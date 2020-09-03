@@ -1,7 +1,96 @@
 ﻿@page "/"
+@using Models
 
-<h1>Hello, world!</h1>
+<h1>BellBoard Performance Entry Mock-up</h1>
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
+
+
+<div class="form-group">
+    <EditForm Model="@Performance">
+        <div class="posabs" style="--leftpos: 18px; --toppos: 72px">
+            <label>
+                Style
+            </label>
+        </div>
+
+        <InputSelect Value="@Performance.Style"
+                     ValueChanged="@( (Style value) => StyleChanged(value) )"
+                     ValueExpression="@( () => Performance.Style )"
+                     class="form-control posabsw"
+                     style="--leftpos: 18px; --toppos: 100px; --width: 200px"
+                     disabled="@false">
+            @foreach (var style in Enum.GetValues(typeof(Style)))
+            {
+                <option value="@style">@style</option>
+            }
+        </InputSelect>
+
+        @if (Performance.Style == Style.Other)
+        {
+            <div class="posabs" style="--leftpos: 250px; --toppos: 72px">
+                <label>
+                    Other Style
+                </label>
+            </div>
+
+            <InputText @bind-Value="Performance.StyleOther"
+                       class="form-control posabsw"
+                       style="--leftpos: 250px; --toppos: 100px; --width: 300px"
+                       disabled="@false">
+            </InputText>
+        }
+
+        <div class="posabs" style="--leftpos: 18px; --toppos: 172px">
+            <label>
+                Bells Per Ringer
+            </label>
+        </div>
+
+        <InputSelect Value="@Performance.BellsPerRinger"
+                     ValueChanged="@( (BellsPerRinger value) => BellsPerRingerChanged(value) )"
+                     ValueExpression="@( () => Performance.BellsPerRinger )"
+                     class="form-control posabsw"
+                     style="--leftpos: 18px; --toppos: 200px; --width: 200px"
+                     disabled="@false">
+            @foreach (var bellsPerRinger in Enum.GetValues(typeof(BellsPerRinger)))
+            {
+                <option value="@bellsPerRinger">@bellsPerRinger</option>
+            }
+        </InputSelect>
+
+        @if (Performance.BellsPerRinger != BellsPerRinger.SelectBellsPerRinger)
+        {
+            <div class="posabs" style="--leftpos: 18px; --toppos: 272px">
+                <label>
+                    Number of Bells
+                </label>
+            </div>
+
+            <InputSelect Value="@Performance.NumBells"
+                         ValueChanged="@( (string value) => NumBellsChanged(value) )"
+                         ValueExpression="@( () => Performance.NumBells )"
+                         class="form-control posabsw"
+                         style="--leftpos: 18px; --toppos: 300px; --width: 200px"
+                         disabled="@false">
+                @if (Performance.BellsPerRinger == BellsPerRinger.OneOrMore)
+                {
+                    @for (int i = 1; i <= 16; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                }
+                else
+                {
+                    @for (int i = 2; i <= 24; i += 2)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                }
+            </InputSelect>
+        }
+
+
+    </EditForm>
+</div>
