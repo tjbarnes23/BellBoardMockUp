@@ -1,96 +1,294 @@
 ﻿@page "/"
 @using Models
+@using Utilities
 
-<h1>BellBoard Performance Entry Mock-up</h1>
+<div class="container ml-2">
+    <h1>BellBoard Performance Entry Mock-up</h1>
 
-
-
-
-
-<div class="form-group">
     <EditForm Model="@Performance">
-        <div class="posabs" style="--leftpos: 18px; --toppos: 72px">
+        <div class="mt-4">
             <label>
-                Style
+                Bells Per Ringer <br />
+                <InputSelect Value="@Performance.BellsPerRinger"
+                             ValueChanged="@( (string value) => BellsPerRingerChanged(value) )"
+                             ValueExpression="@( () => Performance.BellsPerRinger )">
+                    @for (int i = 1; i <= 2; i++)
+                    {
+                        <option value="@i">@ControlData.BellsPerRinger(i)</option>
+                    }
+                </InputSelect>
             </label>
         </div>
 
-        <InputSelect Value="@Performance.Style"
-                     ValueChanged="@( (Style value) => StyleChanged(value) )"
-                     ValueExpression="@( () => Performance.Style )"
-                     class="form-control posabsw"
-                     style="--leftpos: 18px; --toppos: 100px; --width: 200px"
-                     disabled="@false">
-            @foreach (var style in Enum.GetValues(typeof(Style)))
-            {
-                <option value="@style">@style</option>
-            }
-        </InputSelect>
-
-        @if (Performance.Style == Style.Other)
-        {
-            <div class="posabs" style="--leftpos: 250px; --toppos: 72px">
+        <div class="row mt-2">
+            <div class="col-2">
                 <label>
-                    Other Style
+                    Style <br />
+                    <InputSelect Value="@Performance.Style"
+                                 ValueChanged="@( (string value) => StyleChanged(value) )"
+                                 ValueExpression="@( () => Performance.Style )">
+                        @for (int i = 1; i <= 4; i++)
+                        {
+                            <option value="@i">@ControlData.Style(i)</option>
+                        }
+                    </InputSelect>
                 </label>
             </div>
 
-            <InputText @bind-Value="Performance.StyleOther"
-                       class="form-control posabsw"
-                       style="--leftpos: 250px; --toppos: 100px; --width: 300px"
-                       disabled="@false">
-            </InputText>
-        }
-
-        <div class="posabs" style="--leftpos: 18px; --toppos: 172px">
-            <label>
-                Bells Per Ringer
-            </label>
+            @if (Performance.Style == "4")
+            {
+                <div class="col-3">
+                    <label>
+                        Other Style <br />
+                        <InputText @bind-Value="Performance.StyleOther">
+                        </InputText>
+                    </label>
+                </div>
+            }
         </div>
 
-        <InputSelect Value="@Performance.BellsPerRinger"
-                     ValueChanged="@( (BellsPerRinger value) => BellsPerRingerChanged(value) )"
-                     ValueExpression="@( () => Performance.BellsPerRinger )"
-                     class="form-control posabsw"
-                     style="--leftpos: 18px; --toppos: 200px; --width: 200px"
-                     disabled="@false">
-            @foreach (var bellsPerRinger in Enum.GetValues(typeof(BellsPerRinger)))
-            {
-                <option value="@bellsPerRinger">@bellsPerRinger</option>
-            }
-        </InputSelect>
-
-        @if (Performance.BellsPerRinger != BellsPerRinger.SelectBellsPerRinger)
-        {
-            <div class="posabs" style="--leftpos: 18px; --toppos: 272px">
+        <div class="row mt-2">
+            <div class="col-3">
                 <label>
-                    Number of Bells
+                    Association <br />
+                    <InputText @bind-Value="Performance.Association">
+                    </InputText>
                 </label>
             </div>
 
-            <InputSelect Value="@Performance.NumBells"
-                         ValueChanged="@( (string value) => NumBellsChanged(value) )"
-                         ValueExpression="@( () => Performance.NumBells )"
-                         class="form-control posabsw"
-                         style="--leftpos: 18px; --toppos: 300px; --width: 200px"
-                         disabled="@false">
-                @if (Performance.BellsPerRinger == BellsPerRinger.OneOrMore)
-                {
-                    @for (int i = 1; i <= 16; i++)
-                    {
-                        <option value="@i">@i</option>
-                    }
-                }
-                else
-                {
-                    @for (int i = 2; i <= 24; i += 2)
-                    {
-                        <option value="@i">@i</option>
-                    }
-                }
-            </InputSelect>
+            <div class="col-3">
+                <label>
+                    Date <br />
+                    <InputText @bind-Value="Performance.Date">
+                    </InputText>
+                </label>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-3">
+                <label>
+                    Distributed performance? &nbsp;
+                    <InputCheckbox Value="@Performance.Distributed"
+                                   ValueChanged="@( (bool value) => DistributedChanged(value) )"
+                                   ValueExpression="@( () => Performance.Distributed )">
+                        @for (int i = 1; i <= 4; i++)
+                        {
+                            <option value="@i">@ControlData.Style(i)</option>
+                        }
+                    </InputCheckbox>
+                </label>
+            </div>
+        </div>
+
+        @if (Performance.Distributed == false)
+        {
+            <div class="row mt-2">
+                <div class="col-3">
+                    <label>
+                        Place, County, State, Country <br />
+                        <InputText @bind-Value="Performance.Place">
+                        </InputText>
+                    </label>
+                </div>
+
+                <div class="col-3">
+                    <label>
+                        Dedication / Address <br />
+                        <InputText @bind-Value="Performance.Address">
+                        </InputText>
+                    </label>
+                </div>
+            </div>
         }
 
+        <div class="row mt-2">
+            <div class="col-3">
+                <label>
+                    Online performance? &nbsp;
+                    <InputCheckbox Value="@Performance.Online"
+                                   ValueChanged="@( (bool value) => OnlineChanged(value) )"
+                                   ValueExpression="@( () => Performance.Online )">
+                        @for (int i = 1; i <= 4; i++)
+                        {
+                            <option value="@i">@ControlData.Style(i)</option>
+                        }
+                    </InputCheckbox>
+                </label>
+            </div>
+        </div>
 
+        @if (Performance.Online == true)
+        {
+            <div class="row mt-2">
+                <div class="col-3">
+                    <label>
+                        Online platform <br />
+                        <InputText @bind-Value="Performance.Platform">
+                        </InputText>
+                    </label>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row mt-2">
+                <div class="col-3">
+                    <label>
+                        Tenor weight / size, note <br />
+                        <InputText @bind-Value="Performance.Tenor">
+                        </InputText>
+                    </label>
+                </div>
+            </div>
+        }
+
+        <div class="row mt-2">
+            <div class="col-3">
+                <label>
+                    Time taken <br />
+                    <InputText @bind-Value="Performance.Time">
+                    </InputText>
+                </label>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-3">
+                <label>
+                    Performance Title <br />
+                    <InputText @bind-Value="Performance.Title">
+                    </InputText>
+                </label>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-3">
+                <label>
+                    Performance Detail <br />
+                    <InputText @bind-Value="Performance.Detail">
+                    </InputText>
+                </label>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-3">
+                <label>
+                    Composer <br />
+                    <InputText @bind-Value="Performance.Composer">
+                    </InputText>
+                </label>
+            </div>
+        </div>
+
+        @if (Performance.BellsPerRinger == "1")
+        {
+            @for (int i = 1; i <= 8; i++)
+            {
+                <div class="row mt-1">
+                    <div class="col-1">
+                        @i
+                    </div>
+
+                    <div class="col-1">
+                        [Name]
+                    </div>
+
+                    @if (Performance.Distributed == true)
+                    {
+                        <div class="col-2">
+                            [Approx location]
+                        </div>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            @for (int i = 1; i <= 8; i += 2)
+            {
+                <div class="row mt-1">
+                    <div class="col-1">
+                        @i-@(i+1)
+                    </div>
+
+                    <div class="col-1">
+                        [Name]
+                    </div>
+
+                    @if (Performance.Distributed == true)
+                    {
+                        <div class="col-2">
+                            [Approx location]
+                        </div>
+                    }
+                </div>
+            }
+        }
+
+        <div class="row mt-4">
+            <div class="col-3">
+                <label>
+                    Footnotes <br />
+                    <InputText @bind-Value="Performance.Footnotes">
+                    </InputText>
+                </label>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-3">
+                <label>
+                    New methods named <br />
+                    <InputText @bind-Value="Performance.NewMethods">
+                    </InputText>
+                </label>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <u>Norms</u>
+        </div>
+
+        <div class="row mt-2">
+            @if (Performance.Online == true)
+            {
+                <div class="col-4">
+                    <label>
+                        The performance used simulated sound &nbsp;
+                        <InputCheckbox @bind-Value="Performance.SoundNorm">
+                        </InputCheckbox>
+                    </label>
+                </div>
+            }
+            else
+            {
+                <div class="col-4">
+                    <label>
+                        The performance sound was from live bells &nbsp;
+                        <InputCheckbox @bind-Value="Performance.SoundNorm">
+                        </InputCheckbox>
+                    </label>
+                </div>
+            }
+        </div>
+
+        @if (Performance.SoundNorm == false)
+        {
+            <div class="row mt-2">
+                <div class="col-3">
+                    <label>
+                        Sound disclosure <br />
+                        <InputText @bind-Value="Performance.SoundNormComment">
+                        </InputText>
+                    </label>
+                </div>
+            </div>
+        }
     </EditForm>
+
+    <br />
+    <br />
 </div>

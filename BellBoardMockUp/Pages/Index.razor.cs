@@ -10,24 +10,52 @@ namespace BellBoardMockUp.Pages
     {
         public Index()
         {
-            Performance = new Performance();
+            Performance = new Performance()
+            {
+                BellsPerRinger = "1",
+                Style = "1",
+                StyleOther = "",
+                Distributed = false,
+                Online = false,
+                SoundNorm = true
+            };
         }
 
         public Performance Performance { get; set; }
 
-        public void StyleChanged(Style value)
-        {
-            Performance.Style = value;
-        }
-
-        public void BellsPerRingerChanged(BellsPerRinger value)
+        public void BellsPerRingerChanged(string value)
         {
             Performance.BellsPerRinger = value;
+
+            if (Performance.BellsPerRinger == "1")
+            {
+                Performance.Style = "1";
+            }
+            else if (Performance.BellsPerRinger == "2")
+            {
+                Performance.Style = "2";
+            }
         }
 
-        public void NumBellsChanged(string value)
+        public void StyleChanged(string value)
         {
-            Performance.NumBells = value;
+            Performance.Style = value;
+
+            if (Performance.Style == "3")
+            {
+                Performance.Distributed = true;
+                Performance.Online = true;
+            }
+        }
+
+        public void DistributedChanged(bool value)
+        {
+            Performance.Distributed = value;
+        }
+
+        public void OnlineChanged(bool value)
+        {
+            Performance.Online = value;
         }
     }
 }
