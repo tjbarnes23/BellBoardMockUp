@@ -17,12 +17,11 @@ namespace BellBoardMockUp.Pages
                 StyleOther = "",
                 Distributed = false,
                 Online = false,
+                Expand = false,
                 SoundNorm = true,
                 TrueRoundBlockNorm = true,
                 SamePersonNorm = true,
                 RetainedInHandNorm = true,
-                NoAssistanceNorm = true,
-                HumanNorm = true,
                 TechnicalNorm = true,
                 NoFailureNorm = true
             };
@@ -30,7 +29,7 @@ namespace BellBoardMockUp.Pages
 
         public Performance Performance { get; set; }
 
-        public void BellsPerRingerChanged(string value)
+        protected void BellsPerRingerChanged(string value)
         {
             Performance.BellsPerRinger = value;
 
@@ -44,7 +43,7 @@ namespace BellBoardMockUp.Pages
             }
         }
 
-        public void StyleChanged(string value)
+        protected void StyleChanged(string value)
         {
             Performance.Style = value;
 
@@ -55,14 +54,26 @@ namespace BellBoardMockUp.Pages
             }
         }
 
-        public void DistributedChanged(bool value)
+        protected void DistributedChanged(bool value)
         {
             Performance.Distributed = value;
         }
 
-        public void OnlineChanged(bool value)
+        protected void OnlineChanged(bool value)
         {
             Performance.Online = value;
+        }
+
+        protected void ExpandChanged()
+        {
+            if (Performance.Expand == true)
+            {
+                Performance.Expand = false;
+            }
+            else
+            {
+                Performance.Expand = true;
+            }
         }
     }
 }

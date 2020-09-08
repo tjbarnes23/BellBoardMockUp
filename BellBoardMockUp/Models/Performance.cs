@@ -21,7 +21,9 @@ namespace BellBoardMockUp.Models
 
         public bool Online { get; set; }
 
-        public string Place { get; set; }
+        public string Location { get; set; }
+
+        public string County { get; set; }
 
         public string Address { get; set; }
 
@@ -41,29 +43,23 @@ namespace BellBoardMockUp.Models
 
         public string NewMethods { get; set; }
 
+        public bool Expand { get; set; }
+
         public bool SoundNorm { get; set; }
 
-        public string SoundNormComment { get; set; }
+        public string SoundComment { get; set; }
 
         public bool TrueRoundBlockNorm { get; set; }
 
         public string TrueRoundBlockComment { get; set; }
 
-        public bool SamePersonNorm { get; set; }
-
-        public string SamePersonComment { get; set; }
-
         public bool RetainedInHandNorm { get; set; }
 
         public string RetainedInHandComment { get; set; }
 
-        public bool NoAssistanceNorm { get; set; }
+        public bool SamePersonNorm { get; set; }
 
-        public string NoAssistanceComment { get; set; }
-
-        public bool HumanNorm { get; set; }
-
-        public string HumanComment { get; set; }
+        public string SamePersonComment { get; set; }
 
         public bool TechnicalNorm { get; set; }
 
