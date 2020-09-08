@@ -21,7 +21,7 @@
         </div>
 
         <div class="row mt-2">
-            <div class="col-2">
+            <div class="col-3">
                 <label>
                     Style <br />
                     <InputSelect Value="@Performance.Style"
@@ -66,7 +66,7 @@
         </div>
 
         <div class="row mt-2">
-            <div class="col-3">
+            <div class="col-3 pt-4">
                 <label>
                     Distributed performance? &nbsp;
                     <InputCheckbox Value="@Performance.Distributed"
@@ -79,11 +79,9 @@
                     </InputCheckbox>
                 </label>
             </div>
-        </div>
 
-        @if (Performance.Distributed == false)
-        {
-            <div class="row mt-2">
+            @if (Performance.Distributed == false)
+            {
                 <div class="col-3">
                     <label>
                         Place, County, State, Country <br />
@@ -99,11 +97,11 @@
                         </InputText>
                     </label>
                 </div>
-            </div>
-        }
+            }
+        </div>
 
         <div class="row mt-2">
-            <div class="col-3">
+            <div class="col-3 pt-4">
                 <label>
                     Online performance? &nbsp;
                     <InputCheckbox Value="@Performance.Online"
@@ -116,11 +114,9 @@
                     </InputCheckbox>
                 </label>
             </div>
-        </div>
 
-        @if (Performance.Online == true)
-        {
-            <div class="row mt-2">
+            @if (Performance.Online == true)
+            {
                 <div class="col-3">
                     <label>
                         Online platform <br />
@@ -128,11 +124,9 @@
                         </InputText>
                     </label>
                 </div>
-            </div>
-        }
-        else
-        {
-            <div class="row mt-2">
+            }
+            else
+            {
                 <div class="col-3">
                     <label>
                         Tenor weight / size, note <br />
@@ -140,17 +134,7 @@
                         </InputText>
                     </label>
                 </div>
-            </div>
-        }
-
-        <div class="row mt-2">
-            <div class="col-3">
-                <label>
-                    Time taken <br />
-                    <InputText @bind-Value="Performance.Time">
-                    </InputText>
-                </label>
-            </div>
+            }
         </div>
 
         <div class="row mt-2">
@@ -158,6 +142,14 @@
                 <label>
                     Performance Title <br />
                     <InputText @bind-Value="Performance.Title">
+                    </InputText>
+                </label>
+            </div>
+
+            <div class="col-3">
+                <label>
+                    Time taken <br />
+                    <InputText @bind-Value="Performance.Time">
                     </InputText>
                 </label>
             </div>
@@ -236,9 +228,7 @@
                     </InputText>
                 </label>
             </div>
-        </div>
 
-        <div class="row mt-2">
             <div class="col-3">
                 <label>
                     New methods named <br />
@@ -280,8 +270,178 @@
             <div class="row mt-2">
                 <div class="col-3">
                     <label>
-                        Sound disclosure <br />
+                        Disclosure for above <br />
                         <InputText @bind-Value="Performance.SoundNormComment">
+                        </InputText>
+                    </label>
+                </div>
+            </div>
+        }
+
+        <div class="row mt-2">
+            <div class="col-4">
+                <label>
+                    The performance was a true round block that started and ended in rounds,
+                    and was rung without interval &nbsp;
+                    <InputCheckbox @bind-Value="Performance.TrueRoundBlockNorm">
+                    </InputCheckbox>
+                </label>
+            </div>
+        </div>
+
+        @if (Performance.TrueRoundBlockNorm == false)
+        {
+            <div class="row mt-2">
+                <div class="col-3">
+                    <label>
+                        Disclosure for above <br />
+                        <InputText @bind-Value="Performance.TrueRoundBlockComment">
+                        </InputText>
+                    </label>
+                </div>
+            </div>
+        }
+
+        @if (Performance.Style == "2")
+        {
+            <div class="row mt-2">
+                <div class="col-4">
+                    <label>
+                        Handbells were retained in hand throughout the performance &nbsp;
+                        <InputCheckbox @bind-Value="Performance.RetainedInHandNorm">
+                        </InputCheckbox>
+                    </label>
+                </div>
+            </div>
+
+            @if (Performance.RetainedInHandNorm == false)
+            {
+                <div class="row mt-2">
+                    <div class="col-3">
+                        <label>
+                            Disclosure for above <br />
+                            <InputText @bind-Value="Performance.RetainedInHandComment">
+                            </InputText>
+                        </label>
+                    </div>
+                </div>
+            }
+        }
+
+        <div class="row mt-2">
+            <div class="col-4">
+                <label>
+                    The same person or persons rang each bell or bells continously throughout
+                    the performance &nbsp;
+                    <InputCheckbox @bind-Value="Performance.SamePersonNorm">
+                    </InputCheckbox>
+                </label>
+            </div>
+        </div>
+
+        @if (Performance.SamePersonNorm == false)
+        {
+            <div class="row mt-2">
+                <div class="col-3">
+                    <label>
+                        Disclosure for above <br />
+                        <InputText @bind-Value="Performance.SamePersonComment">
+                        </InputText>
+                    </label>
+                </div>
+            </div>
+        }
+
+        <div class="row mt-2">
+            <div class="col-4">
+                <label>
+                    No physical aids to memory were used, and no assistance from
+                    anyone not ringing &nbsp;
+                    <InputCheckbox @bind-Value="Performance.NoAssistanceNorm">
+                    </InputCheckbox>
+                </label>
+            </div>
+        </div>
+
+        @if (Performance.NoAssistanceNorm == false)
+        {
+            <div class="row mt-2">
+                <div class="col-3">
+                    <label>
+                        Disclosure for above <br />
+                        <InputText @bind-Value="Performance.NoAssistanceComment">
+                        </InputText>
+                    </label>
+                </div>
+            </div>
+        }
+
+        <div class="row mt-2">
+            <div class="col-4">
+                <label>
+                    All bells were rung by human ringers &nbsp;
+                    <InputCheckbox @bind-Value="Performance.HumanNorm">
+                    </InputCheckbox>
+                </label>
+            </div>
+        </div>
+
+        @if (Performance.HumanNorm == false)
+        {
+            <div class="row mt-2">
+                <div class="col-3">
+                    <label>
+                        Disclosure for above <br />
+                        <InputText @bind-Value="Performance.HumanComment">
+                        </InputText>
+                    </label>
+                </div>
+            </div>
+        }
+
+        <div class="row mt-2">
+            <div class="col-4">
+                <label>
+                    In any given row, all bells rang at the same stroke,
+                    cover bells were in the highest places of the row,
+                    only one method or variation was used to generate the row,
+                    and jump changes were not used &nbsp;
+                    <InputCheckbox @bind-Value="Performance.TechnicalNorm">
+                    </InputCheckbox>
+                </label>
+            </div>
+        </div>
+
+        @if (Performance.TechnicalNorm == false)
+        {
+            <div class="row mt-2">
+                <div class="col-3">
+                    <label>
+                        Disclosure for above <br />
+                        <InputText @bind-Value="Performance.TechnicalComment">
+                        </InputText>
+                    </label>
+                </div>
+            </div>
+        }
+
+        <div class="row mt-2">
+            <div class="col-4">
+                <label>
+                    The performance was not part of a failed longer attempt &nbsp;
+                    <InputCheckbox @bind-Value="Performance.NoFailureNorm">
+                    </InputCheckbox>
+                </label>
+            </div>
+        </div>
+
+        @if (Performance.NoFailureNorm == false)
+        {
+            <div class="row mt-2">
+                <div class="col-3">
+                    <label>
+                        Disclosure for above <br />
+                        <InputText @bind-Value="Performance.NoFailureComment">
                         </InputText>
                     </label>
                 </div>

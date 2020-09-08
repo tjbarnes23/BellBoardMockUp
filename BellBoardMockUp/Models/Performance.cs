@@ -45,5 +45,33 @@ namespace BellBoardMockUp.Models
 
         public string SoundNormComment { get; set; }
 
+        public bool TrueRoundBlockNorm { get; set; }
+
+        public string TrueRoundBlockComment { get; set; }
+
+        public bool SamePersonNorm { get; set; }
+
+        public string SamePersonComment { get; set; }
+
+        public bool RetainedInHandNorm { get; set; }
+
+        public string RetainedInHandComment { get; set; }
+
+        public bool NoAssistanceNorm { get; set; }
+
+        public string NoAssistanceComment { get; set; }
+
+        public bool HumanNorm { get; set; }
+
+        public string HumanComment { get; set; }
+
+        public bool TechnicalNorm { get; set; }
+
+        public string TechnicalComment { get; set; }
+
+        public bool NoFailureNorm { get; set; }
+
+        public string NoFailureComment { get; set; }
+
     }
 }

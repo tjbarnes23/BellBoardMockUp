@@ -17,7 +17,14 @@ namespace BellBoardMockUp.Pages
                 StyleOther = "",
                 Distributed = false,
                 Online = false,
-                SoundNorm = true
+                SoundNorm = true,
+                TrueRoundBlockNorm = true,
+                SamePersonNorm = true,
+                RetainedInHandNorm = true,
+                NoAssistanceNorm = true,
+                HumanNorm = true,
+                TechnicalNorm = true,
+                NoFailureNorm = true
             };
         }
 

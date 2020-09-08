@@ -21,8 +21,8 @@ namespace BellBoardMockUp.Utilities
         {
             return style switch
             {
-                1 => "Full circle",
-                2 => "Alternating strokes",
+                1 => "Full circle (Towerbells)",
+                2 => "Alternating strokes (Handbells)",
                 3 => "Key presses",
                 4 => "Other",
                 _ => style.ToString()
