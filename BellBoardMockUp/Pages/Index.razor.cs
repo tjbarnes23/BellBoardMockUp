@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BellBoardMockUp.Models;
+using BellBoardMockUp.Shared;
 
 namespace BellBoardMockUp.Pages
 {
@@ -16,18 +17,15 @@ namespace BellBoardMockUp.Pages
                 Style = "1",
                 StyleOther = "",
                 Distributed = false,
-                Online = false,
-                Expand = false,
-                SoundNorm = true,
-                TrueRoundBlockNorm = true,
-                SamePersonNorm = true,
-                RetainedInHandNorm = true,
-                TechnicalNorm = true,
-                NoFailureNorm = true
+                Online = false
             };
         }
 
         public Performance Performance { get; set; }
+
+        private Modal Modal { get; set; }
+
+        public int PopUpNum { get; set; }
 
         protected void BellsPerRingerChanged(string value)
         {
@@ -64,16 +62,58 @@ namespace BellBoardMockUp.Pages
             Performance.Online = value;
         }
 
-        protected void ExpandChanged()
+        protected void BellsPerRingerPopUp()
         {
-            if (Performance.Expand == true)
-            {
-                Performance.Expand = false;
-            }
-            else
-            {
-                Performance.Expand = true;
-            }
+            PopUpNum = 0;
+            Modal.Open();
+        }
+
+        protected void StylePopUp()
+        {
+            PopUpNum = 1;
+            Modal.Open();
+        }
+
+        protected void DistributedPopUp()
+        {
+            PopUpNum = 2;
+            Modal.Open();
+        }
+
+        protected void OnlinePopUp()
+        {
+            PopUpNum = 3;
+            Modal.Open();
+        }
+
+        protected void TenorPopUp()
+        {
+            PopUpNum = 4;
+            Modal.Open();
+        }
+
+        protected void OnlinePlatformPopUp()
+        {
+            PopUpNum = 5;
+            Modal.Open();
+        }
+
+        protected void TimePopUp()
+        {
+            PopUpNum = 6;
+            Modal.Open();
+        }
+
+        protected void NewMethodsPopUp()
+        {
+            PopUpNum = 7;
+            Modal.Open();
+        }
+
+        protected void NormsPopUp()
+        {
+            PopUpNum = 8;
+            Modal.Open();
         }
     }
 }

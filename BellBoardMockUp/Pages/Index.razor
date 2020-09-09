@@ -2,6 +2,8 @@
 @using Models
 @using Utilities
 
+<Modal @ref="Modal" PopUpNum="@PopUpNum"></Modal>
+
 <div class="container mx-2">
     <h1>BellBoard Performance Entry Mock-up</h1>
 
@@ -10,7 +12,11 @@
 
         <div class="row mt-2">
             <div class="col-6 col-md-4 col-lg-3">
-                Bells Per Ringer <br />
+                Bells per ringer
+                <button @onclick="BellsPerRingerPopUp" style="background-color: white; border: none">
+                    <b>&#9432;</b>
+                </button>
+                <br />
                 <InputSelect Value="@Performance.BellsPerRinger"
                              ValueChanged="@( (string value) => BellsPerRingerChanged(value) )"
                              ValueExpression="@( () => Performance.BellsPerRinger )">
@@ -22,7 +28,11 @@
             </div>
 
             <div class="col-6 col-md-4 col-lg-3">
-                Style <br />
+                Style
+                <button @onclick="StylePopUp" style="background-color: white; border: none">
+                    <b>&#9432;</b>
+                </button>
+                <br />
                 <InputSelect Value="@Performance.Style"
                              ValueChanged="@( (string value) => StyleChanged(value) )"
                              ValueExpression="@( () => Performance.Style )">
@@ -36,7 +46,8 @@
             @if (Performance.Style == "4")
             {
                 <div class="col-6 col-md-4 col-lg-3">
-                    Other Style <br />
+                    Other Style
+                    <br />
                     <InputText @bind-Value="Performance.StyleOther" style="width: 100%" />
                 </div>
             }
@@ -46,12 +57,14 @@
 
         <div class="row mt-2">
             <div class="col-6 col-md-4 col-lg-3">
-                Association <br />
+                Association
+                <br />
                 <InputText @bind-Value="Performance.Association" style="width: 100%" />
             </div>
 
             <div class="col-6 col-md-4 col-lg-3">
-                Date <br />
+                Date
+                <br />
                 <InputText @bind-Value="Performance.Date" style="width: 100%" />
             </div>
         </div>
@@ -59,7 +72,7 @@
         <hr />
 
         <div class="row mt-2">
-            <div class="col-6 col-md-4 col-lg-3 pt-3">
+            <div class="col-6 col-md-4 col-lg-3 pt-2">
                 Distributed performance? &nbsp;
                 <InputCheckbox Value="@Performance.Distributed"
                                ValueChanged="@( (bool value) => DistributedChanged(value) )"
@@ -69,22 +82,28 @@
                         <option value="@i">@ControlData.Style(i)</option>
                     }
                 </InputCheckbox>
+                <button @onclick="DistributedPopUp" style="background-color: white; border: none">
+                    <b>&#9432;</b>
+                </button>
             </div>
 
             @if (Performance.Distributed == false)
             {
                 <div class="col-6 col-md-4 col-lg-3">
-                    Place <br />
+                    Place
+                    <br />
                     <InputText @bind-Value="Performance.Location" style="width: 100%" />
                 </div>
 
                 <div class="col-6 col-md-4 col-lg-3">
-                    County, State, Country <br />
+                    County, State, Country
+                    <br />
                     <InputText @bind-Value="Performance.County" style="width: 100%" />
                 </div>
 
                 <div class="col-6 col-md-4 col-lg-3">
-                    Dedication / Address <br />
+                    Dedication / Address
+                    <br />
                     <InputText @bind-Value="Performance.Address" style="width: 100%" />
                 </div>
             }
@@ -103,47 +122,65 @@
                         <option value="@i">@ControlData.Style(i)</option>
                     }
                 </InputCheckbox>
+                <button @onclick="OnlinePopUp" style="background-color: white; border: none">
+                    <b>&#9432;</b>
+                </button>
             </div>
 
             @if (Performance.Online == true)
             {
                 <div class="col-6 col-md-4 col-lg-3">
-                    Online platform <br />
+                    Online platform
+                    <button @onclick="OnlinePlatformPopUp" style="background-color: white; border: none">
+                        <b>&#9432;</b>
+                    </button>
+                    <br />
                     <InputText @bind-Value="Performance.Platform" style="width: 100%" />
                 </div>
             }
             else
             {
                 <div class="col-6 col-md-4 col-lg-3">
-                    Tenor weight / size, note <br />
+                    Tenor weight / size, note
+                    <button @onclick="TenorPopUp" style="background-color: white; border: none">
+                        <b>&#9432;</b>
+                    </button>
+                    <br />
                     <InputText @bind-Value="Performance.Tenor" style="width: 100%" />
                 </div>
             }
+
+            <div class="col-6 col-md-4 col-lg-3">
+                Time taken
+                <button @onclick="TimePopUp" style="background-color: white; border: none">
+                    <b>&#9432;</b>
+                </button>
+                <br />
+                <InputText @bind-Value="Performance.Time" style="width: 100%" />
+            </div>
         </div>
 
         <hr />
 
         <div class="row mt-2">
             <div class="col-6 col-md-4 col-lg-3">
-                Performance Title <br />
+                Performance Title
+                <br />
                 <InputText @bind-Value="Performance.Title" style="width: 100%" />
             </div>
 
             <div class="col-6 col-md-4 col-lg-3">
-                Time taken <br />
-                <InputText @bind-Value="Performance.Time" style="width: 100%" />
+                Composer
+                <br />
+                <InputText @bind-Value="Performance.Composer" style="width: 100%" />
             </div>
         </div>
 
         <div class="row mt-2">
-            <div class="col-6 col-md-4 col-lg-3">
-                Performance Detail <br />
+            <div class="col">
+                Performance Detail
+                <br />
                 <InputText @bind-Value="Performance.Detail" style="width: 100%" />
-            </div>
-
-            <div class="col-6 col-md-4 col-lg-3">
-                Composer <br />
-                <InputText @bind-Value="Performance.Composer" style="width: 100%" />
             </div>
         </div>
 
@@ -196,184 +233,37 @@
 
         <hr />
 
-        <div class="row mt-4">
-            <div class="col-12 col-lg-6">
-                Footnotes <br />
+        <div class="row mt-2">
+            <div class="col">
+                Footnotes
+                <br />
                 <InputTextArea @bind-Value="Performance.Footnotes" style="width: 100%" />
             </div>
+        </div>
 
-            <div class="col-12 col-lg-6">
-                New methods named <br />
+        <div class="row mt-2">
+            <div class="col">
+                New methods named
+                <button @onclick="NewMethodsPopUp" style="background-color: white; border: none">
+                    <b>&#9432;</b>
+                </button>
+                <br />
                 <InputTextArea @bind-Value="Performance.NewMethods" style="width: 100%" />
             </div>
         </div>
 
-        <hr />
-
-        <div class="row mt-3">
+        <div class="row mt-2">
             <div class="col">
-                <p>
-                    <u>Norms:</u> If the performance departed from any of the norms of method ringing as described in
-                    <a href="https://cccbr.github.io/method_ringing_framework/reporting.html">
-                        Section 6.C of the Framework
-                    </a>
-                    , please click on the Expand button and indicate the norms that do not apply.
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <button class="btn btn-primary" @onclick="ExpandChanged">
-                    @if (Performance.Expand == false)
-                    {
-                        <span>Expand</span>
-                    }
-                    else
-                    {
-                        <span>Collapse</span>
-                    }
+                Departures from Norms
+                <button @onclick="NormsPopUp" style="background-color: white; border: none">
+                    <b>&#9432;</b>
                 </button>
+                <br />
+                <InputTextArea @bind-Value="Performance.NormDepartures" style="width: 100%" />
             </div>
         </div>
 
         <hr />
-
-        @if (Performance.Expand == true)
-        {
-            <div class="row mt-2">
-                @if (Performance.Online == true)
-                {
-                    <div class="col">
-                        The performance used simulated sound &nbsp;
-                        <InputCheckbox @bind-Value="Performance.SoundNorm" />
-                    </div>
-                }
-                else
-                {
-                    <div class="col">
-                        The performance sound was from live bells &nbsp;
-                        <InputCheckbox @bind-Value="Performance.SoundNorm" />
-                    </div>
-                }
-            </div>
-
-            @if (Performance.SoundNorm == false)
-            {
-                <div class="row mt-2">
-                    <div class="col">
-                        Disclosure for above <br />
-                        <InputText @bind-Value="Performance.SoundComment" style="width: 100%" />
-                    </div>
-                </div>
-            }
-
-            <hr />
-
-            <div class="row mt-2">
-                <div class="col">
-                    The performance was a true round block that started and ended in rounds,
-                    and was rung without interval &nbsp;
-                    <InputCheckbox @bind-Value="Performance.TrueRoundBlockNorm" />
-                </div>
-            </div>
-
-            @if (Performance.TrueRoundBlockNorm == false)
-            {
-                <div class="row mt-2">
-                    <div class="col">
-                        Disclosure for above <br />
-                        <InputText @bind-Value="Performance.TrueRoundBlockComment" style="width: 100%" />
-                    </div>
-                </div>
-            }
-
-            @if (Performance.Style == "2")
-            {
-                <hr />
-
-                <div class="row mt-2">
-                    <div class="col">
-                        Handbells were retained in hand throughout the performance &nbsp;
-                        <InputCheckbox @bind-Value="Performance.RetainedInHandNorm" />
-                    </div>
-                </div>
-
-                @if (Performance.RetainedInHandNorm == false)
-                {
-                    <div class="row mt-2">
-                        <div class="col">
-                            Disclosure for above <br />
-                            <InputText @bind-Value="Performance.RetainedInHandComment" style="width: 100%" />
-                        </div>
-                    </div>
-                }
-            }
-
-            <hr />
-
-            <div class="row mt-2">
-                <div class="col">
-                    All bells were rung by human ringers, the same person or persons rang each bell or bells
-                    continously throughout the performance, no physical aids to memory were used,
-                    and there was no assistance from anyone not ringing &nbsp;
-                    <InputCheckbox @bind-Value="Performance.SamePersonNorm" />
-                </div>
-            </div>
-
-            @if (Performance.SamePersonNorm == false)
-            {
-                <div class="row mt-2">
-                    <div class="col">
-                        Disclosure for above <br />
-                        <InputText @bind-Value="Performance.SamePersonComment" style="width: 100%" />
-                    </div>
-                </div>
-            }
-
-            <hr />
-
-            <div class="row mt-2">
-                <div class="col">
-                    In any given row, all bells rang at the same stroke,
-                    cover bells were in the highest places of the row,
-                    only one method or variation was used to generate the row,
-                    and jump changes were not used &nbsp;
-                    <InputCheckbox @bind-Value="Performance.TechnicalNorm" />
-                </div>
-            </div>
-
-            @if (Performance.TechnicalNorm == false)
-            {
-                <div class="row mt-2">
-                    <div class="col">
-                        Disclosure for above <br />
-                        <InputText @bind-Value="Performance.TechnicalComment" style="width: 100%" />
-                    </div>
-                </div>
-            }
-
-            <hr />
-
-            <div class="row mt-2">
-                <div class="col">
-                    The performance was not part of a failed longer attempt &nbsp;
-                    <InputCheckbox @bind-Value="Performance.NoFailureNorm" />
-                </div>
-            </div>
-
-            @if (Performance.NoFailureNorm == false)
-            {
-                <div class="row mt-2">
-                    <div class="col">
-                        Disclosure for above <br />
-                        <InputText @bind-Value="Performance.NoFailureComment" style="width: 100%" />
-                    </div>
-                </div>
-            }
-
-            <hr />
-        }
     </EditForm>
 
     <br />
