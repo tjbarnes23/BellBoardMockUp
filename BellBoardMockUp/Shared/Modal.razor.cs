@@ -62,57 +62,59 @@ namespace BellBoardMockUp.Shared
             sb.Append("\n\n");
             sb.Append("Other is for anything that doesn't fall into the above categories. " +
                 "Please provide details in the 'Other Style' box that will appear.");
+            sb.Append("\n\n");
+            sb.Append("If different ringers use different styles in the same performance (e.g. in a Ringing Room " +
+                "performance, some ringers use dummy handbells and others use key presses), " +
+                "please select 'Other' and specify who did what in the 'Other Style' box that will appear.");
             Content[1, 1] = sb.ToString();
 
-            Content[2, 0] = "Distributed performance";
+            Content[2, 0] = "Distributed";
             sb.Clear();
             sb.Append("A distributed performance is one where the ringers are located in different places.");
             sb.Append("\n\n");
             sb.Append("Instead of entering a place for the performance, the approximate location is entered " +
                 "for each ringer.");
             Content[2, 1] = sb.ToString();
-
-            Content[3, 0] = "Online performance";
+            
+            Content[3, 0] = "Tenor info";
             sb.Clear();
-            sb.Append("An online performance is one that uses a computer platform such as Ringing Room or " +
-                "Handbell Stadium to connect the ringers.");
-            sb.Append("\n\n");
-            sb.Append("Online performances are assumed to use simulated sound unless otherwise specified.");
-            Content[3, 1] = sb.ToString();
-
-            Content[4, 0] = "Tenor weight / size, note";
-            sb.Clear();
-            sb.Append("For tower bells this usually takes the form: 18–3–20 in E♭ where the weight is in " +
+            sb.Append("For tower bells, this is usually entered in the form 18–3–20 in E♭, where the weight is in " +
                 "cwt-qtr-lb.");
             sb.Append("\n\n");
-            sb.Append("For handbells, this usually takes the form: 13 in C♯ where 13 is the size used by handbell " +
-                "manufacturers.");
+            sb.Append("For handbells, this is usually entered in the form 13 in C♯, where 13 is the size used " +
+                "by handbell manufacturers.");
+            sb.Append("\n\n");
+            sb.Append("If the performance was rung on a computer platform such as Ringing Room or Handbell Stadium, " +
+                "then leave this box blank.");
+            Content[3, 1] = sb.ToString();
+
+            Content[4, 0] = "Platform";
+            sb.Clear();
+            sb.Append("If the performance was rung on a computer platform, enter the name of the platform such as " +
+                "Ringing Room, Handbell Stadium, Muster, Ding, Abel, Mobel.");
+            sb.Append("\n\n");
+            sb.Append("Otherwise, leave this box blank.");
             Content[4, 1] = sb.ToString();
 
-            Content[5, 0] = "Online platform";
-            sb.Clear();
-            sb.Append("E.g. Ringing Room, Handbell Stadium, Muster, Ding.");
-            Content[5, 1] = sb.ToString();
-
-            Content[6, 0] = "Time taken";
+            Content[5, 0] = "Time taken";
             sb.Clear();
             sb.Append("Entered as hours:minutes, e.g. 3:05 or 0:42.");
-            Content[6, 1] = sb.ToString();
+            Content[5, 1] = sb.ToString();
 
-            Content[7, 0] = "New methods named";
+            Content[6, 0] = "New methods named";
             sb.Clear();
             sb.Append("Please enter the method title and place notation for any new method named in this performance.");
             sb.Append("\n\n");
             sb.Append("The requirements for naming a new method are in Section 5 of the Framework for Method Ringing.");
             sb.Append("\n\n");
             sb.Append("Place notation is described in Appendix A of the Framework.");
-            Content[7, 1] = sb.ToString();
+            Content[6, 1] = sb.ToString();
 
-            Content[8, 0] = "Departures from Norms";
+            Content[7, 0] = "Departures from Norms";
             sb.Clear();
             sb.Append("If the performance departed from any of the norms of method ringing as described in " +
                 "Section 6.C of the Framework for Method Ringing, please describe the departures in the box provided.");
-            Content[8, 1] = sb.ToString();
+            Content[7, 1] = sb.ToString();
         }
     }
 }

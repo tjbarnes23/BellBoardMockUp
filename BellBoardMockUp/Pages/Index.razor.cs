@@ -16,8 +16,7 @@ namespace BellBoardMockUp.Pages
                 BellsPerRinger = "1",
                 Style = "1",
                 StyleOther = "",
-                Distributed = false,
-                Online = false
+                Distributed = false
             };
         }
 
@@ -48,18 +47,12 @@ namespace BellBoardMockUp.Pages
             if (Performance.Style == "3")
             {
                 Performance.Distributed = true;
-                Performance.Online = true;
             }
         }
 
         protected void DistributedChanged(bool value)
         {
             Performance.Distributed = value;
-        }
-
-        protected void OnlineChanged(bool value)
-        {
-            Performance.Online = value;
         }
 
         protected void BellsPerRingerPopUp()
@@ -80,39 +73,33 @@ namespace BellBoardMockUp.Pages
             Modal.Open();
         }
 
-        protected void OnlinePopUp()
+        protected void TenorPopUp()
         {
             PopUpNum = 3;
             Modal.Open();
         }
 
-        protected void TenorPopUp()
+        protected void PlatformPopUp()
         {
             PopUpNum = 4;
             Modal.Open();
         }
 
-        protected void OnlinePlatformPopUp()
+        protected void TimePopUp()
         {
             PopUpNum = 5;
             Modal.Open();
         }
 
-        protected void TimePopUp()
+        protected void NewMethodsPopUp()
         {
             PopUpNum = 6;
             Modal.Open();
         }
 
-        protected void NewMethodsPopUp()
-        {
-            PopUpNum = 7;
-            Modal.Open();
-        }
-
         protected void NormsPopUp()
         {
-            PopUpNum = 8;
+            PopUpNum = 7;
             Modal.Open();
         }
     }

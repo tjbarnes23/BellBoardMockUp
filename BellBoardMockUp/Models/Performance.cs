@@ -19,8 +19,6 @@ namespace BellBoardMockUp.Models
 
         public bool Distributed { get; set; }
 
-        public bool Online { get; set; }
-
         public string Location { get; set; }
 
         public string County { get; set; }
@@ -35,9 +33,9 @@ namespace BellBoardMockUp.Models
 
         public string Title { get; set; }
 
-        public string Detail { get; set; }
-
         public string Composer { get; set; }
+
+        public string Detail { get; set; }
 
         public string Footnotes { get; set; }
 

@@ -48,7 +48,7 @@
                 <div class="col-6 col-md-4 col-lg-3">
                     Other Style
                     <br />
-                    <InputText @bind-Value="Performance.StyleOther" style="width: 100%" />
+                    <InputTextArea @bind-Value="Performance.StyleOther" style="width: 100%" />
                 </div>
             }
         </div>
@@ -73,7 +73,7 @@
 
         <div class="row mt-2">
             <div class="col-6 col-md-4 col-lg-3 pt-2">
-                Distributed performance? &nbsp;
+                Distributed? &nbsp;
                 <InputCheckbox Value="@Performance.Distributed"
                                ValueChanged="@( (bool value) => DistributedChanged(value) )"
                                ValueExpression="@( () => Performance.Distributed )">
@@ -112,43 +112,23 @@
         <hr />
 
         <div class="row mt-2">
-            <div class="col-6 col-md-4 col-lg-3 pt-3">
-                Online performance? &nbsp;
-                <InputCheckbox Value="@Performance.Online"
-                               ValueChanged="@( (bool value) => OnlineChanged(value) )"
-                               ValueExpression="@( () => Performance.Online )">
-                    @for (int i = 1; i <= 4; i++)
-                    {
-                        <option value="@i">@ControlData.Style(i)</option>
-                    }
-                </InputCheckbox>
-                <button @onclick="OnlinePopUp" style="background-color: white; border: none">
+            <div class="col-6 col-md-4 col-lg-3">
+                Tenor info (if applicable)
+                <button @onclick="TenorPopUp" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
+                <br />
+                <InputText @bind-Value="Performance.Tenor" style="width: 100%" />
             </div>
 
-            @if (Performance.Online == true)
-            {
-                <div class="col-6 col-md-4 col-lg-3">
-                    Online platform
-                    <button @onclick="OnlinePlatformPopUp" style="background-color: white; border: none">
-                        <b>&#9432;</b>
-                    </button>
-                    <br />
-                    <InputText @bind-Value="Performance.Platform" style="width: 100%" />
-                </div>
-            }
-            else
-            {
-                <div class="col-6 col-md-4 col-lg-3">
-                    Tenor weight / size, note
-                    <button @onclick="TenorPopUp" style="background-color: white; border: none">
-                        <b>&#9432;</b>
-                    </button>
-                    <br />
-                    <InputText @bind-Value="Performance.Tenor" style="width: 100%" />
-                </div>
-            }
+            <div class="col-6 col-md-4 col-lg-3">
+                Platform (if applicable)
+                <button @onclick="PlatformPopUp" style="background-color: white; border: none">
+                    <b>&#9432;</b>
+                </button>
+                <br />
+                <InputText @bind-Value="Performance.Platform" style="width: 100%" />
+            </div>
 
             <div class="col-6 col-md-4 col-lg-3">
                 Time taken
