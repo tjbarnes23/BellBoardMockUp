@@ -13,7 +13,9 @@ namespace BellBoardMockUp.Models
 
         public string StyleOther { get; set; }
 
-        public string Association { get; set; }
+        public string AssociationDropDown { get; set; }
+
+        public string AssociationFreeForm { get; set; }
 
         public string Date { get; set; }
 
@@ -31,11 +33,17 @@ namespace BellBoardMockUp.Models
 
         public string Time { get; set; }
 
+        public string Length { get; set; }
+
         public string Title { get; set; }
 
         public string Composer { get; set; }
 
         public string Detail { get; set; }
+
+        public bool AdditionalRingerInfo { get; set; }
+
+        public List<RingerResponse> Ringers { get; set; }
 
         public string Footnotes { get; set; }
 

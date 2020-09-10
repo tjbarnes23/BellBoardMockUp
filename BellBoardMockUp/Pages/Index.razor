@@ -19,7 +19,8 @@
                 <br />
                 <InputSelect Value="@Performance.BellsPerRinger"
                              ValueChanged="@( (string value) => BellsPerRingerChanged(value) )"
-                             ValueExpression="@( () => Performance.BellsPerRinger )">
+                             ValueExpression="@( () => Performance.BellsPerRinger )"
+                             style="width: 100%" >
                     @for (int i = 1; i <= 2; i++)
                     {
                         <option value="@i">@ControlData.BellsPerRinger(i)</option>
@@ -35,7 +36,8 @@
                 <br />
                 <InputSelect Value="@Performance.Style"
                              ValueChanged="@( (string value) => StyleChanged(value) )"
-                             ValueExpression="@( () => Performance.Style )">
+                             ValueExpression="@( () => Performance.Style )"
+                             style="width: 100%" >
                     @for (int i = 1; i <= 4; i++)
                     {
                         <option value="@i">@ControlData.Style(i)</option>
@@ -57,9 +59,24 @@
 
         <div class="row mt-2">
             <div class="col-6 col-md-4 col-lg-3">
-                Association
+                Association (drop down)
                 <br />
-                <InputText @bind-Value="Performance.Association" style="width: 100%" />
+                <InputSelect Value="@Performance.AssociationDropDown"
+                             ValueChanged="@( (string value) => AssociationDropDownChanged(value) )"
+                             ValueExpression="@( () => Performance.AssociationDropDown )"
+                             style="width: 100%" >
+                    <option value="Please select">Please select...</option>
+                    <option value="ASCY">ASCY</option>
+                    <option value="SRCY">SRCY</option>
+                    <option value="Guild of St Cuileáin">Guild of St Cuileáin</option>
+                    <option value="etc">etc</option>
+                </InputSelect>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                Association (free form)
+                <br />
+                <InputText @bind-Value="Performance.AssociationFreeForm" style="width: 100%" />
             </div>
 
             <div class="col-6 col-md-4 col-lg-3">
@@ -76,12 +93,7 @@
                 Distributed? &nbsp;
                 <InputCheckbox Value="@Performance.Distributed"
                                ValueChanged="@( (bool value) => DistributedChanged(value) )"
-                               ValueExpression="@( () => Performance.Distributed )">
-                    @for (int i = 1; i <= 4; i++)
-                    {
-                        <option value="@i">@ControlData.Style(i)</option>
-                    }
-                </InputCheckbox>
+                               ValueExpression="@( () => Performance.Distributed )" />
                 <button @onclick="DistributedPopUp" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
@@ -143,72 +155,136 @@
         <hr />
 
         <div class="row mt-2">
-            <div class="col-6 col-md-4 col-lg-3">
+            <div class="col-7 col-md-6 col-lg-4">
                 Performance Title
-                <br />
-                <InputText @bind-Value="Performance.Title" style="width: 100%" />
+                <button @onclick="TitlePopUp" style="background-color: white; border: none">
+                    <b>&#9432;</b>
+                </button>
             </div>
 
-            <div class="col-6 col-md-4 col-lg-3">
+            <div class="col-5 col-lg-3">
                 Composer
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2 col-lg-1 pr-1">
+                <InputText @bind-Value="Performance.Length"
+                           style="width: 100%" />
                 <br />
+                <small>Length</small>
+            </div>
+
+            <div class="col-5 col-md-4 col-lg-3 pl-1">
+                <InputText @bind-Value="Performance.Title" style="width: 100%" />
+                <br />
+                <small>Method / Class / Stage</small>
+            </div>
+
+            <div class="col-5 col-md-4 col-lg-3">
                 <InputText @bind-Value="Performance.Composer" style="width: 100%" />
             </div>
         </div>
 
-        <div class="row mt-2">
+        <div class="row mt-3">
             <div class="col">
                 Performance Detail
+                <button @onclick="DetailPopUp" style="background-color: white; border: none">
+                    <b>&#9432;</b>
+                </button>
                 <br />
-                <InputText @bind-Value="Performance.Detail" style="width: 100%" />
+                <InputTextArea @bind-Value="Performance.Detail" style="width: 100%" />
             </div>
         </div>
 
         <hr />
 
-        @if (Performance.BellsPerRinger == "1")
-        {
-            @for (int i = 1; i <= 8; i++)
+        <div class="row">
+            <div class="col">
+                Enter additional ringer-level info? &nbsp;
+                <InputCheckbox Value="@Performance.AdditionalRingerInfo"
+                               ValueChanged="@( (bool value) => AdditionalRingerInfoChanged(value) )"
+                               ValueExpression="@( () => Performance.AdditionalRingerInfo )" />
+                <button @onclick="AdditionalRingerInfoPopUp" style="background-color: white; border: none">
+                    <b>&#9432;</b>
+                </button>
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+            @if (Performance.BellsPerRinger == "1")
             {
-                <div class="row mt-1">
-                    <div class="col-2 col-lg-1">
-                        @i
-                    </div>
-
-                    <div class="col-3 col-lg-1">
-                        [Name]
-                    </div>
-
-                    @if (Performance.Distributed == true)
-                    {
-                        <div class="col-6 col-lg-3">
-                            [Approx location]
-                        </div>
-                    }
+                <div class="col-2 col-lg-1">
+                    Bell
                 </div>
             }
-        }
-        else
-        {
-            @for (int i = 1; i <= 8; i += 2)
+            else
             {
-                <div class="row mt-1">
-                    <div class="col-2 col-lg-1">
-                        @i-@(i+1)
-                    </div>
-
-                    <div class="col-3 col-lg-1">
-                        [Name]
-                    </div>
-
-                    @if (Performance.Distributed == true)
-                    {
-                        <div class="col-6 col-lg-3">
-                            [Approx location]
-                        </div>
-                    }
+                <div class="col-2 col-lg-1">
+                    Bells
                 </div>
             }
+
+            <div class="col-3">
+                Ringer
+            </div>
+
+            <div class="col-1">
+                (C)
+            </div>
+            @if (Performance.AdditionalRingerInfo == true)
+            {
+                <div class="col-3">
+                    Info
+                </div>
+            }
+
+            @if (Performance.Distributed == true)
+            {
+                <div class="col-3">
+                    Approx location
+                </div>
+            }
+        </div>
+
+        @foreach (RingerResponse ringer in Performance.Ringers)
+        {
+            <div class="row mt-1">
+                <div class="col-2 col-lg-1">
+                    <label>@ringer.Bell</label>
+                </div>
+
+                <div class="col-3">
+                    <InputText id="@ringer.Bell"
+                               @bind-Value="ringer.Ringer"
+                               style="width: 100%" />
+                </div>
+
+                <div class="col-1">
+                    <InputCheckbox id="@ringer.Bell"
+                                   @bind-Value="ringer.Conductor"
+                                   style="margin-left: 5px"/>
+                </div>
+
+                @if (Performance.AdditionalRingerInfo == true)
+                {
+                    <div class="col-3">
+                        <InputText id="@ringer.Bell"
+                                   @bind-Value="ringer.RingerInfo"
+                                   style="width: 100%" />
+                    </div>
+                }
+
+                @if (Performance.Distributed == true)
+                {
+                    <div class="col-3">
+                        <InputText id="@ringer.Bell"
+                                   @bind-Value="ringer.RingerLocation"
+                                   style="width: 100%" />
+                    </div>
+                }
+            </div>
         }
 
         <hr />

@@ -12,7 +12,7 @@ namespace BellBoardMockUp.Shared
         public string ModalDisplay = "none;";
         public string ModalClass = "";
         public bool ShowBackdrop = false;
-        public string[,] Content = new string[10, 2];
+        public string[,] Content = new string[11, 2];
 
         public Modal()
         {
@@ -101,20 +101,44 @@ namespace BellBoardMockUp.Shared
             sb.Append("Entered as hours:minutes, e.g. 3:05 or 0:42.");
             Content[5, 1] = sb.ToString();
 
-            Content[6, 0] = "New methods named";
+            Content[6, 0] = "Performance Title";
+            sb.Clear();
+            sb.Append("E.g. 1260 Plain Bob Minor or 5152 Spliced Surprise Major (7m)");
+            sb.Append("\n\n");
+            sb.Append("See Section 6.A of the Framework for more information.");
+            Content[6, 1] = sb.ToString();
+
+            Content[7, 0] = "Performance Detail";
+            sb.Clear();
+            sb.Append("E.g. for 7 extents of multi-method Minor: (1-2) Beverley S, Surfleet S; (3) London S, Wells S; " +
+                "(4-5) Kent TB; (6) Cambridge S; (7) Plain B");
+            sb.Append("\n\n");
+            sb.Append("E.g. for multi-method Surprise Major: 640 each Bristol, Pudsey, Rutland, Superlative, " +
+                "Yorkshire; 608 each Cambridge, Lincolnshire, London; 120 com; atw");
+            sb.Append("\n\n");
+            sb.Append("See Section 6.A of the Framework for more information.");
+            Content[7, 1] = sb.ToString();
+
+            Content[8, 0] = "Additional ringer-level info";
+            sb.Clear();
+            sb.Append("Check this box to display an additional field per ringer, which can be used to enter " +
+                "information such as college, role, lodge, etc.");
+            Content[8, 1] = sb.ToString();
+
+            Content[9, 0] = "New methods named";
             sb.Clear();
             sb.Append("Please enter the method title and place notation for any new method named in this performance.");
             sb.Append("\n\n");
             sb.Append("The requirements for naming a new method are in Section 5 of the Framework for Method Ringing.");
             sb.Append("\n\n");
             sb.Append("Place notation is described in Appendix A of the Framework.");
-            Content[6, 1] = sb.ToString();
+            Content[9, 1] = sb.ToString();
 
-            Content[7, 0] = "Departures from Norms";
+            Content[10, 0] = "Departures from Norms";
             sb.Clear();
             sb.Append("If the performance departed from any of the norms of method ringing as described in " +
                 "Section 6.C of the Framework for Method Ringing, please describe the departures in the box provided.");
-            Content[7, 1] = sb.ToString();
+            Content[10, 1] = sb.ToString();
         }
     }
 }
