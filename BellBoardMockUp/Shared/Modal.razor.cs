@@ -57,7 +57,7 @@ namespace BellBoardMockUp.Shared
             sb.Append("Alternating strokes is the usual style for handbells (including dummy handbells). " +
                 "The bells are retained in hand and rung with alternating upstrokes and downstrokes.");
             sb.Append("\n\n");
-            sb.Append("Key presses usually refers to performances rung using a computer keyboard, " +
+            sb.Append("Key presses usually refers to online performances 'rung' using a computer keyboard, " +
                 "but it can also refer to a method ringing performance on an instrument such as a carillon.");
             sb.Append("\n\n");
             sb.Append("Other is for anything that doesn't fall into the above categories. " +
