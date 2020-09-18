@@ -12,7 +12,7 @@ namespace BellBoardMockUp.Shared
         public string ModalDisplay = "none;";
         public string ModalClass = "";
         public bool ShowBackdrop = false;
-        public string[,] Content = new string[11, 2];
+        public string[,] Content = new string[15, 2];
 
         public Modal()
         {
@@ -41,15 +41,8 @@ namespace BellBoardMockUp.Shared
         protected void Populate()
         {
             StringBuilder sb = new StringBuilder();
-
-            Content[0, 0] = "Bells per ringer";
-            sb.Clear();
-            sb.Append("If some ringers ring 1 bell and others ring 2 (or more) bells, " +
-                "select 1 bell per ringer and enter the ringers' names for each bell. " +
-                "BellBoard will merge the same ringer on adjacent bells.");
-            Content[0, 1] = sb.ToString();
-
-            Content[1, 0] = "Style";
+            
+            Content[0, 0] = "Style";
             sb.Clear();
             sb.Append("Full circle is the usual style for tower bells (including dummy tower bells). " +
                 "The bells are rung using a rope, wheel and pulley.");
@@ -60,23 +53,24 @@ namespace BellBoardMockUp.Shared
             sb.Append("Key presses usually refers to online performances 'rung' using a computer keyboard, " +
                 "but it can also refer to a method ringing performance on an instrument such as a carillon.");
             sb.Append("\n\n");
-            sb.Append("Other is for anything that doesn't fall into the above categories. " +
+            sb.Append("Other style is for anything that doesn't fall into the above categories. " +
                 "Please provide details in the 'Other Style' box that will appear.");
             sb.Append("\n\n");
             sb.Append("If different ringers use different styles in the same performance (e.g. in a Ringing Room " +
                 "performance, some ringers use dummy handbells and others use key presses), " +
-                "please select 'Other' and specify who did what in the 'Other Style' box that will appear.");
-            Content[1, 1] = sb.ToString();
+                "please select 'Mixed style'. You will then be able to specify the style used by each individual " +
+                "ringer.");
+            Content[0, 1] = sb.ToString();
 
-            Content[2, 0] = "Distributed";
+            Content[1, 0] = "Distributed";
             sb.Clear();
             sb.Append("A distributed performance is one where the ringers are located in different places.");
             sb.Append("\n\n");
             sb.Append("Instead of entering a place for the performance, the approximate location is entered " +
                 "for each ringer.");
-            Content[2, 1] = sb.ToString();
+            Content[1, 1] = sb.ToString();
             
-            Content[3, 0] = "Tenor info";
+            Content[2, 0] = "Tenor info";
             sb.Clear();
             sb.Append("For tower bells, this is usually entered in the form 18–3–20 in E♭, where the weight is in " +
                 "cwt-qtr-lb.");
@@ -86,19 +80,29 @@ namespace BellBoardMockUp.Shared
             sb.Append("\n\n");
             sb.Append("If the performance was rung on a computer platform such as Ringing Room or Handbell Stadium, " +
                 "then leave this box blank.");
-            Content[3, 1] = sb.ToString();
+            Content[2, 1] = sb.ToString();
 
-            Content[4, 0] = "Platform";
+            Content[3, 0] = "Platform";
             sb.Clear();
             sb.Append("If the performance was rung on a computer platform, enter the name of the platform such as " +
                 "Ringing Room, Handbell Stadium, Muster, Ding, Abel, Mobel.");
             sb.Append("\n\n");
             sb.Append("Otherwise, leave this box blank.");
-            Content[4, 1] = sb.ToString();
+            Content[3, 1] = sb.ToString();
 
-            Content[5, 0] = "Time taken";
+            Content[4, 0] = "Time taken";
             sb.Clear();
             sb.Append("Entered as hours:minutes, e.g. 3:05 or 0:42.");
+            Content[4, 1] = sb.ToString();
+
+            Content[5, 0] = "Import from CompLib";
+            sb.Clear();
+            sb.Append("The Performance Title, Composer and Performance Detail boxes can be " +
+                "imported from CompLib.");
+            sb.Append("\n\n");
+            sb.Append("Click this checkbox, enter the composition id in the box that will appear, " +
+                "and click on Import. The id is the number at the end of the CompLib URL " +
+                "(after the slash) when the composition is selected in CompLib.");
             Content[5, 1] = sb.ToString();
 
             Content[6, 0] = "Performance Title";
@@ -119,26 +123,47 @@ namespace BellBoardMockUp.Shared
             sb.Append("See Section 6.A of the Framework for more information.");
             Content[7, 1] = sb.ToString();
 
-            Content[8, 0] = "Additional ringer-level info";
+            Content[8, 0] = "Bells per ringer";
+            sb.Clear();
+            sb.Append("If the performance didn't use one of the first two options (e.g. an online performance " +
+                "might have had some people ringing one bell and other people ringing two bells), then " + 
+                "select 'Other Configuration'. You will then be able to enter the bell(s) that each ringer rang.");
+            sb.Append("\n\n");
+            sb.Append("E.g. enter 1 4 if a ringer rang bells 1 and 4, " +
+                "or enter 3-6 if a ringer rang bells 3, 4, 5 and 6.");
+            sb.Append("\n\n");
+            sb.Append("If two people rang one bell (e.g. a tenor rung with a strapper), " +
+                "enter the same bell number on two separate rows and enter one of the two ringers alongside each.");
+            Content[8, 1] = sb.ToString();
+
+            Content[9, 0] = "Additional ringer-level info";
             sb.Clear();
             sb.Append("Check this box to display an additional field per ringer, which can be used to enter " +
                 "information such as college, role, lodge, etc.");
-            Content[8, 1] = sb.ToString();
+            Content[9, 1] = sb.ToString();
 
-            Content[9, 0] = "New methods named";
+            Content[10, 0] = "Ringer style";
+            sb.Clear();
+            sb.Append("This box is for entering the style of an individual ringer when not all ringers " +
+                "in the band used the same style (i.e. a mixed style performance).");
+            sb.Append("\n\n");
+            sb.Append("See the information box for Style at the top of the page for more information.");
+            Content[10, 1] = sb.ToString();
+
+            Content[11, 0] = "New methods named";
             sb.Clear();
             sb.Append("Please enter the method title and place notation for any new method named in this performance.");
             sb.Append("\n\n");
             sb.Append("The requirements for naming a new method are in Section 5 of the Framework for Method Ringing.");
             sb.Append("\n\n");
             sb.Append("Place notation is described in Appendix A of the Framework.");
-            Content[9, 1] = sb.ToString();
+            Content[11, 1] = sb.ToString();
 
-            Content[10, 0] = "Departures from Norms";
+            Content[12, 0] = "Departures from Norms";
             sb.Clear();
             sb.Append("If the performance departed from any of the norms of method ringing as described in " +
                 "Section 6.C of the Framework for Method Ringing, please describe the departures in the box provided.");
-            Content[10, 1] = sb.ToString();
+            Content[12, 1] = sb.ToString();
         }
     }
 }

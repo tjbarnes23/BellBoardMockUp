@@ -13,6 +13,7 @@ namespace BellBoardMockUp.Utilities
             {
                 1 => "One bell per ringer",
                 2 => "Two bells per ringer",
+                3 => "Other configuration",
                 _ => bellsPerRinger.ToString()
             };
         }
@@ -24,7 +25,8 @@ namespace BellBoardMockUp.Utilities
                 1 => "Full circle (Tower bells)",
                 2 => "Up / down strokes (Handbells)",
                 3 => "Key presses (Online)",
-                4 => "Other",
+                4 => "Other style",
+                5 => "Mixed style",
                 _ => style.ToString()
             };
         }

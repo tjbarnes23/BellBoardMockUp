@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace BellBoardMockUp.Models
 {
-    public class RingerResponse
+    public class RingerData
     {
+        public int Id { get; set; }
+
         public string Bell { get; set; }
 
         public string Ringer { get; set; }
@@ -16,5 +18,9 @@ namespace BellBoardMockUp.Models
         public string RingerInfo { get; set; }
 
         public string RingerLocation { get; set; }
+
+        public int RingerStyle { get; set; }
+
+        public string RingerStyleOther { get; set; }
     }
 }

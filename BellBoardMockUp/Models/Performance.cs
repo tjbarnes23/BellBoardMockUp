@@ -7,13 +7,11 @@ namespace BellBoardMockUp.Models
 {
     public class Performance
     {
-        public string BellsPerRinger { get; set; }
-
-        public string Style { get; set; }
+        public int Style { get; set; }
 
         public string StyleOther { get; set; }
 
-        public string AssociationDropDown { get; set; }
+        public int AssociationDropDown { get; set; }
 
         public string AssociationFreeForm { get; set; }
 
@@ -33,6 +31,10 @@ namespace BellBoardMockUp.Models
 
         public string Time { get; set; }
 
+        public bool ImportFromCompLib { get; set; }
+
+        public string CompLibId { get; set; }
+
         public string Length { get; set; }
 
         public string Title { get; set; }
@@ -41,9 +43,11 @@ namespace BellBoardMockUp.Models
 
         public string Detail { get; set; }
 
+        public int BellsPerRinger { get; set; }
+
         public bool AdditionalRingerInfo { get; set; }
 
-        public List<RingerResponse> Ringers { get; set; }
+        public List<RingerData> Ringers { get; set; }
 
         public string Footnotes { get; set; }
 
