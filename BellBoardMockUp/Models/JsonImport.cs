@@ -12,6 +12,6 @@ namespace BellBoardMockUp.Models
         [Key]
         public int Id { get; set; }
 
-        public string JsonSpec { get; set; }
+        public string GapTestSpec { get; set; }
     }
 }

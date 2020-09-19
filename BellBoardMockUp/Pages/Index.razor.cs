@@ -38,8 +38,6 @@ namespace BellBoardMockUp.Pages
 
         private Modal Modal { get; set; }
 
-        public int PopUpNum { get; set; }
-
         protected void StyleChanged(int value)
         {
             Performance.Style = value;
@@ -81,94 +79,30 @@ namespace BellBoardMockUp.Pages
         protected async Task Import()
         {
             // Get a test from the API
-            JsonImport jsonImport = await Http.GetFromJsonAsync<JsonImport>($"composition/{Performance.CompLibId}");
+            JsonImport jsonImport = await Http.GetFromJsonAsync<JsonImport>("api/gaptests/14");
+
+            // Make property matching case insensitive
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
 
             // Use the Deserializer method of the JsonSerializer class (in the System.Text.Json namespace) to create
             // a BlowSetData object
-            CompImport compImport = JsonSerializer.Deserialize<CompImport>(jsonImport.JsonSpec);
+            CompImport compImport = JsonSerializer.Deserialize<CompImport>(jsonImport.GapTestSpec, options);
 
-            Performance.Title = compImport.Title;
-            Performance.Composer = compImport.Composer;
+            int loc = compImport.Title.IndexOf(" ");
+
+            Performance.Length = compImport.Title.Substring(0, loc);
+            Performance.Title = compImport.Title.Substring(loc + 1);
+            Performance.Composer = compImport.ComposerDetails.First().Name;
             
             StateHasChanged();
         }
 
-        protected void StylePopUp()
+        protected void ActivatePopUp(PopUp value)
         {
-            PopUpNum = 0;
-            Modal.Open();
-        }
-
-        protected void DistributedPopUp()
-        {
-            PopUpNum = 1;
-            Modal.Open();
-        }
-
-        protected void TenorPopUp()
-        {
-            PopUpNum = 2;
-            Modal.Open();
-        }
-
-        protected void PlatformPopUp()
-        {
-            PopUpNum = 3;
-            Modal.Open();
-        }
-
-        protected void TimePopUp()
-        {
-            PopUpNum = 4;
-            Modal.Open();
-        }
-
-        protected void ImportPopUp()
-        {
-            PopUpNum = 5;
-            Modal.Open();
-        }
-
-        protected void TitlePopUp()
-        {
-            PopUpNum = 6;
-            Modal.Open();
-        }
-
-        protected void DetailPopUp()
-        {
-            PopUpNum = 7;
-            Modal.Open();
-        }
-
-        protected void BellsPerRingerPopUp()
-        {
-            PopUpNum = 8;
-            Modal.Open();
-        }
-
-        protected void AdditionalRingerInfoPopUp()
-        {
-            PopUpNum = 9;
-            Modal.Open();
-        }
-
-        protected void RingerStylePopUp()
-        {
-            PopUpNum = 10;
-            Modal.Open();
-        }
-
-        protected void NewMethodsPopUp()
-        {
-            PopUpNum = 11;
-            Modal.Open();
-        }
-
-        protected void NormsPopUp()
-        {
-            PopUpNum = 12;
-            Modal.Open();
+            Modal.Open(value);
         }
 
         private void PopulateRingers()

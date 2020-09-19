@@ -17,7 +17,7 @@ namespace BellBoardMockUp
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri("https://api.complib.org/") });
+            builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri("https://tjbarnes.com/") });
             
             // builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

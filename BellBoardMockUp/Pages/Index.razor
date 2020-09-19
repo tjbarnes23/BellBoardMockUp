@@ -2,7 +2,7 @@
 @using BellBoardMockUp.Models
 @using BellBoardMockUp.Utilities
 
-<Modal @ref="Modal" PopUpNum="@PopUpNum"></Modal>
+<Modal @ref="Modal"></Modal>
 
 <div class="container mx-2">
     <h1>BellBoard Performance Entry Mock-up</h1>
@@ -13,7 +13,7 @@
         <div class="row mt-2">
             <div class="col-6 col-md-5 col-lg-4 col-xl-3">
                 Style
-                <button @onclick="StylePopUp" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.Style))" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
                 <br />
@@ -75,7 +75,7 @@
             <div class="col-6 col-md-4 col-lg-3 pt-2">
                 Distributed? &nbsp;
                 <InputCheckbox @bind-Value="@Performance.Distributed" />
-                <button @onclick="DistributedPopUp" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.Distributed))" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
             </div>
@@ -107,7 +107,7 @@
         <div class="row mt-2">
             <div class="col-6 col-md-4 col-lg-3">
                 Tenor info (if applicable)
-                <button @onclick="TenorPopUp" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.Tenor))" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
                 <br />
@@ -116,7 +116,7 @@
 
             <div class="col-6 col-md-4 col-lg-3">
                 Platform (if applicable)
-                <button @onclick="PlatformPopUp" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.Platform))" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
                 <br />
@@ -125,7 +125,7 @@
 
             <div class="col-6 col-md-4 col-lg-3">
                 Time taken
-                <button @onclick="TimePopUp" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.Time))" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
                 <br />
@@ -139,7 +139,7 @@
             <div class="col-6 col-md-4 col-lg-3 pt-2">
                 Import from CompLib? &nbsp;
                 <InputCheckbox @bind-Value="@Performance.ImportFromCompLib" />
-                <button @onclick="ImportPopUp" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.Import))" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
             </div>
@@ -161,7 +161,7 @@
         <div class="row mt-3">
             <div class="col-7 col-md-6 col-lg-4">
                 Performance Title
-                <button @onclick="TitlePopUp" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.Title))" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
             </div>
@@ -193,7 +193,7 @@
         <div class="row mt-3">
             <div class="col">
                 Performance Detail
-                <button @onclick="DetailPopUp" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.Detail))" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
                 <br />
@@ -206,7 +206,7 @@
         <div class="row mt-2">
             <div class="col-6 col-md-4 col-lg-3">
                 Bells per ringer
-                <button @onclick="BellsPerRingerPopUp" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.BellsPerRinger))" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
                 <br />
@@ -222,11 +222,11 @@
             </div>
 
             <div class="col-6 col-lg-5 pt-2 pt-md-4">
-                Enter additional ringer-level info? &nbsp;
+                Enter additional ringer info? &nbsp;
                 <InputCheckbox Value="@Performance.AdditionalRingerInfo"
                                ValueChanged="@( (bool value) => AdditionalRingerInfoChanged(value) )"
                                ValueExpression="@( () => Performance.AdditionalRingerInfo )" />
-                <button @onclick="AdditionalRingerInfoPopUp" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.AdditionalRingerInfo))" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
             </div>
@@ -334,7 +334,7 @@
                 <div class="row mt-2">
                     <div class="col-10 col-md-7 col-lg-5 col-xl-4 offset-2 offset-lg-1">
                         &nbsp; Style:
-                        <button @onclick="RingerStylePopUp" style="background-color: white; border: none">
+                        <button @onclick="@(e => ActivatePopUp(PopUp.RingerStyle))" style="background-color: white; border: none">
                             <b>&#9432;</b>
                         </button>
                         <CustomInputSelect @bind-Value="ringer.RingerStyle" style="height: 28px">
@@ -369,7 +369,7 @@
         <div class="row mt-2">
             <div class="col">
                 New methods named
-                <button @onclick="NewMethodsPopUp" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.NewMethods))" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
                 <br />
@@ -380,7 +380,7 @@
         <div class="row mt-2">
             <div class="col">
                 Departures from Norms
-                <button @onclick="NormsPopUp" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.Norms))" style="background-color: white; border: none">
                     <b>&#9432;</b>
                 </button>
                 <br />
