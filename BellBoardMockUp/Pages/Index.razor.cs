@@ -38,6 +38,10 @@ namespace BellBoardMockUp.Pages
 
         private Modal Modal { get; set; }
 
+        public bool CompImporting { get; set; }
+
+        public bool NewMethodValidating { get; set; }
+
         protected void StyleChanged(int value)
         {
             Performance.Style = value;
@@ -78,6 +82,17 @@ namespace BellBoardMockUp.Pages
 
         protected async Task Import()
         {
+            // Start spinner
+            CompImporting = true;
+
+            DateTime currTimeStart = DateTime.Now;
+
+            // Clear any existing composition info
+            Performance.Length = string.Empty;
+            Performance.Title = string.Empty;
+            Performance.Composer = string.Empty;
+            Performance.Detail = string.Empty;
+
             // Get a test from the API
             JsonImport jsonImport = await Http.GetFromJsonAsync<JsonImport>("api/gaptests/14");
 
@@ -96,8 +111,54 @@ namespace BellBoardMockUp.Pages
             Performance.Length = compImport.Title.Substring(0, loc);
             Performance.Title = compImport.Title.Substring(loc + 1);
             Performance.Composer = compImport.ComposerDetails.First().Name;
-            
-            StateHasChanged();
+
+            DateTime currTimeEnd = DateTime.Now;
+
+            if (currTimeEnd < currTimeStart.AddSeconds(1))
+            {
+                double delay = currTimeStart.AddSeconds(1).Subtract(currTimeEnd).TotalMilliseconds;
+                await Task.Delay(Convert.ToInt32(delay));
+            }
+
+            CompImporting = false;
+        }
+
+        protected async Task Validate()
+        {
+            // Start spinner
+            NewMethodValidating = true;
+
+            DateTime currTimeStart = DateTime.Now;
+
+            // Clear any existing new method results
+            Performance.NewMethodValidationMessage = string.Empty;
+            Performance.NewMethodTitle = string.Empty;
+
+            // Get a test from the API
+            JsonImport jsonImport = await Http.GetFromJsonAsync<JsonImport>("api/gaptests/16");
+
+            // Make property matching case insensitive
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+
+            // Use the Deserializer method of the JsonSerializer class (in the System.Text.Json namespace) to create
+            // a BlowSetData object
+            NewMethod newMethod = JsonSerializer.Deserialize<NewMethod>(jsonImport.GapTestSpec, options);
+
+            Performance.NewMethodValidationMessage = newMethod.Status;
+            Performance.NewMethodTitle = newMethod.Result.Title;
+
+            DateTime currTimeEnd = DateTime.Now;
+
+            if (currTimeEnd < currTimeStart.AddSeconds(1))
+            {
+                double delay = currTimeStart.AddSeconds(1).Subtract(currTimeEnd).TotalMilliseconds;
+                await Task.Delay(Convert.ToInt32(delay));
+            }
+
+            NewMethodValidating = false;
         }
 
         protected void ActivatePopUp(PopUp value)

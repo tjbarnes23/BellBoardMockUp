@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BellBoardMockUp.Utilities;
 
 namespace BellBoardMockUp.Models
 {
@@ -51,8 +52,16 @@ namespace BellBoardMockUp.Models
 
         public string Footnotes { get; set; }
 
-        public string NewMethods { get; set; }
-        
+        public string NewMethodName { get; set; }
+
+        public string NewMethodPlaceNotation { get; set; }
+
+        public Stage NewMethodStage { get; set; }
+
+        public string NewMethodValidationMessage { get; set; }
+
+        public string NewMethodTitle { get; set; }
+
         public string NormDepartures { get; set; }
     }
 }

@@ -119,3 +119,26 @@ app {
     position: absolute;
     user-select: none;
 }
+
+.spinner {
+    border-width: var(--borderwidth);
+    border-style: solid;
+    border-color: silver;
+    border-top-width: var(--borderwidth);
+    border-top-style: solid;
+    border-top-color: #337AB7;
+    border-radius: 50%;
+    width: var(--width);
+    height: var(--height);
+    animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}

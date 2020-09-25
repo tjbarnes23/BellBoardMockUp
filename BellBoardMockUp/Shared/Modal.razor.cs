@@ -185,13 +185,19 @@ namespace BellBoardMockUp.Shared
                 
                 case PopUp.NewMethods:
                     Title = "New methods named";
-                    sb.Append("Please enter the method title and place notation for any new method named in this " +
-                        "performance.");
+                    sb.Append("Please enter the method name (excluding any class descriptors such as Bob or " +
+                        "Surprise), place notation and stage for any new method(s) named in this performance.");
                     sb.Append("\n\n");
                     sb.Append("The requirements for naming a new method are in Section 5 " +
                         "of the Framework for Method Ringing.");
                     sb.Append("\n\n");
                     sb.Append("Place notation is described in Appendix A of the Framework.");
+                    sb.Append("\n\n");
+                    sb.Append("Then click the Validate button to check that your new method name is available " +
+                        "and meets requirements. ");
+                    sb.Append("If the Status shows as anything other than 'success', the CC Methods " +
+                        "Team is available to help you resolve the problem. ");
+                    sb.Append("They can be reached by email at methods@cccbr.org.uk.");
                     Content = sb.ToString();
                     Link = "https://framework.cccbr.org.uk";
                     break;

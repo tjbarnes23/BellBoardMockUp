@@ -75,7 +75,8 @@
             <div class="col-6 col-md-4 col-lg-3 pt-2">
                 Distributed? &nbsp;
                 <InputCheckbox @bind-Value="@Performance.Distributed" />
-                <button @onclick="@(e => ActivatePopUp(PopUp.Distributed))" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.Distributed))" style="background-color: white;
+                        border: none">
                     <b>&#9432;</b>
                 </button>
             </div>
@@ -147,13 +148,22 @@
             @if (Performance.ImportFromCompLib == true)
             {
                 <div class="col-6 col-md-4 col-lg-3">
-                    CompLib composition id
-                    <br />
-                    <InputText @bind-Value="Performance.CompLibId" style="width: 120px" />
-                    <button class="btn btn-primary" @onclick="Import" style="width: 80px; height: 30px;
+                    <div style="display: inline-block">
+                        CompLib composition id
+                        <br />
+                        <InputText @bind-Value="Performance.CompLibId" style="width: 90px" />
+                        <button class="btn btn-primary" @onclick="Import" style="width: 70px; height: 30px;
                             padding-left: 8px; padding-top: 2px">
-                        Import
-                    </button>
+                            Import
+                        </button>
+                    </div>
+
+                    @if (CompImporting == true)
+                    {
+                        <div class="spinner" style="display: inline-block; vertical-align: middle; --borderwidth: 5px;
+                                --width: 24px; --height: 24px">
+                        </div>
+                    }
                 </div>
             }
         </div>
@@ -206,7 +216,8 @@
         <div class="row mt-2">
             <div class="col-6 col-md-4 col-lg-3">
                 Bells per ringer
-                <button @onclick="@(e => ActivatePopUp(PopUp.BellsPerRinger))" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.BellsPerRinger))" style="background-color: white;
+                        border: none">
                     <b>&#9432;</b>
                 </button>
                 <br />
@@ -226,7 +237,8 @@
                 <InputCheckbox Value="@Performance.AdditionalRingerInfo"
                                ValueChanged="@( (bool value) => AdditionalRingerInfoChanged(value) )"
                                ValueExpression="@( () => Performance.AdditionalRingerInfo )" />
-                <button @onclick="@(e => ActivatePopUp(PopUp.AdditionalRingerInfo))" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.AdditionalRingerInfo))" style="background-color: white;
+                        border: none">
                     <b>&#9432;</b>
                 </button>
             </div>
@@ -334,7 +346,8 @@
                 <div class="row mt-2">
                     <div class="col-10 col-md-7 col-lg-5 col-xl-4 offset-2 offset-lg-1">
                         &nbsp; Style:
-                        <button @onclick="@(e => ActivatePopUp(PopUp.RingerStyle))" style="background-color: white; border: none">
+                        <button @onclick="@(e => ActivatePopUp(PopUp.RingerStyle))" style="background-color: white;
+                                border: none">
                             <b>&#9432;</b>
                         </button>
                         <CustomInputSelect @bind-Value="ringer.RingerStyle" style="height: 28px">
@@ -366,16 +379,83 @@
             </div>
         </div>
 
+        <hr />
+
         <div class="row mt-2">
             <div class="col">
                 New methods named
-                <button @onclick="@(e => ActivatePopUp(PopUp.NewMethods))" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.NewMethods))" style="background-color: white;
+                        border: none">
                     <b>&#9432;</b>
                 </button>
-                <br />
-                <InputTextArea @bind-Value="Performance.NewMethods" style="width: 100%" />
             </div>
         </div>
+
+        <div class="row mt-2">
+            <div class="col-2">
+                Name
+                <br />
+                <InputText @bind-Value="Performance.NewMethodName" style="width: 100%" />
+            </div>
+
+            <div class="col-2">
+                Place notation
+                <br />
+                <InputText @bind-Value="Performance.NewMethodPlaceNotation" style="width: 100%" />
+            </div>
+
+            <div class="col-2">
+                Stage
+                <br />
+                <InputSelect @bind-Value="Performance.NewMethodStage" style="width: 100%; height: 28px">
+                    @foreach (var stage in Enum.GetValues(typeof(Stage)))
+                    {
+                        <option value="@stage">@stage</option>
+                    }
+                </InputSelect>
+            </div>
+
+            <div class="col-2">
+                <br />
+                <div style="display: inline-block">
+                    <button class="btn btn-primary" @onclick="Validate" style="width: 100px; height: 30px;
+                            padding-left: 8px; padding-top: 2px">
+                        Validate
+                    </button>
+                </div>
+
+                @if (NewMethodValidating == true)
+                {
+                    <div class="spinner" style="display: inline-block; vertical-align: middle; margin-left: 7px;
+                                --borderwidth: 5px; --width: 24px; --height: 24px">
+                    </div>
+                }
+            </div>
+
+            <div class="col-2">
+                Status
+                <br />
+                <InputText @bind-Value="Performance.NewMethodValidationMessage" style="width: 100%" />
+            </div>
+
+            <div class="col-2">
+                Title
+                <br />
+                <InputText @bind-Value="Performance.NewMethodTitle" style="width: 100%" />
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <button class="btn btn-primary" style="width: 225px; height: 30px;
+                            padding-left: 8px; padding-top: 2px">
+                    Enter another new method
+                </button> &nbsp;
+                (Not yet implemented)
+            </div>
+        </div>
+
+        <hr />
 
         <div class="row mt-2">
             <div class="col">
@@ -391,6 +471,5 @@
         <hr />
     </EditForm>
 
-    <br />
     <br />
 </div>
