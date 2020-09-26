@@ -7,7 +7,8 @@ namespace BellBoardMockUp.Utilities
 {
     public enum Stage
     {
-        Two = 2,
+        Please_select = 1,
+        Two,
         Singles,
         Minimus,
         Doubles,

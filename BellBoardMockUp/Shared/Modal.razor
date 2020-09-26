@@ -18,6 +18,11 @@
                     @Content
                 </p>
 
+                @if (Image != string.Empty)
+                {
+                    <img src="@Image" />
+                }
+
                 @if (Link != string.Empty)
                 {
                     <a href="@Link" target="_blank">@Link</a>

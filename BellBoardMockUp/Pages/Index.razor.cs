@@ -25,10 +25,12 @@ namespace BellBoardMockUp.Pages
                 Distributed = false,
                 BellsPerRinger = 1,
                 AdditionalRingerInfo = false,
-                Ringers = new List<RingerData>()
+                Ringers = new List<RingerData>(),
+                NewMethods = new List<NewMethodData>()
             };
 
             PopulateRingers();
+            AddNewMethod();
         }
 
         [Inject]
@@ -39,8 +41,6 @@ namespace BellBoardMockUp.Pages
         private Modal Modal { get; set; }
 
         public bool CompImporting { get; set; }
-
-        public bool NewMethodValidating { get; set; }
 
         protected void StyleChanged(int value)
         {
@@ -123,16 +123,16 @@ namespace BellBoardMockUp.Pages
             CompImporting = false;
         }
 
-        protected async Task Validate()
+        protected async Task Validate(int newMethodId)
         {
             // Start spinner
-            NewMethodValidating = true;
+            Performance.NewMethods[newMethodId].Validating = true;
 
             DateTime currTimeStart = DateTime.Now;
 
             // Clear any existing new method results
-            Performance.NewMethodValidationMessage = string.Empty;
-            Performance.NewMethodTitle = string.Empty;
+            Performance.NewMethods[newMethodId].Status = string.Empty;
+            Performance.NewMethods[newMethodId].Title = string.Empty;
 
             // Get a test from the API
             JsonImport jsonImport = await Http.GetFromJsonAsync<JsonImport>("api/gaptests/16");
@@ -147,8 +147,8 @@ namespace BellBoardMockUp.Pages
             // a BlowSetData object
             NewMethod newMethod = JsonSerializer.Deserialize<NewMethod>(jsonImport.GapTestSpec, options);
 
-            Performance.NewMethodValidationMessage = newMethod.Status;
-            Performance.NewMethodTitle = newMethod.Result.Title;
+            Performance.NewMethods[newMethodId].Status = newMethod.Status;
+            Performance.NewMethods[newMethodId].Title = newMethod.Result.Title;
 
             DateTime currTimeEnd = DateTime.Now;
 
@@ -158,7 +158,7 @@ namespace BellBoardMockUp.Pages
                 await Task.Delay(Convert.ToInt32(delay));
             }
 
-            NewMethodValidating = false;
+            Performance.NewMethods[newMethodId].Validating = false;
         }
 
         protected void ActivatePopUp(PopUp value)
@@ -213,6 +213,19 @@ namespace BellBoardMockUp.Pages
 
                 Performance.Ringers.Add(ringerData);
             }
+        }
+
+        private void AddNewMethod()
+        {
+            NewMethodData newMethodData = new NewMethodData()
+            {
+                Id = Performance.NewMethods.Count(),
+                Name = string.Empty,
+                PlaceNotation = string.Empty,
+                Stage = Stage.Please_select
+            };
+
+            Performance.NewMethods.Add(newMethodData);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace BellBoardMockUp.Shared
         public bool ShowBackdrop = false;
         public string Title;
         public string Content;
+        public string Image;
         public string Link;
 
         public void Open()
@@ -69,6 +70,7 @@ namespace BellBoardMockUp.Shared
                         "please select 'Mixed style'. You will then be able to specify the style used by each " +
                         "individual ringer.");
                     Content = sb.ToString();
+                    Image = string.Empty;
                     Link = string.Empty;
                     break;
                 
@@ -79,6 +81,7 @@ namespace BellBoardMockUp.Shared
                     sb.Append("Instead of entering a place for the performance, the approximate location is entered " +
                         "for each ringer.");
                     Content = sb.ToString();
+                    Image = string.Empty;
                     Link = string.Empty;
                     break;
                 
@@ -93,6 +96,7 @@ namespace BellBoardMockUp.Shared
                     sb.Append("If the performance was rung on a computer platform such as Ringing Room or Handbell " +
                         "Stadium, then leave this box blank.");
                     Content = sb.ToString();
+                    Image = string.Empty;
                     Link = string.Empty;
                     break;
                 
@@ -103,6 +107,7 @@ namespace BellBoardMockUp.Shared
                     sb.Append("\n\n");
                     sb.Append("Otherwise, leave this box blank.");
                     Content = sb.ToString();
+                    Image = string.Empty;
                     Link = string.Empty;
                     break;
                 
@@ -110,6 +115,7 @@ namespace BellBoardMockUp.Shared
                     Title = "Time taken";
                     sb.Append("Entered as hours:minutes, e.g. 3:05 or 0:42.");
                     Content = sb.ToString();
+                    Image = string.Empty;
                     Link = string.Empty;
                     break;
                 
@@ -118,10 +124,15 @@ namespace BellBoardMockUp.Shared
                     sb.Append("The Performance Title, Composer and Performance Detail boxes can be " +
                         "imported from CompLib.");
                     sb.Append("\n\n");
-                    sb.Append("Click this checkbox, enter the composition id in the box that will appear, " +
-                        "and click on Import. The id is the number at the end of the CompLib URL " +
-                        "(after the slash) when the composition is selected in CompLib.");
+                    sb.Append("Click this checkbox, enter the CompLib composition id in the box that will appear, " +
+                        "and click on Import.");
+                    sb.Append("\n\n");
+                    sb.Append("The CompLib composition id is the number at the end of the CompLib URL " +
+                        "(after the last slash) when the composition is selected in CompLib.");
+                    sb.Append(" E.g. if the selected composition in CompLib has the URL shown below, the " +
+                        "composition id is 66827.");
                     Content = sb.ToString();
+                    Image = "Images/CompLibId.jpg";
                     Link = string.Empty;
                     break;
                 
@@ -131,6 +142,7 @@ namespace BellBoardMockUp.Shared
                     sb.Append("\n\n");
                     sb.Append("See Section 6.A of the Framework for Method Ringing for more information.");
                     Content = sb.ToString();
+                    Image = string.Empty;
                     Link = "https://framework.cccbr.org.uk";
                     break;
                 
@@ -144,6 +156,7 @@ namespace BellBoardMockUp.Shared
                     sb.Append("\n\n");
                     sb.Append("See Section 6.A of the Framework for Method Ringing for more information.");
                     Content = sb.ToString();
+                    Image = string.Empty;
                     Link = "https://framework.cccbr.org.uk";
                     break;
                 
@@ -162,6 +175,7 @@ namespace BellBoardMockUp.Shared
                         "enter the same bell number on two separate rows and enter one of the two ringers alongside " +
                         "each.");
                     Content = sb.ToString();
+                    Image = string.Empty;
                     Link = string.Empty;
                     break;
                 
@@ -170,6 +184,7 @@ namespace BellBoardMockUp.Shared
                     sb.Append("Check this box to display an additional field per ringer, which can be used to enter " +
                         "information such as college, role, lodge, etc.");
                     Content = sb.ToString();
+                    Image = string.Empty;
                     Link = string.Empty;
                     break;
                 
@@ -180,6 +195,7 @@ namespace BellBoardMockUp.Shared
                     sb.Append("\n\n");
                     sb.Append("See the information box for Style at the top of the page for more information.");
                     Content = sb.ToString();
+                    Image = string.Empty;
                     Link = string.Empty;
                     break;
                 
@@ -199,6 +215,7 @@ namespace BellBoardMockUp.Shared
                         "Team is available to help you resolve the problem. ");
                     sb.Append("They can be reached by email at methods@cccbr.org.uk.");
                     Content = sb.ToString();
+                    Image = string.Empty;
                     Link = "https://framework.cccbr.org.uk";
                     break;
                 
@@ -208,6 +225,7 @@ namespace BellBoardMockUp.Shared
                         "Section 6.C of the Framework for Method Ringing, please describe the departures in the box " +
                         "provided.");
                     Content = sb.ToString();
+                    Image = string.Empty;
                     Link = "https://framework.cccbr.org.uk";
                     break;
                 

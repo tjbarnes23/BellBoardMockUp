@@ -52,15 +52,7 @@ namespace BellBoardMockUp.Models
 
         public string Footnotes { get; set; }
 
-        public string NewMethodName { get; set; }
-
-        public string NewMethodPlaceNotation { get; set; }
-
-        public Stage NewMethodStage { get; set; }
-
-        public string NewMethodValidationMessage { get; set; }
-
-        public string NewMethodTitle { get; set; }
+        public List<NewMethodData> NewMethods { get; set; }
 
         public string NormDepartures { get; set; }
     }
