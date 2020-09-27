@@ -14,7 +14,7 @@ namespace BellBoardMockUp.Models
 
         public string PlaceNotation { get; set; }
 
-        public Stage Stage { get; set; }
+        public int Stage { get; set; }
 
         public bool Validating { get; set; }
 

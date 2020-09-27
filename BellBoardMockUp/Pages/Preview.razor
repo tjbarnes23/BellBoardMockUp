@@ -1,0 +1,83 @@
+﻿@page "/preview"
+@using BellBoardMockUp.Models
+@using BellBoardMockUp.Services
+@using BellBoardMockUp.Utilities
+@inject Performance Performance
+@inject NavigationManager NavManager
+
+<div class="container mx-2">
+    <h1>BellBoard Performance Preview Mock-up</h1>
+
+    <br />
+
+    @if (Performance.AssociationDropDown != 0)
+    {
+        <p><b>@ControlData.Association(Performance.AssociationDropDown)</b></p>
+    }
+    else if (Performance.AssociationFreeForm != string.Empty)
+    {
+        <p><b>@Performance.AssociationFreeForm</b></p>
+    }
+
+    <p>
+        <b>@Performance.Location</b>
+
+        @if (Performance.County != string.Empty)
+        {
+            <span>, @Performance.County</span>
+        }
+    </p>
+
+    <p>
+        @Performance.Address
+    </p>
+
+    <p>
+        @Performance.Date
+
+        @if (Performance.Time != string.Empty)
+        {
+            <span>in @Performance.Time</span>
+        }
+
+        @if (Performance.Tenor != string.Empty)
+        {
+            <span>(@Performance.Tenor)</span>
+        }
+    </p>
+
+    <p>
+        <b>@Performance.Title</b>
+    </p>
+
+    <p>
+        @Performance.Composer
+    </p>
+
+    @foreach (RingerData ringerData in Performance.Ringers)
+    {
+        <div class="row">
+            <div class="col-2 col-lg-1">
+                @ringerData.Bell
+            </div>
+
+            <div class="col-3">
+                @ringerData.Ringer
+            </div>
+
+            <div class="col-3">
+                (@ringerData.RingerInfo)
+            </div>
+
+            <div class="col-3">
+                (@ringerData.RingerLocation)
+            </div>
+        </div>
+    }
+
+    <div>
+        <button class="btn btn-primary" @onclick="@(e => NavManager.NavigateTo("/"))">
+            Return to entry page
+        </button>
+    </div>
+</div>

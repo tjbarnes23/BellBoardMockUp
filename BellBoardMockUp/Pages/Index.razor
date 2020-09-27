@@ -1,6 +1,9 @@
 ﻿@page "/"
 @using BellBoardMockUp.Models
+@using BellBoardMockUp.Services
 @using BellBoardMockUp.Utilities
+@inject Performance Performance
+@inject NavigationManager NavManager
 
 <Modal @ref="Modal"></Modal>
 
@@ -49,10 +52,10 @@
                                    ValueExpression="@( () => Performance.AssociationDropDown )"
                                    style="width: 100%; height: 28px">
                     <option value="0">Please select...</option>
-                    <option value="1">ASCY</option>
-                    <option value="2">SRCY</option>
-                    <option value="3">Guild of St Cuileáin</option>
-                    <option value="4">etc</option>
+                    @for (int i = 1; i <= 3; i++)
+                    {
+                        <option value="@i">@ControlData.Association(i)</option>
+                    }
                 </CustomInputSelect>
             </div>
 
@@ -215,6 +218,24 @@
 
         <div class="row mt-2">
             <div class="col-6 col-md-4 col-lg-3">
+                Number of ringers
+                <button @onclick="@(e => ActivatePopUp(PopUp.NumRingers))" style="background-color: white;
+                        border: none">
+                    <b>&#9432;</b>
+                </button>
+                <br />
+                <CustomInputSelect Value="@Performance.NumRingers"
+                                   ValueChanged="@( (int value) => NumRingersChanged(value) )"
+                                   ValueExpression="@( () => Performance.NumRingers )"
+                                   style="width: 100%; height: 28px">
+                    @for (int i = 1; i <= 24; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </CustomInputSelect>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
                 Bells per ringer
                 <button @onclick="@(e => ActivatePopUp(PopUp.BellsPerRinger))" style="background-color: white;
                         border: none">
@@ -300,7 +321,7 @@
                     <div class="col-2 col-lg-1">
                         <InputText id="@ringer.Id"
                                    @bind-Value="ringer.Bell"
-                                   style="width: 100%" />
+                                   style="width: 100%; margin-bottom: 2px" />
                     </div>
                 }
                 else
@@ -410,9 +431,10 @@
                     Stage
                     <br />
                     <InputSelect id="@newMethod.Id" @bind-Value="newMethod.Stage" style="width: 100%; height: 28px">
-                        @foreach (var stage in Enum.GetValues(typeof(Stage)))
+                        <option value="0">Please select...</option>
+                        @for (int i = 2; i <= 24; i++)
                             {
-                            <option value="@stage">@stage</option>
+                            <option value="@i">@ControlData.Stage(i)</option>
                             }
                     </InputSelect>
                 </div>
@@ -454,7 +476,7 @@
 
         <div class="row mt-2 mt-lg-4">
             <div class="col">
-                <button @onclick="AddNewMethod" class="btn btn-primary" style="height: 30px; padding-top: 2px">
+                <button @onclick="Performance.AddNewMethod" class="btn btn-primary" style="height: 30px; padding-top: 2px">
                     Enter another new method
                 </button>
             </div>
@@ -478,19 +500,15 @@
         <div class="row mt-2">
             <div class="col">
                 <div style="display: inline-block; margin-right: 10px">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" disabled>
                         Save draft
                     </button>
                 </div>
 
                 <div style="display: inline-block; margin-right: 10px">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" @onclick="@(e => NavManager.NavigateTo("/preview"))">
                         Preview submission
                     </button>
-                </div>
-
-                <div style="display: inline-block">
-                    (These buttons are not yet implemented)
                 </div>
             </div>
         </div>

@@ -159,9 +159,20 @@ namespace BellBoardMockUp.Shared
                     Image = string.Empty;
                     Link = "https://framework.cccbr.org.uk";
                     break;
-                
+
+                case PopUp.NumRingers:
+                    Title = "Number of ringers";
+                    sb.Append("Select the number of ringers who took part in the performance.");
+                    Content = sb.ToString();
+                    Image = string.Empty;
+                    Link = string.Empty;
+                    break;
+
                 case PopUp.BellsPerRinger:
                     Title = "Bells per ringer";
+                    sb.Append("Select one of the options from the dropdown. The first option is usually for " +
+                        "tower bell performances, and the second option is usually for handbell performances.");
+                    sb.Append("\n\n");
                     sb.Append("If the performance didn't use one bell per ringer or two bells per ringer across " +
                         "all bells (e.g. an online performance " +
                         "might have had some people ringing one bell and other people ringing two bells), then " +

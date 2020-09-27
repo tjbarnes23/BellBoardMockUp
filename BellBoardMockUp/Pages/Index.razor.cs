@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using BellBoardMockUp.Models;
+using BellBoardMockUp.Services;
 using BellBoardMockUp.Shared;
 using BellBoardMockUp.Utilities;
 using Microsoft.AspNetCore.Components;
@@ -16,28 +14,9 @@ namespace BellBoardMockUp.Pages
 {
     public partial class Index
     {
-        public Index()
-        {
-            Performance = new Performance()
-            {
-                Style = 1,
-                AssociationDropDown = 0,
-                Distributed = false,
-                BellsPerRinger = 1,
-                AdditionalRingerInfo = false,
-                Ringers = new List<RingerData>(),
-                NewMethods = new List<NewMethodData>()
-            };
-
-            PopulateRingers();
-            AddNewMethod();
-        }
-
         [Inject]
         public HttpClient Http { get; set; }
-
-        public Performance Performance { get; set; }
-
+        
         private Modal Modal { get; set; }
 
         public bool CompImporting { get; set; }
@@ -49,12 +28,12 @@ namespace BellBoardMockUp.Pages
             if (Performance.Style == 1)
             {
                 Performance.BellsPerRinger = 1;
-                PopulateRingers();
+                Performance.PopulateRingers();
             }
             else if (Performance.Style == 2)
             {
                 Performance.BellsPerRinger = 2;
-                PopulateRingers();
+                Performance.PopulateRingers();
             }
             else if (Performance.Style == 3)
             {
@@ -68,11 +47,17 @@ namespace BellBoardMockUp.Pages
             Performance.AssociationFreeForm = string.Empty;
         }
 
+        protected void NumRingersChanged(int value)
+        {
+            Performance.NumRingers = value;
+            Performance.PopulateRingers();
+        }
+
         protected void BellsPerRingerChanged(int value)
         {
             Performance.BellsPerRinger = value;
-            
-            PopulateRingers();
+
+            Performance.PopulateRingersBells();
         }
 
         protected void AdditionalRingerInfoChanged(bool value)
@@ -164,68 +149,6 @@ namespace BellBoardMockUp.Pages
         protected void ActivatePopUp(PopUp value)
         {
             Modal.Open(value);
-        }
-
-        private void PopulateRingers()
-        {
-            // Clear and (re)populate Ringers List
-            int j;
-
-            if (Performance.BellsPerRinger == 1)
-            {
-                j = 16;
-            }
-            else if (Performance.BellsPerRinger == 2)
-            {
-                j = 12;
-            }
-            else
-            {
-                j = 18;
-            }
-
-            Performance.Ringers.Clear();
-
-            for (int i = 1; i <= j; i++)
-            {
-                RingerData ringerData = new RingerData();
-                ringerData.Id = i;
-
-                if (Performance.BellsPerRinger == 1)
-                {
-                    ringerData.Bell = i.ToString();
-                }
-                else if (Performance.BellsPerRinger == 2)
-                {
-                    ringerData.Bell = ((i * 2) - 1).ToString() + "-" + (i * 2).ToString();
-                }
-                else
-                {
-                    ringerData.Bell = string.Empty;
-                }
-
-                ringerData.Ringer = string.Empty;
-                ringerData.Conductor = false;
-                ringerData.RingerInfo = string.Empty;
-                ringerData.RingerLocation = string.Empty;
-                ringerData.RingerStyle = 1;
-                ringerData.RingerStyleOther = string.Empty;
-
-                Performance.Ringers.Add(ringerData);
-            }
-        }
-
-        private void AddNewMethod()
-        {
-            NewMethodData newMethodData = new NewMethodData()
-            {
-                Id = Performance.NewMethods.Count(),
-                Name = string.Empty,
-                PlaceNotation = string.Empty,
-                Stage = Stage.Please_select
-            };
-
-            Performance.NewMethods.Add(newMethodData);
         }
     }
 }

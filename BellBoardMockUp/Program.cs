@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using BellBoardMockUp.Services;
 
 namespace BellBoardMockUp
 {
@@ -18,8 +19,10 @@ namespace BellBoardMockUp
             builder.RootComponents.Add<App>("app");
 
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri("https://tjbarnes.com/") });
-            
+
             // builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            builder.Services.AddSingleton<Performance>();
 
             await builder.Build().RunAsync();
         }

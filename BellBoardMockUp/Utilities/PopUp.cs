@@ -15,6 +15,7 @@ namespace BellBoardMockUp.Utilities
         Import,
         Title,
         Detail,
+        NumRingers,
         BellsPerRinger,
         AdditionalRingerInfo,
         RingerStyle,
