@@ -5,12 +5,8 @@
 <Modal @ref="Modal"></Modal>
 
 <div class="container mx-2">
-    <h1>BellBoard Performance Entry Mock-up</h1>
-
     <EditForm Model="@Performance">
-        <hr />
-
-        <div class="row mt-2">
+        <div class="row">
             <div class="col-6 col-md-5 col-lg-4 col-xl-3">
                 Style
                 <button @onclick="@(e => ActivatePopUp(PopUp.Style))" style="background-color: white; border: none">
@@ -509,8 +505,15 @@
 
                 @if (Saving == true)
                 {
-                    <div class="spinner" style="display: inline-block; vertical-align: middle; margin-left: 6px;
-                                --borderwidth: 5px; --width: 24px; --height: 24px">
+                    <div class="spinner" style="display: inline-block; vertical-align: middle; margin-right: 10px;
+                            --borderwidth: 5px; --width: 24px; --height: 24px">
+                    </div>
+                }
+
+                @if (Saved == true)
+                {
+                    <div style="display: inline-block; color: red; margin-right: 10px">
+                        Saved
                     </div>
                 }
 

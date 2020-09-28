@@ -3,10 +3,6 @@
 @using BellBoardMockUp.Utilities
 
 <div class="container mx-2">
-    <h1>BellBoard Performance Preview Mock-up</h1>
-
-    <hr />
-
     @if (Performance.AssociationDropDown != 0)
     {
         <div>
@@ -101,7 +97,7 @@
     <hr />
 
     <div>
-        <button class="btn btn-primary" @onclick="@(e => NavManager.NavigateTo("/"))">
+        <button class="btn btn-primary" @onclick="@(e => NavManager.NavigateTo("/entry"))">
             Return to entry page
         </button>
     </div>

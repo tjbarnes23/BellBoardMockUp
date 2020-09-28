@@ -7,6 +7,7 @@ namespace BellBoardMockUp.Models
     {
         public Performance()
         {
+            Id = 0;
             Style = 1;
             AssociationDropDown = 0;
             Distributed = false;

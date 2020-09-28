@@ -25,9 +25,27 @@ namespace BellBoardMockUp.Pages
 
         public IEnumerable<PerformanceJson> Performances { get; set; }
 
+        public bool Loading { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
-            Performances = (await TJBarnesService.GetHttpClient().GetFromJsonAsync<PerformanceJson[]>("api/performances")).ToList();
+            // Start spinner
+            Loading = true;
+
+            DateTime currTimeStart = DateTime.Now;
+            
+            Performances = (await TJBarnesService.GetHttpClient()
+                    .GetFromJsonAsync<PerformanceJson[]>("api/performances")).ToList();
+
+            DateTime currTimeEnd = DateTime.Now;
+
+            if (currTimeEnd < currTimeStart.AddMilliseconds(700))
+            {
+                double delay = currTimeStart.AddMilliseconds(700).Subtract(currTimeEnd).TotalMilliseconds;
+                await Task.Delay(Convert.ToInt32(delay));
+            }
+
+            Loading = false;
         }
 
         protected void LoadDraft(int id)
@@ -36,9 +54,85 @@ namespace BellBoardMockUp.Pages
 
             // Use the Deserializer method of the JsonSerializer class (in the System.Text.Json namespace) to create
             // a Performance object
-            Performance = JsonSerializer.Deserialize<Performance>(performanceJson.PerformanceContent);
+            Performance performance = JsonSerializer.Deserialize<Performance>(performanceJson.PerformanceContent);
 
-            StateHasChanged();
+            // Populate Performance service fields
+            Performance.Id = performance.Id;
+            Performance.Nickname = performance.Nickname;
+            Performance.Style = performance.Style;
+            Performance.StyleOther = performance.StyleOther;
+            Performance.AssociationDropDown = performance.AssociationDropDown;
+            Performance.AssociationFreeForm = performance.AssociationFreeForm;
+            Performance.Date = performance.Date;
+            Performance.Distributed = performance.Distributed;
+            Performance.Location = performance.Location;
+            Performance.County = performance.County;
+            Performance.Address = performance.Address;
+            Performance.Tenor = performance.Tenor;
+            Performance.Platform = performance.Platform;
+            Performance.Time = performance.Time;
+            Performance.ImportFromCompLib = performance.ImportFromCompLib;
+            Performance.CompLibId = performance.CompLibId;
+            Performance.Length = performance.Length;
+            Performance.Title = performance.Title;
+            Performance.Composer = performance.Composer;
+            Performance.Detail = performance.Detail;
+            Performance.NumRingers = performance.NumRingers;
+            Performance.BellsPerRinger = performance.BellsPerRinger;
+            Performance.AdditionalRingerInfo = performance.AdditionalRingerInfo;
+            Performance.Footnotes = performance.Footnotes;
+            Performance.NormDepartures = performance.NormDepartures;
+
+            Performance.Ringers.Clear();
+            
+            foreach (RingerData ringerData in performance.Ringers)
+            {
+                Performance.Ringers.Add(ringerData);
+            }
+
+            Performance.NewMethods.Clear();
+
+            foreach (NewMethodData newMethodData in performance.NewMethods)
+            {
+                Performance.NewMethods.Add(newMethodData);
+            }
+
+            NavManager.NavigateTo("/entry");
+        }
+
+        protected void NewPerformance()
+        {
+            Performance.Id = 0;
+            Performance.Nickname = string.Empty;
+            Performance.Style = 1;
+            Performance.StyleOther = string.Empty;
+            Performance.AssociationDropDown = 0;
+            Performance.AssociationFreeForm = string.Empty;
+            Performance.Date = string.Empty;
+            Performance.Distributed = false;
+            Performance.Location = string.Empty;
+            Performance.County = string.Empty;
+            Performance.Address = string.Empty;
+            Performance.Tenor = string.Empty;
+            Performance.Platform = string.Empty;
+            Performance.Time = string.Empty;
+            Performance.ImportFromCompLib = false;
+            Performance.CompLibId = string.Empty;
+            Performance.Length = string.Empty;
+            Performance.Title = string.Empty;
+            Performance.Composer = string.Empty;
+            Performance.Detail = string.Empty;
+            Performance.NumRingers = 8;
+            Performance.BellsPerRinger = 1;
+            Performance.AdditionalRingerInfo = false;
+            Performance.Footnotes = string.Empty;
+            Performance.NormDepartures = string.Empty;
+
+            Performance.Ringers.Clear();
+            Performance.PopulateRingers();
+
+            Performance.NewMethods.Clear();
+            Performance.AddNewMethod();
 
             NavManager.NavigateTo("/entry");
         }

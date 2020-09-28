@@ -1,15 +1,21 @@
 ﻿@page "/"
 
-<div class="ml-3 mt-3">
-    <p style="max-width: 800px">
-        Load one of the existing draft performances below, or click on Entry above to enter a new performance.
+<div class="container mx-2">
+    <p style="max-width: 700px">
+        Load one of the existing draft performances below,
+        or click on the New Performance button to enter a new performance.
     </p>
 
+    <button class="btn btn-primary" @onclick="NewPerformance">
+        New Performance
+    </button>
+
+    <br />
     <br />
 
-    @if (Performances == null)
+    @if (Loading == true)
     {
-        <div class="spinner" style="position: absolute; left: 250px; top: 300px;
+        <div class="spinner" style="position: absolute; left: 215px; top: 250px;
                 --borderwidth: 16px; --width: 80px; --height: 80px">
         </div>
     }
@@ -28,11 +34,11 @@
                 @foreach (var performance in Performances)
                 {
                     <tr style="font-size: small">
-                        <td class="align-left" style="padding: 6px; padding-top: 12px">@performance.Id</td>
-                        <td class="align-left" style="padding: 6px; padding-top: 12px">@performance.Nickname</td>
+                        <td class="align-left" style="padding: 6px; padding-top: 9px">@performance.Id</td>
+                        <td class="align-left" style="padding: 6px; padding-top: 9px">@performance.Nickname</td>
                         <td class="align-left" style="padding: 6px">
                             <button class="btn btn-primary" @onclick="@(e => LoadDraft(performance.Id))"
-                                    style="height: 30px; padding-top: 2px">
+                                    style="font-size: 12px; height: 24px; padding-top: 2px">
                                 Load
                             </button>
                         </td>
