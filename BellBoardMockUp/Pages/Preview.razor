@@ -1,79 +1,104 @@
 ﻿@page "/preview"
 @using BellBoardMockUp.Models
-@using BellBoardMockUp.Services
 @using BellBoardMockUp.Utilities
-@inject Performance Performance
-@inject NavigationManager NavManager
 
 <div class="container mx-2">
     <h1>BellBoard Performance Preview Mock-up</h1>
 
-    <br />
+    <hr />
 
     @if (Performance.AssociationDropDown != 0)
     {
-        <p><b>@ControlData.Association(Performance.AssociationDropDown)</b></p>
+        <div>
+            <b>@ControlData.Association(Performance.AssociationDropDown)</b>
+        </div>
     }
     else if (Performance.AssociationFreeForm != string.Empty)
     {
-        <p><b>@Performance.AssociationFreeForm</b></p>
+        <div>
+            <b>@Performance.AssociationFreeForm</b>
+        </div>
     }
 
-    <p>
-        <b>@Performance.Location</b>
+    <div>
+        <div style="display: inline-block">
+            @Performance.Location
+        </div>
 
         @if (Performance.County != string.Empty)
         {
-            <span>, @Performance.County</span>
+            <div style="display: inline-block">
+                , @Performance.County
+            </div>
         }
-    </p>
+    </div>
 
-    <p>
+    <div>
         @Performance.Address
-    </p>
+    </div>
 
-    <p>
-        @Performance.Date
+    <div>
+        <div style="display: inline-block">
+            @Performance.Date
+        </div>
 
         @if (Performance.Time != string.Empty)
         {
-            <span>in @Performance.Time</span>
+            <div style="display: inline-block">
+                in @Performance.Time
+            </div>
         }
 
         @if (Performance.Tenor != string.Empty)
         {
-            <span>(@Performance.Tenor)</span>
+            <div style="display: inline-block">
+                (@Performance.Tenor)
+            </div>
         }
-    </p>
+    </div>
 
-    <p>
+    <div>
         <b>@Performance.Title</b>
-    </p>
+    </div>
 
-    <p>
+    <div>
         @Performance.Composer
-    </p>
+    </div>
 
     @foreach (RingerData ringerData in Performance.Ringers)
     {
-        <div class="row">
-            <div class="col-2 col-lg-1">
+        <div>
+            <div style="display: inline-block; width: 60px">
                 @ringerData.Bell
             </div>
 
-            <div class="col-3">
+            <div style="display: inline-block; width: 120px">
                 @ringerData.Ringer
             </div>
 
-            <div class="col-3">
+            <div style="display: inline-block; width: 80px">
                 (@ringerData.RingerInfo)
             </div>
 
-            <div class="col-3">
+            <div style="display: inline-block; width: 100px">
                 (@ringerData.RingerLocation)
             </div>
         </div>
     }
+
+    <div>
+        @Performance.Footnotes
+    </div>
+
+    <div>
+        [New method info to go here]
+    </div>
+
+    <div>
+        @Performance.NormDepartures
+    </div>
+
+    <hr />
 
     <div>
         <button class="btn btn-primary" @onclick="@(e => NavManager.NavigateTo("/"))">

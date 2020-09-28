@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using BellBoardMockUp.Models;
-using BellBoardMockUp.Utilities;
 
-namespace BellBoardMockUp.Services
+namespace BellBoardMockUp.Models
 {
     public class Performance
     {
@@ -24,6 +20,10 @@ namespace BellBoardMockUp.Services
             PopulateRingers();
             AddNewMethod();
         }
+
+        public int Id { get; set; }
+
+        public string Nickname { get; set; }
 
         public int Style { get; set; }
 
