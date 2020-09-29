@@ -29,23 +29,8 @@ namespace BellBoardMockUp.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            // Start spinner
-            Loading = true;
-
-            DateTime currTimeStart = DateTime.Now;
-            
             Performances = (await TJBarnesService.GetHttpClient()
                     .GetFromJsonAsync<PerformanceJson[]>("api/performances")).ToList();
-
-            DateTime currTimeEnd = DateTime.Now;
-
-            if (currTimeEnd < currTimeStart.AddMilliseconds(700))
-            {
-                double delay = currTimeStart.AddMilliseconds(700).Subtract(currTimeEnd).TotalMilliseconds;
-                await Task.Delay(Convert.ToInt32(delay));
-            }
-
-            Loading = false;
         }
 
         protected void LoadDraft(int id)

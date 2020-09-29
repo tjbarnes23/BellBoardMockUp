@@ -19,6 +19,8 @@ namespace BellBoardMockUp
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
+            builder.Services.AddSingleton<Viewport>();
+
             builder.Services.AddSingleton<Performance>();
 
             builder.Services.AddSingleton<NewMethod>();

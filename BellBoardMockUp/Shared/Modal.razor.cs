@@ -249,6 +249,18 @@ namespace BellBoardMockUp.Shared
                     sb.Append($"Title: {NewMethod.Method.Title}");
                     sb.Append("\n");
                     sb.Append($"Place notation: {NewMethod.Method.PlaceNotation}");
+                    sb.Append("\n");
+                    sb.Append($"First leadhead: {NewMethod.Properties.LeadHead}");
+                    sb.Append("\n");
+
+                    if (string.IsNullOrEmpty(NewMethod.Properties.LeadheadCode))
+                    {
+                        sb.Append("Leadhead code: n/a");
+                    }
+                    else
+                    {
+                        sb.Append($"Leadhead code: {NewMethod.Properties.LeadheadCode}");
+                    }
                     sb.Append("\n\n");
 
                     if (NewMethod.Messages.Count != 0)

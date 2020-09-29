@@ -28,6 +28,9 @@ namespace BellBoardMockUp.Pages
         [Inject]
         public NavigationManager NavManager { get; set; }
 
+        [Inject]
+        public Viewport Viewport { get; set; }
+
         private Modal Modal { get; set; }
 
         public bool CompImporting { get; set; }
@@ -35,6 +38,8 @@ namespace BellBoardMockUp.Pages
         public bool Saving { get; set; }
 
         public bool Saved { get; set; }
+
+        public int Width { get; set; }
 
         protected void StyleChanged(int value)
         {
@@ -187,6 +192,8 @@ namespace BellBoardMockUp.Pages
                 {
                     NewMethod.Method.Title = newMethod.Method.Title;
                     NewMethod.Method.PlaceNotation = newMethod.Method.PlaceNotation;
+                    NewMethod.Properties.LeadheadCode = newMethod.Properties.LeadheadCode;
+                    NewMethod.Properties.LeadHead = newMethod.Properties.LeadHead;
 
                     Performance.NewMethods[newMethodId].Title = newMethod.Method.Title;
                 }
@@ -284,6 +291,13 @@ namespace BellBoardMockUp.Pages
             Saved = false;
 
             StateHasChanged();
+        }
+
+        protected async Task<int> GetWidth()
+        {
+            BrowserDimensions browserDimensions = await Viewport.GetDimensions();
+            StateHasChanged();
+            return browserDimensions.Width;
         }
     }
 }

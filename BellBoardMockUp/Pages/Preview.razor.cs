@@ -71,7 +71,7 @@ namespace BellBoardMockUp.Pages
                         break;
 
                     case 2:
-                        sb.Append("Up / down strokes");
+                        sb.Append("Up/down strokes");
                         break;
 
                     case 3:

@@ -133,8 +133,8 @@
         <hr />
 
         <div class="row mt-2">
-            <div class="col-6 col-md-5 col-lg-4 col-xl-3 pt-2">
-                Import from CompLib? &nbsp;
+            <div class="col-6 col-md-5 col-lg-4 col-xl-3">
+                Import composition details from CompLib? &nbsp;
                 <InputCheckbox @bind-Value="@Performance.ImportFromCompLib" />
                 <button @onclick="@(e => ActivatePopUp(PopUp.Import))" style="background-color: white; border: none">
                     <b>&#9432;</b>
@@ -426,9 +426,9 @@
                     <CustomInputSelect id="@newMethod.Id" @bind-Value="newMethod.Stage" style="width: 100%; height: 28px">
                         <option value="0">Please select...</option>
                         @for (int i = 2; i <= 24; i++)
-                            {
+                        {
                             <option value="@i">@ControlData.Stage(i)</option>
-                            }
+                        }
                     </CustomInputSelect>
                 </div>
 
@@ -443,8 +443,9 @@
 
                     @if (newMethod.Validating == true)
                     {
-                        <div class="spinner pr-1" style="display: inline-block; vertical-align: middle; margin-left: 7px;
-                                    --borderwidth: 5px; --width: 24px; --height: 24px">
+                        <div class="spinner pr-1" style="display: inline-block; vertical-align: middle;
+                                margin-left: 7px; margin-right: 7px;
+                                --borderwidth: 5px; --width: 24px; --height: 24px">
                         </div>
                     }
 
@@ -457,7 +458,14 @@
                     <div style="display: inline-block">
                         Title
                         <br />
-                        <InputText id="@newMethod.Id" @bind-Value="newMethod.Title" style="width: 225px" disabled="true" />
+                        @if (newMethod.Validating == true)
+                        {
+                            <InputText id="@newMethod.Id" @bind-Value="newMethod.Title" style="width: 183px" disabled="true" />
+                        }
+                        else
+                        {
+                            <InputText id="@newMethod.Id" @bind-Value="newMethod.Title" style="width: 225px" disabled="true" />
+                        }
                     </div>
                 </div>
             </div>
@@ -512,7 +520,7 @@
 
                 @if (Saved == true)
                 {
-                    <div style="display: inline-block; color: red; margin-right: 10px">
+                    <div style="display: inline-block; color: #a00000; margin-right: 10px">
                         Saved
                     </div>
                 }
