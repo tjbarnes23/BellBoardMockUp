@@ -9,43 +9,59 @@
             <b>@ControlData.Association(Performance.AssociationDropDown)</b>
         </div>
     }
-    else if (Performance.AssociationFreeForm != string.Empty)
+    else if (!string.IsNullOrEmpty(Performance.AssociationFreeForm))
     {
         <div>
             <b>@Performance.AssociationFreeForm</b>
         </div>
     }
 
-    <div>
-        <div style="display: inline-block">
-            @Performance.Location
+    @if (!string.IsNullOrEmpty(Performance.Location) && !string.IsNullOrEmpty(Performance.County))
+    {
+        <div>
+            <b>@Performance.Location,</b> @Performance.County
         </div>
+    }
+    else if (!string.IsNullOrEmpty(Performance.Location))
+    {
+        <div>
+            <b>@Performance.Location</b>
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(Performance.County))
+    {
+        <div>
+            <b>@Performance.County</b>
+        </div>
+    }
 
-        @if (Performance.County != string.Empty)
-        {
-            <div style="display: inline-block">
-                , @Performance.County
-            </div>
-        }
-    </div>
+    @if (!string.IsNullOrEmpty(Performance.Platform))
+    {
+        <div>
+            <b>@Performance.Platform</b>
+        </div>
+    }
 
-    <div>
-        @Performance.Address
-    </div>
+    @if (!string.IsNullOrEmpty(Performance.Address))
+    {
+        <div>
+            @Performance.Address
+        </div>
+    }
 
     <div>
         <div style="display: inline-block">
             @Performance.Date
         </div>
 
-        @if (Performance.Time != string.Empty)
+        @if (!string.IsNullOrEmpty(Performance.Time))
         {
             <div style="display: inline-block">
                 in @Performance.Time
             </div>
         }
 
-        @if (Performance.Tenor != string.Empty)
+        @if (!string.IsNullOrEmpty(Performance.Tenor))
         {
             <div style="display: inline-block">
                 (@Performance.Tenor)
@@ -54,51 +70,66 @@
     </div>
 
     <div>
-        <b>@Performance.Title</b>
+        <b>@Performance.Length @Performance.Title</b>
     </div>
 
-    <div>
-        @Performance.Composer
-    </div>
+    @if (!string.IsNullOrEmpty(Performance.Detail))
+    {
+        <div style="font-size: 12px">
+            @Performance.Detail
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(Performance.Composer))
+    {
+        <div>
+            Composed by @Performance.Composer
+        </div>
+    }
 
     @foreach (RingerData ringerData in Performance.Ringers)
     {
         <div>
-            <div style="display: inline-block; width: 60px">
+            <div style="display: inline-block; width: 40px">
                 @ringerData.Bell
             </div>
 
-            <div style="display: inline-block; width: 120px">
-                @ringerData.Ringer
-            </div>
-
-            <div style="display: inline-block; width: 80px">
-                (@ringerData.RingerInfo)
-            </div>
-
-            <div style="display: inline-block; width: 100px">
-                (@ringerData.RingerLocation)
+            <div style="display: inline-block">
+                @ConsolidatedRinger(ringerData)
             </div>
         </div>
     }
 
-    <div>
-        @Performance.Footnotes
-    </div>
+    @if (!string.IsNullOrEmpty(Performance.Footnotes))
+    {
+        <div>
+            @Performance.Footnotes
+        </div>
+    }
 
-    <div>
-        [New method info to go here]
-    </div>
+    @foreach (var newMethodData in Performance.NewMethods)
+    {
+        @if (!string.IsNullOrEmpty(@newMethodData.Title) || !string.IsNullOrEmpty(@newMethodData.PlaceNotation))
+        {
+            <div>
 
-    <div>
-        @Performance.NormDepartures
-    </div>
+                @newMethodData.Title: @newMethodData.PlaceNotation
+            </div>
+        }
+    }
+
+    @if (!string.IsNullOrEmpty(Performance.NormDepartures))
+    {
+        <div>
+            @Performance.NormDepartures
+        </div>
+    }
 
     <hr />
 
     <div>
         <button class="btn btn-primary" @onclick="@(e => NavManager.NavigateTo("/entry"))">
-            Return to entry page
+            Return to Entry page
         </button>
     </div>
 </div>

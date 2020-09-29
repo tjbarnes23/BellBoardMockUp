@@ -28,7 +28,9 @@ namespace BellBoardMockUp.Utilities
             {
                 1 => "Ancient Society of College Youths",
                 2 => "Society of Royal Cumberland Youths",
-                3 => "Guild of St Cuileáin",
+                3 => "North American Guild",
+                4 => "Cambridge University Guild",
+                5 => "Guild of St Cuileáin",
                 _ => association.ToString()
             };
         }

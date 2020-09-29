@@ -171,51 +171,45 @@ namespace BellBoardMockUp.Pages
             Performance.NewMethods[newMethodId].Status = string.Empty;
             Performance.NewMethods[newMethodId].Title = string.Empty;
 
-            // Get a test from the API
-            NewMethod newMethod = await CompLibService.GetHttpClient()
-                    .GetFromJsonAsync<NewMethod>($"method/validate?stage={Performance.NewMethods[newMethodId].Stage}" +
-                    $"&name={Performance.NewMethods[newMethodId].Name}" +
-                    $"&placenotation={Performance.NewMethods[newMethodId].PlaceNotation}");
-
-            /*
-            // Make property matching case insensitive
-            var options = new JsonSerializerOptions
+            // Check for nothing entered
+            if (!string.IsNullOrEmpty(Performance.NewMethods[newMethodId].Name) ||
+                    !string.IsNullOrEmpty(Performance.NewMethods[newMethodId].PlaceNotation) ||
+                    Performance.NewMethods[newMethodId].Stage != 0)
             {
-                PropertyNameCaseInsensitive = true,
-            };
+                // Get a test from the API
+                NewMethod newMethod = await CompLibService.GetHttpClient()
+                        .GetFromJsonAsync<NewMethod>($"method/validate?stage={Performance.NewMethods[newMethodId].Stage}" +
+                        $"&name={Performance.NewMethods[newMethodId].Name}" +
+                        $"&placenotation={Performance.NewMethods[newMethodId].PlaceNotation}");
 
-            // Use the Deserializer method of the JsonSerializer class (in the System.Text.Json namespace) to create
-            // a BlowSetData object
-            NewMethod newMethod = JsonSerializer.Deserialize<NewMethod>(jsonImport.GapTestSpec, options);
-            */
-
-            // Populate the NewMethod service
-            if (newMethod.Method != null)
-            {
-                NewMethod.Method.Title = newMethod.Method.Title;
-                NewMethod.Method.PlaceNotation = newMethod.Method.PlaceNotation;
-
-                Performance.NewMethods[newMethodId].Title = newMethod.Method.Title;
-            }
-            else
-            {
-                Performance.NewMethods[newMethodId].Title = "Error";
-            }
-
-            NewMethod.Messages.Clear();
-
-            if (newMethod.Messages.Count != 0)
-            {
-                foreach (var message in newMethod.Messages)
+                // Populate the NewMethod service
+                if (newMethod.Method != null)
                 {
-                    NewMethod.Messages.Add(message);
+                    NewMethod.Method.Title = newMethod.Method.Title;
+                    NewMethod.Method.PlaceNotation = newMethod.Method.PlaceNotation;
+
+                    Performance.NewMethods[newMethodId].Title = newMethod.Method.Title;
+                }
+                else
+                {
+                    Performance.NewMethods[newMethodId].Title = "Error";
                 }
 
-                Performance.NewMethods[newMethodId].Status = "See messages";
-            }
-            else
-            {
-                Performance.NewMethods[newMethodId].Status = "No messages";
+                NewMethod.Messages.Clear();
+
+                if (newMethod.Messages.Count != 0)
+                {
+                    foreach (var message in newMethod.Messages)
+                    {
+                        NewMethod.Messages.Add(message);
+                    }
+
+                    Performance.NewMethods[newMethodId].Status = "See messages";
+                }
+                else
+                {
+                    Performance.NewMethods[newMethodId].Status = "No messages";
+                }
             }
 
             DateTime currTimeEnd = DateTime.Now;
@@ -228,7 +222,10 @@ namespace BellBoardMockUp.Pages
 
             Performance.NewMethods[newMethodId].Validating = false;
 
-            ActivatePopUp(PopUp.NewMethodResult);
+            if (!string.IsNullOrEmpty(Performance.NewMethods[newMethodId].Title))
+            {
+                ActivatePopUp(PopUp.NewMethodResult);
+            }
         }
 
         protected async void SaveDraft()
