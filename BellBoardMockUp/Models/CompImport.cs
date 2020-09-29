@@ -12,5 +12,14 @@ namespace BellBoardMockUp.Models
         public string Title { get; set; }
 
         public ComposerDetails[] ComposerDetails { get; set; }
+
+        public string MethodDetails { get; set; }
+    }
+
+    public class ComposerDetails
+    {
+        public string Role { get; set; }
+
+        public string Name { get; set; }
     }
 }

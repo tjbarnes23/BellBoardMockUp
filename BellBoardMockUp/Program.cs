@@ -21,6 +21,8 @@ namespace BellBoardMockUp
 
             builder.Services.AddSingleton<Performance>();
 
+            builder.Services.AddSingleton<NewMethod>();
+
             builder.Services.AddHttpClient<TJBarnesService>(client =>
             {
                 client.BaseAddress = new Uri("https://tjbarnes.com/");

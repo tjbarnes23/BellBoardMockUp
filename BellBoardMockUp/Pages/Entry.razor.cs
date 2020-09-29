@@ -23,6 +23,9 @@ namespace BellBoardMockUp.Pages
         public Performance Performance { get; set; }
 
         [Inject]
+        public NewMethod NewMethod { get; set; }
+
+        [Inject]
         public NavigationManager NavManager { get; set; }
 
         private Modal Modal { get; set; }
@@ -95,9 +98,44 @@ namespace BellBoardMockUp.Pages
             Performance.Composer = string.Empty;
             Performance.Detail = string.Empty;
 
-            // Get a test from the API
-            JsonImport jsonImport = await TJBarnesService.GetHttpClient().GetFromJsonAsync<JsonImport>("api/gaptests/14");
+            // Check that valid id has been entered
+            if (!string.IsNullOrEmpty(Performance.CompLibId))
+            {
+                var response = await CompLibService.GetHttpClient()
+                    .GetAsync($"composition/{Performance.CompLibId}");
 
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    CompImport compImport = await CompLibService.GetHttpClient()
+                        .GetFromJsonAsync<CompImport>($"composition/{Performance.CompLibId}");
+
+                    int firstSpace = compImport.Title.IndexOf(" ");
+
+                    Performance.Length = compImport.Title.Substring(0, firstSpace);
+                    Performance.Title = compImport.Title.Substring(firstSpace + 1);
+
+                    if (compImport.ComposerDetails.Length != 0)
+                    {
+                        Performance.Composer = compImport.ComposerDetails.First().Name;
+                    }
+                    else
+                    {
+                        Performance.Composer = string.Empty;
+                    }
+
+                    Performance.Detail = compImport.MethodDetails;
+                }
+                else
+                {
+                    Performance.Title = "*** Composition not found ***";
+                }
+            }
+            else
+            {
+                Performance.Title = "*** Composition not found ***";
+            }
+
+            /*
             // Make property matching case insensitive
             var options = new JsonSerializerOptions
             {
@@ -107,12 +145,9 @@ namespace BellBoardMockUp.Pages
             // Use the Deserializer method of the JsonSerializer class (in the System.Text.Json namespace) to create
             // a BlowSetData object
             CompImport compImport = JsonSerializer.Deserialize<CompImport>(jsonImport.GapTestSpec, options);
+            */
 
-            int loc = compImport.Title.IndexOf(" ");
-
-            Performance.Length = compImport.Title.Substring(0, loc);
-            Performance.Title = compImport.Title.Substring(loc + 1);
-            Performance.Composer = compImport.ComposerDetails.First().Name;
+            
 
             DateTime currTimeEnd = DateTime.Now;
 
@@ -137,8 +172,12 @@ namespace BellBoardMockUp.Pages
             Performance.NewMethods[newMethodId].Title = string.Empty;
 
             // Get a test from the API
-            JsonImport jsonImport = await TJBarnesService.GetHttpClient().GetFromJsonAsync<JsonImport>("api/gaptests/16");
+            NewMethod newMethod = await CompLibService.GetHttpClient()
+                    .GetFromJsonAsync<NewMethod>($"method/validate?stage={Performance.NewMethods[newMethodId].Stage}" +
+                    $"&name={Performance.NewMethods[newMethodId].Name}" +
+                    $"&placenotation={Performance.NewMethods[newMethodId].PlaceNotation}");
 
+            /*
             // Make property matching case insensitive
             var options = new JsonSerializerOptions
             {
@@ -148,9 +187,36 @@ namespace BellBoardMockUp.Pages
             // Use the Deserializer method of the JsonSerializer class (in the System.Text.Json namespace) to create
             // a BlowSetData object
             NewMethod newMethod = JsonSerializer.Deserialize<NewMethod>(jsonImport.GapTestSpec, options);
+            */
 
-            Performance.NewMethods[newMethodId].Status = newMethod.Status;
-            Performance.NewMethods[newMethodId].Title = newMethod.Result.Title;
+            // Populate the NewMethod service
+            if (newMethod.Method != null)
+            {
+                NewMethod.Method.Title = newMethod.Method.Title;
+                NewMethod.Method.PlaceNotation = newMethod.Method.PlaceNotation;
+
+                Performance.NewMethods[newMethodId].Title = newMethod.Method.Title;
+            }
+            else
+            {
+                Performance.NewMethods[newMethodId].Title = "Error";
+            }
+
+            NewMethod.Messages.Clear();
+
+            if (newMethod.Messages.Count != 0)
+            {
+                foreach (var message in newMethod.Messages)
+                {
+                    NewMethod.Messages.Add(message);
+                }
+
+                Performance.NewMethods[newMethodId].Status = "See messages";
+            }
+            else
+            {
+                Performance.NewMethods[newMethodId].Status = "No messages";
+            }
 
             DateTime currTimeEnd = DateTime.Now;
 
@@ -161,6 +227,8 @@ namespace BellBoardMockUp.Pages
             }
 
             Performance.NewMethods[newMethodId].Validating = false;
+
+            ActivatePopUp(PopUp.NewMethodResult);
         }
 
         protected async void SaveDraft()
@@ -169,6 +237,12 @@ namespace BellBoardMockUp.Pages
             Saving = true;
 
             DateTime currTimeStart = DateTime.Now;
+
+            // Add nickname if none
+            if (string.IsNullOrEmpty(Performance.Nickname))
+            {
+                Performance.Nickname = "NoName";
+            }
 
             PerformanceJson performanceJson = new PerformanceJson();
 

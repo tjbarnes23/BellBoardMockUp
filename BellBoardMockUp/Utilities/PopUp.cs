@@ -20,6 +20,7 @@ namespace BellBoardMockUp.Utilities
         AdditionalRingerInfo,
         RingerStyle,
         NewMethods,
+        NewMethodResult,
         Norms
     }
 }

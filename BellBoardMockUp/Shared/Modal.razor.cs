@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using BellBoardMockUp.Models;
 using BellBoardMockUp.Utilities;
 using Microsoft.AspNetCore.Components;
 
@@ -12,6 +13,9 @@ namespace BellBoardMockUp.Shared
 {
     public partial class Modal
     {
+        [Inject]
+        public NewMethod NewMethod { get; set; }
+
         public string ModalDisplay = "none;";
         public string ModalClass = "";
         public bool ShowBackdrop = false;
@@ -222,8 +226,8 @@ namespace BellBoardMockUp.Shared
                     sb.Append("\n\n");
                     sb.Append("Then click the Validate button to check that your new method name is available " +
                         "and meets requirements. ");
-                    sb.Append("If the Status shows as anything other than 'success', the CC Methods " +
-                        "Team is available to help you resolve the problem. ");
+                    sb.Append("If you receive error or warning messages that you are unclear about, the CC Methods " +
+                        "Team will be pleased to assist you. ");
                     sb.Append("They can be reached by email at methods@cccbr.org.uk.");
                     Content = sb.ToString();
                     Image = string.Empty;
@@ -239,7 +243,33 @@ namespace BellBoardMockUp.Shared
                     Image = string.Empty;
                     Link = "https://framework.cccbr.org.uk";
                     break;
-                
+
+                case PopUp.NewMethodResult:
+                    Title = "New method validation results";
+                    sb.Append($"Title: {NewMethod.Method.Title}");
+                    sb.Append("\n");
+                    sb.Append($"Place notation: {NewMethod.Method.PlaceNotation}");
+                    sb.Append("\n\n");
+
+                    if (NewMethod.Messages.Count != 0)
+                    {
+                        foreach (var msg in NewMethod.Messages)
+                        {
+                            sb.Append($"{msg.Type}: {msg.message}");
+                            sb.Append("\n");
+                        }
+                    }
+                    else
+                    {
+                        sb.Append("No messages");
+                        sb.Append("\n");
+                    }
+
+                    Content = sb.ToString();
+                    Image = string.Empty;
+                    Link = string.Empty;
+                    break;
+
                 default:
                     break;
             }
