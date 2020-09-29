@@ -432,40 +432,43 @@
                     </CustomInputSelect>
                 </div>
 
-                <div class="col col-lg-6">
-                    <div class="pr-1" style="display: inline-block">
+                <div class="col-12 col-lg-6 d-flex">
+                    <div>
                         <br />
                         <button class="btn btn-primary" @onclick="@(e => ValidateMethod(newMethod.Id))"
-                                style="height: 30px; padding-top: 2px">
+                                style="width: 90px; height: 30px; margin-right: 8px; padding-top: 2px">
                             Validate
                         </button>
                     </div>
 
                     @if (newMethod.Validating == true)
                     {
-                        <div class="spinner pr-1" style="display: inline-block; vertical-align: middle;
-                                margin-left: 7px; margin-right: 7px;
+                        <div>
+                            <br />
+                            <div class="spinner" style="margin-top: 3px; margin-left: 8px; margin-right: 12px;
                                 --borderwidth: 5px; --width: 24px; --height: 24px">
+                            </div>
                         </div>
                     }
 
-                    <div class="pr-1" style="display: inline-block">
+                    <div>
                         Status
                         <br />
-                        <InputText id="@newMethod.Id" @bind-Value="newMethod.Status" style="width: 125px" disabled="true" />
+                        <InputText id="@newMethod.Id" @bind-Value="newMethod.Status" style="width: 125px; margin-right: 8px" disabled="true" />
                     </div>
 
-                    <div style="display: inline-block">
-                        Title
-                        <br />
-                        @if (newMethod.Validating == true)
-                        {
-                            <InputText id="@newMethod.Id" @bind-Value="newMethod.Title" style="width: 183px" disabled="true" />
-                        }
-                        else
-                        {
-                            <InputText id="@newMethod.Id" @bind-Value="newMethod.Title" style="width: 225px" disabled="true" />
-                        }
+                    <div class="flex-grow-1">
+                        <div class="row">
+                            <div class="col">
+                                Title
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col d-flex">
+                                <InputText id="@newMethod.Id" @bind-Value="newMethod.Title" class="flex-grow-1" disabled="true" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
