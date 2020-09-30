@@ -116,14 +116,17 @@
                     </div>
                 </div>
 
-                <div class="col-12">
-                    <div style="display: inline-block; width: 55px">
-                    </div>
+                @if (!string.IsNullOrEmpty(ConsolidatedRingerInfo(ringerData)))
+                {
+                    <div class="col-12">
+                        <div style="display: inline-block; width: 55px">
+                        </div>
 
-                    <div style="display: inline-block">
-                        @ConsolidatedRingerInfo(ringerData)
+                        <div style="display: inline-block">
+                            @ConsolidatedRingerInfo(ringerData)
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     }
