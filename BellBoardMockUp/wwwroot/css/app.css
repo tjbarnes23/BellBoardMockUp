@@ -1,31 +1,9 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+/* Standard classes */
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-h1 {
-    font-size: 20px;
-}
-
-h2 {
-    font-size: 19px;
-}
-
-h3 {
-    font-size: 18px;
-}
-
-h4 {
-    font-size: 17px;
-}
-
-h5 {
-    font-size: 16px;
-}
-
-h6 {
-    font-size: 15px;
 }
 
 a, .btn-link {
@@ -38,21 +16,51 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
+
+/* Used by index.html */
+
 app {
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+
+/* Used by MainLayout.razor and NavMenu.razor */
+
 .topbar {
-    height: 50px;
     width: auto;
+    min-height: 60px;
+    display: flex;
     background-image: linear-gradient(90deg, rgba(58, 6, 71, 0.9), rgba(5, 39, 103, 1));
 }
 
     .topbar .navbar-brand {
         font-size: 18px;
         color: white;
+    }
+
+    .topbar .navbar-toggler {
+        background-color: rgba(255, 255, 255, 0.1);
     }
 
     .topbar .nav-item {
@@ -83,29 +91,8 @@ app {
                 color: white;
             }
 
-.main {
-    flex: 1;
-}
 
-    .main .top-row {
-        background-color: #f7f7f7;
-        border-bottom: 1px solid #d6d5d5;
-        justify-content: flex-end;
-    }
-
-        .main .top-row > a, .main .top-row .btn-link {
-            white-space: nowrap;
-            margin-left: 1.5rem;
-        }
-
-            .main .top-row a:first-child {
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-.content {
-    padding-top: 1.1rem;
-}
+/* Don't know where these are used */
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
@@ -119,23 +106,31 @@ app {
     color: red;
 }
 
-#blazor-error-ui {
-    background: lightyellow;
-    bottom: 0;
-    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
-    display: none;
-    left: 0;
-    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
+
+/* These classes added by me */
+
+h1 {
+    font-size: 20px;
 }
 
-#blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
+h2 {
+    font-size: 19px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 17px;
+}
+
+h5 {
+    font-size: 16px;
+}
+
+h6 {
+    font-size: 15px;
 }
 
 .posabs {

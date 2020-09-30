@@ -1,31 +1,59 @@
-﻿<div class="navbar">
-    <a class="navbar-brand posabs" style="--leftpos: 20px; --toppos: 8px" href="">
+﻿<div class="topbar navbar navbar-dark">
+    <a class="navbar-brand mx-0 mx-md-2" href="/">
         BellBoard Mock-Up
     </a>
-
-    <ul class="nav">
-        <li class="nav-item">
-            <NavLink class="nav-link posabswh"
-                     style="--leftpos: 200px; --toppos: 7px; --width: 135px; height: 36px"
+    
+    <ul class="nav d-none d-md-inline-block mt-1">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link posabsw"
+                     style="--leftpos: 200px; --toppos: 12px; --width: 113px"
                      href="/" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </li>
 
-        <li class="nav-item">
-            <NavLink class="nav-link posabswh"
-                     style="--leftpos: 350px; --toppos: 7px; --width: 135px; height: 36px"
+        <li class="nav-item px-3">
+            <NavLink class="nav-link posabsw"
+                     style="--leftpos: 330px; --toppos: 12px; --width: 113px"
                      href="/entry" Match="NavLinkMatch.All">
                 <span class="oi oi-pencil" aria-hidden="true"></span> Entry
             </NavLink>
         </li>
 
-        <li class="nav-item">
-            <NavLink class="nav-link posabswh"
-                     style="--leftpos: 500px; --toppos: 7px; --width: 135px; height: 36px"
+        <li class="nav-item px-3">
+            <NavLink class="nav-link posabsw"
+                     style="--leftpos: 460px; --toppos: 12px; --width: 113px"
                      href="/preview" Match="NavLinkMatch.All">
                 <span class="oi oi-list" aria-hidden="true"></span> Preview
             </NavLink>
         </li>
     </ul>
+
+    <button class="navbar-toggler d-md-none" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="d-md-none @NavMenuCssClass" @onclick="ToggleNavMenu">
+    <div class="topbar pl-4 navbar navbar-dark">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                    <span class="oi oi-home" aria-hidden="true"></span> Home
+                </NavLink>
+            </li>
+
+            <li class="nav-item">
+                <NavLink class="nav-link" href="/entry" Match="NavLinkMatch.All">
+                    <span class="oi oi-pencil" aria-hidden="true"></span> Entry
+                </NavLink>
+            </li>
+
+            <li class="nav-item">
+                <NavLink class="nav-link" href="/preview" Match="NavLinkMatch.All">
+                    <span class="oi oi-list" aria-hidden="true"></span> Preview
+                </NavLink>
+            </li>
+        </ul>
+    </div>
 </div>
