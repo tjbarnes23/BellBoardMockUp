@@ -140,20 +140,6 @@ namespace BellBoardMockUp.Pages
                 Performance.Title = "*** Composition not found ***";
             }
 
-            /*
-            // Make property matching case insensitive
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            };
-
-            // Use the Deserializer method of the JsonSerializer class (in the System.Text.Json namespace) to create
-            // a BlowSetData object
-            CompImport compImport = JsonSerializer.Deserialize<CompImport>(jsonImport.GapTestSpec, options);
-            */
-
-            
-
             DateTime currTimeEnd = DateTime.Now;
 
             if (currTimeEnd < currTimeStart.AddSeconds(1))

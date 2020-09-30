@@ -16,36 +16,39 @@
         </div>
     }
 
-    @if (!string.IsNullOrEmpty(Performance.Location) && !string.IsNullOrEmpty(Performance.County))
+    @if (Performance.Distributed == false)
     {
-        <div>
-            <b>@Performance.Location,</b> @Performance.County
-        </div>
-    }
-    else if (!string.IsNullOrEmpty(Performance.Location))
-    {
-        <div>
-            <b>@Performance.Location</b>
-        </div>
-    }
-    else if (!string.IsNullOrEmpty(Performance.County))
-    {
-        <div>
-            <b>@Performance.County</b>
-        </div>
+        if (!string.IsNullOrEmpty(Performance.Location) && !string.IsNullOrEmpty(Performance.County))
+        {
+            <div>
+                <b>@Performance.Location,</b> @Performance.County
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(Performance.Location))
+        {
+            <div>
+                <b>@Performance.Location</b>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(Performance.County))
+        {
+            <div>
+                <b>@Performance.County</b>
+            </div>
+        }
+
+        if (!string.IsNullOrEmpty(Performance.Address))
+        {
+            <div>
+                @Performance.Address
+            </div>
+        }
     }
 
     @if (!string.IsNullOrEmpty(Performance.Platform))
     {
         <div>
             <b>@Performance.Platform</b>
-        </div>
-    }
-
-    @if (!string.IsNullOrEmpty(Performance.Address))
-    {
-        <div>
-            @Performance.Address
         </div>
     }
 
@@ -89,13 +92,38 @@
 
     @foreach (RingerData ringerData in Performance.Ringers)
     {
-        <div>
-            <div style="display: inline-block; width: 40px">
-                @ringerData.Bell
+        <div class="row">
+            <div class="d-none d-md-block">
+                <div class="col">
+                    <div style="display: inline-block; width: 40px">
+                        @ringerData.Bell
+                    </div>
+
+                    <div style="display: inline-block">
+                        @ConsolidatedRinger(ringerData) @ConsolidatedRingerInfo(ringerData)
+                    </div>
+                </div>
             </div>
 
-            <div style="display: inline-block">
-                @ConsolidatedRinger(ringerData)
+            <div class="d-md-none">
+                <div class="col-12">
+                    <div style="display: inline-block; width: 40px">
+                        @ringerData.Bell
+                    </div>
+
+                    <div style="display: inline-block">
+                        @ConsolidatedRinger(ringerData)
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div style="display: inline-block; width: 55px">
+                    </div>
+
+                    <div style="display: inline-block">
+                        @ConsolidatedRingerInfo(ringerData)
+                    </div>
+                </div>
             </div>
         </div>
     }

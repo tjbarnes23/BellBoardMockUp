@@ -129,10 +129,6 @@ namespace BellBoardMockUp.Models
                 {
                     ringerData.Bell = ((i * 2) - 1).ToString() + "-" + (i * 2).ToString();
                 }
-                else
-                {
-                    ringerData.Bell = string.Empty;
-                }
 
                 i++;
             }

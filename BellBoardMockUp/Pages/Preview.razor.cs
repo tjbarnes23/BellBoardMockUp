@@ -21,24 +21,31 @@ namespace BellBoardMockUp.Pages
         protected string ConsolidatedRinger(RingerData ringerData)
         {
             StringBuilder sb = new StringBuilder();
-            int items = 0;
 
             sb.Append(ringerData.Ringer);
             sb.Append(" ");
 
             if (ringerData.Conductor == true)
             {
-                sb.Append("(C) ");
+                sb.Append("(C)");
             }
 
-            if (!string.IsNullOrEmpty(ringerData.RingerInfo))
+            return sb.ToString();
+        }
+
+        protected string ConsolidatedRingerInfo(RingerData ringerData)
+        {
+            StringBuilder sb = new StringBuilder();
+            int items = 0;
+
+            if (Performance.AdditionalRingerInfo == true && !string.IsNullOrEmpty(ringerData.RingerInfo))
             {
                 sb.Append("(");
                 sb.Append(ringerData.RingerInfo);
                 items++;
             }
 
-            if (!string.IsNullOrEmpty(ringerData.RingerLocation))
+            if (Performance.Distributed == true && !string.IsNullOrEmpty(ringerData.RingerLocation))
             {
                 if (items > 0)
                 {
