@@ -82,7 +82,7 @@ namespace BellBoardMockUp.Pages
                 Performance.NewMethods.Add(newMethodData);
             }
 
-            NavManager.NavigateTo("/entry");
+            NavManager.NavigateTo("/preview");
         }
 
         protected void NewPerformance()
