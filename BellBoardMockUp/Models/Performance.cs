@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BellBoardMockUp.Models
@@ -10,6 +11,7 @@ namespace BellBoardMockUp.Models
             Id = 0;
             Style = 1;
             AssociationDropDown = 0;
+            Date = DateTime.Today;
             Distributed = false;
             ImportFromCompLib = false;
             NumRingers = 8;
@@ -34,7 +36,7 @@ namespace BellBoardMockUp.Models
 
         public string AssociationFreeForm { get; set; }
 
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         public bool Distributed { get; set; }
 

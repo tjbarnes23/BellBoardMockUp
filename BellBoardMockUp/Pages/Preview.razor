@@ -54,7 +54,7 @@
 
     <div>
         <div style="display: inline-block">
-            @Performance.Date
+            @Performance.Date.ToString("dddd, d MMMM yyyy")
         </div>
 
         @if (!string.IsNullOrEmpty(Performance.Time))

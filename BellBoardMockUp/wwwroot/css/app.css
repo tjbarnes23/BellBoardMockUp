@@ -133,6 +133,12 @@ h6 {
     font-size: 15px;
 }
 
+.shadowline {
+    width: auto;
+    height: 3px;
+    border-bottom: 1px solid #d7d7d7;
+}
+
 .posabs {
     left: var(--leftpos);
     top: var(--toppos);

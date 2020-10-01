@@ -136,7 +136,7 @@ namespace BellBoardMockUp.Shared
                     sb.Append(" E.g. if the selected composition in CompLib has the URL shown below, the " +
                         "composition id is 66827.");
                     Content = sb.ToString();
-                    Image = "Images/CompLibId.jpg";
+                    Image = "images/complib-id.jpg";
                     Link = string.Empty;
                     break;
                 

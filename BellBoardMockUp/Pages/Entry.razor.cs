@@ -67,6 +67,12 @@ namespace BellBoardMockUp.Pages
             Performance.AssociationFreeForm = string.Empty;
         }
 
+        protected void AssociationFreeFormChanged(string value)
+        {
+            Performance.AssociationFreeForm = value;
+            Performance.AssociationDropDown = 0;
+        }
+
         protected void NumRingersChanged(int value)
         {
             Performance.NumRingers = value;

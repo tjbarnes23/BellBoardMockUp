@@ -93,7 +93,7 @@ namespace BellBoardMockUp.Pages
             Performance.StyleOther = string.Empty;
             Performance.AssociationDropDown = 0;
             Performance.AssociationFreeForm = string.Empty;
-            Performance.Date = string.Empty;
+            // Performance.Date = ???
             Performance.Distributed = false;
             Performance.Location = string.Empty;
             Performance.County = string.Empty;
