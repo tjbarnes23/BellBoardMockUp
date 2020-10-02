@@ -350,31 +350,33 @@
         </div>
 
         <div class="row mt-3">
-            @if (Performance.BellsPerRinger == 1)
-            {
-                <div class="col-2 col-lg-1">
-                    <b>Bell</b>
-                </div>
-            }
-            else if (Performance.BellsPerRinger == 2)
-            {
-                <div class="col-2 col-lg-1">
-                    <b>Bells</b>
-                </div>
-            }
-            else
-            {
-                <div class="col-2 col-lg-1">
-                    <b>Bell(s)</b>
-                </div>
-            }
+            <div class="col-12 col-md-8 col-lg-6 d-flex">
+                @if (Performance.BellsPerRinger == 1)
+                {
+                    <div style="width: 50px">
+                        <b>Bell</b>
+                    </div>
+                }
+                else if (Performance.BellsPerRinger == 2)
+                {
+                    <div style="width: 80px">
+                        <b>Bells</b>
+                    </div>
+                }
+                else
+                {
+                    <div style="width: 100px; margin-right: 8px">
+                        <b>Bell(s)</b>
+                    </div>
+                }
 
-            <div class="col-9 col-md-6 col-lg-4">
-                <b>Ringer</b>
-            </div>
+                <div class="flex-grow-1">
+                    <b>Ringer</b>
+                </div>
 
-            <div class="col-1 text-center">
-                <b>(C)</b>
+                <div style="width: 50px; padding-left: 13px">
+                    <b>(C)</b>
+                </div>
             </div>
         </div>
 
@@ -385,32 +387,42 @@
 
         @foreach (RingerData ringer in Performance.Ringers)
         {
-            <div class="row mt-1">
-                @if (Performance.BellsPerRinger == 3)
-                {
-                    <div class="col-2 col-lg-1">
+            <div class="row mt-2">
+                <div class="col-12 col-md-8 col-lg-6 d-flex">
+                    @if (Performance.BellsPerRinger == 1)
+                    {
+                        <div style="width: 50px; padding-top: 8px">
+                            <label>@ringer.Bell</label>
+                        </div>
+                    }
+                    else if (Performance.BellsPerRinger == 2)
+                    {
+                        <div style="width: 80px; padding-top: 8px">
+                            <label>@ringer.Bell</label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="width: 100px; margin-right: 8px">
+                            <InputText id="@ringer.Id"
+                                       @bind-Value="ringer.Bell"
+                                       class="form-control"
+                                       style="margin-bottom: 2px" />
+                        </div>
+                    }
+
+                    <div class="flex-grow-1">
                         <InputText id="@ringer.Id"
-                                   @bind-Value="ringer.Bell"
+                                   @bind-Value="ringer.Ringer"
                                    class="form-control" />
                     </div>
-                }
-                else
-                {
-                    <div class="col-2 col-lg-1">
-                        <label>@ringer.Bell</label>
+
+                    <div style="width: 50px; padding-top: 8px">
+                        <InputCheckbox id="@ringer.Id"
+                                       @bind-Value="ringer.Conductor"
+                                       class="form-check-input"
+                                       style="margin-left: 18px" />
                     </div>
-                }
-
-                <div class="col-9 col-md-6 col-lg-4">
-                    <InputText id="@ringer.Id"
-                               @bind-Value="ringer.Ringer"
-                               class="form-control" />
-                </div>
-
-                <div class="col-1 text-center">
-                    <InputCheckbox id="@ringer.Id"
-                                   @bind-Value="ringer.Conductor"
-                                   class="form-check-input" />
                 </div>
             </div>
 
