@@ -294,10 +294,11 @@ namespace BellBoardMockUp.Shared
 
                 case PopUp.Nickname:
                     Title = "Draft performance description";
-                    sb.Append("This description will be used to identify the performance in the list of " +
+                    sb.Append("This description is used to identify the performance in the list of " +
                         "saved draft performances on the home page.");
                     sb.Append("\n\n");
-                    sb.Append("If no description is entered, one will be automatically generated.");
+                    sb.Append("A default description is automatically generated, but this may be changed " +
+                        "by editing the description box and clicking Save draft.");
                     Content = sb.ToString();
                     Image = string.Empty;
                     Link = string.Empty;

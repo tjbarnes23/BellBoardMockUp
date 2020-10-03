@@ -6,114 +6,153 @@
 
 <div class="container mx-0 mx-md-2">
     <EditForm Model="@Performance">
-        <div class="row mt-2">
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="form-group">
-                    <label>
-                        Style
-                        <button @onclick="@(e => ActivatePopUp(PopUp.Style))"
-                                class="infobutton">
-                            <b>&#9432;</b>
-                        </button>
-                    </label>
-                    <CustomInputSelect Value="@Performance.Style"
-                                       ValueChanged="@( (int value) => StyleChanged(value) )"
-                                       ValueExpression="@( () => Performance.Style )"
-                                       class="form-control">
-                        @for (int i = 1; i <= 5; i++)
-                        {
-                            <option value="@i">@ControlData.Style(i)</option>
-                        }
-                    </CustomInputSelect>
-                </div>
-            </div>
-
-            @if (Performance.Style == 4)
-            {
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label>
-                            Other Style
-                        </label>
-                        <InputTextArea @bind-Value="Performance.StyleOther"
-                                       class="form-control" />
-                    </div>
-                </div>
-            }
-        </div>
-
-        <div class="row mt-2">
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="form-group">
-                    <label>
-                        Association (drop down)
-                    </label>
-                    <CustomInputSelect Value="@Performance.AssociationDropDown"
-                                       ValueChanged="@( (int value) => AssociationDropDownChanged(value) )"
-                                       ValueExpression="@( () => Performance.AssociationDropDown )"
-                                       class="form-control">
-                        <option value="0">Please select...</option>
-                        @for (int i = 1; i <= 5; i++)
-                        {
-                            <option value="@i">@ControlData.Association(i)</option>
-                        }
-                    </CustomInputSelect>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6">
-                <div class="form-group">
-                    <label>
-                        Association (free form)
-                    </label>
-                    <InputText Value="@Performance.AssociationFreeForm"
-                               ValueChanged="@( (string value) => AssociationFreeFormChanged(value) )"
-                               ValueExpression="@( () => Performance.AssociationFreeForm )"
-                               class="form-control" />
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-2">
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="form-group">
-                    <label>
-                        Date of performance
-                    </label>
-                    <InputDate @bind-Value="Performance.Date"
-                               class="form-control" />
-                </div>
-            </div>
-        </div>
-
-        <div class="shadowline shadow mt-2" />
-
-        <div class="row mt-4 mb-3">
-            <div class="col">
-                <div class="form-check">
-                    <InputCheckbox id="distributedCheck"
-                                   @bind-Value="@Performance.Distributed"
-                                   class="form-check-input" />
-                    <label class="form-check-label" for="distributedCheck">
-                        Distributed performance?
-                    </label>
-                    <button @onclick="@(e => ActivatePopUp(PopUp.Distributed))"
-                            class="infobutton">
-                        <b>&#9432;</b>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        @if (Performance.Distributed == false)
+        @if (FormPage == 0 || FormPage == 1)
         {
             <div class="row mt-2">
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="form-group">
                         <label>
-                            Place (City / Town / Village)
+                            Style
+                            <button @onclick="@(e => ActivatePopUp(PopUp.Style))"
+                                    class="infobutton">
+                                <b>&#9432;</b>
+                            </button>
                         </label>
-                        <InputText @bind-Value="Performance.Location"
+                        <CustomInputSelect Value="@Performance.Style"
+                                           ValueChanged="@( (int value) => StyleChanged(value) )"
+                                           ValueExpression="@( () => Performance.Style )"
+                                           class="form-control">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <option value="@i">@ControlData.Style(i)</option>
+                            }
+                        </CustomInputSelect>
+                    </div>
+                </div>
+
+                @if (Performance.Style == 4)
+                {
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Other Style
+                            </label>
+                            <InputTextArea @bind-Value="Performance.StyleOther"
+                                           class="form-control" />
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                        <label>
+                            Association (drop down)
+                        </label>
+                        <CustomInputSelect Value="@Performance.AssociationDropDown"
+                                           ValueChanged="@( (int value) => AssociationDropDownChanged(value) )"
+                                           ValueExpression="@( () => Performance.AssociationDropDown )"
+                                           class="form-control">
+                            <option value="0">Please select...</option>
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <option value="@i">@ControlData.Association(i)</option>
+                            }
+                        </CustomInputSelect>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Association (free form)
+                        </label>
+                        <InputText Value="@Performance.AssociationFreeForm"
+                                   ValueChanged="@( (string value) => AssociationFreeFormChanged(value) )"
+                                   ValueExpression="@( () => Performance.AssociationFreeForm )"
+                                   class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                        <label>
+                            Date of performance
+                        </label>
+                        <InputDate @bind-Value="Performance.Date"
+                                   class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="shadowline shadow mt-2" />
+
+            <div class="row mt-4 mb-3">
+                <div class="col">
+                    <div class="form-check">
+                        <InputCheckbox id="distributedCheck"
+                                       @bind-Value="@Performance.Distributed"
+                                       class="form-check-input" />
+                        <label class="form-check-label" for="distributedCheck">
+                            Distributed performance?
+                        </label>
+                        <button @onclick="@(e => ActivatePopUp(PopUp.Distributed))"
+                                class="infobutton">
+                            <b>&#9432;</b>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            @if (Performance.Distributed == false)
+            {
+                <div class="row mt-2">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                Place (City / Town / Village)
+                            </label>
+                            <InputText @bind-Value="Performance.Location"
+                                       class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                County, State, Country
+                            </label>
+                            <InputText @bind-Value="Performance.County"
+                                       class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                Dedication / Address
+                            </label>
+                            <InputText @bind-Value="Performance.Address"
+                                       class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="row mt-2">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="form-group">
+                        <label>
+                            Tenor info (if applicable)
+                            <button @onclick="@(e => ActivatePopUp(PopUp.Tenor))"
+                                    class="infobutton">
+                                <b>&#9432;</b>
+                            </button>
+                        </label>
+                        <InputText @bind-Value="Performance.Tenor"
                                    class="form-control" />
                     </div>
                 </div>
@@ -121,9 +160,13 @@
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="form-group">
                         <label>
-                            County, State, Country
+                            Platform (if applicable)
+                            <button @onclick="@(e => ActivatePopUp(PopUp.Platform))"
+                                    class="infobutton">
+                                <b>&#9432;</b>
+                            </button>
                         </label>
-                        <InputText @bind-Value="Performance.County"
+                        <InputText @bind-Value="Performance.Platform"
                                    class="form-control" />
                     </div>
                 </div>
@@ -131,606 +174,674 @@
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="form-group">
                         <label>
-                            Dedication / Address
+                            Time taken
+                            <button @onclick="@(e => ActivatePopUp(PopUp.Time))"
+                                    class="infobutton">
+                                <b>&#9432;</b>
+                            </button>
                         </label>
-                        <InputText @bind-Value="Performance.Address"
+                        <InputText @bind-Value="Performance.Time"
                                    class="form-control" />
                     </div>
                 </div>
             </div>
         }
 
-        <div class="row mt-2">
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="form-group">
-                    <label>
-                        Tenor info (if applicable)
-                        <button @onclick="@(e => ActivatePopUp(PopUp.Tenor))"
+        @if (FormPage == 0)
+        {
+            <div class="shadowline shadow mt-2" />
+        }
+
+        @if (FormPage == 1)
+        {
+            <div class="row mt-2">
+                <div class="col">
+                    <button class="btn btn-primary"
+                            @onclick="Next">
+                        Next
+                    </button>
+
+                    @if (Saving == true)
+                    {
+                        <div class="spinner" style="display: inline-block; vertical-align: top; margin-left: 12px;
+                                margin-top: 7px; --borderwidth: 5px; --width: 24px; --height: 24px">
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+        @if (FormPage == 0 || FormPage == 2)
+        {
+            <div class="row mt-4">
+                <div class="col">
+                    <div class="form-check">
+                        <InputCheckbox id="complibImportCheck"
+                                       @bind-Value="@Performance.ImportFromCompLib"
+                                       class="form-check-input" />
+                        <label class="form-check-label" for="complibImportCheck">
+                            Import composition details from CompLib?
+                        </label>
+                        <button @onclick="@(e => ActivatePopUp(PopUp.Import))"
                                 class="infobutton">
                             <b>&#9432;</b>
                         </button>
-                    </label>
-                    <InputText @bind-Value="Performance.Tenor"
-                               class="form-control" />
+                    </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="form-group">
-                    <label>
-                        Platform (if applicable)
-                        <button @onclick="@(e => ActivatePopUp(PopUp.Platform))"
-                                class="infobutton">
-                            <b>&#9432;</b>
-                        </button>
-                    </label>
-                    <InputText @bind-Value="Performance.Platform"
-                               class="form-control" />
+            @if (Performance.ImportFromCompLib == true)
+            {
+                <div class="row mt-3">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>
+                                CompLib composition id
+                            </label>
+                            <div class="form-inline">
+                                <InputText @bind-Value="Performance.CompLibId"
+                                           class="form-control"
+                                           style="width: 120px" />
+                                <button class="btn btn-primary ml-2"
+                                        @onclick="CompImport">
+                                    Import
+                                </button>
+
+                                @if (CompImporting == true)
+                                {
+                                    <div class="spinner" style="margin-left: 12px;
+                                            --borderwidth: 5px; --width: 24px; --height: 24px">
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            }
 
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="form-group">
-                    <label>
-                        Time taken
-                        <button @onclick="@(e => ActivatePopUp(PopUp.Time))"
-                                class="infobutton">
-                            <b>&#9432;</b>
-                        </button>
-                    </label>
-                    <InputText @bind-Value="Performance.Time"
-                               class="form-control" />
-                </div>
-            </div>
-        </div>
-
-        <div class="shadowline shadow mt-2" />
-
-        <div class="row mt-4">
-            <div class="col">
-                <div class="form-check">
-                    <InputCheckbox id="complibImportCheck"
-                                   @bind-Value="@Performance.ImportFromCompLib"
-                                   class="form-check-input" />
-                    <label class="form-check-label" for="complibImportCheck">
-                        Import composition details from CompLib?
-                    </label>
-                    <button @onclick="@(e => ActivatePopUp(PopUp.Import))"
+            <div class="row mt-3">
+                <div class="col-12 col-md-9">
+                    Performance Title
+                    <button @onclick="@(e => ActivatePopUp(PopUp.Title))"
                             class="infobutton">
                         <b>&#9432;</b>
                     </button>
                 </div>
             </div>
-        </div>
 
-        @if (Performance.ImportFromCompLib == true)
-        {
-            <div class="row mt-3">
+            <div class="row mt-1">
+                <div class="col-12 col-md-10 col-lg-7 d-flex">
+                    <div class="form-group" style="margin-right: 6px">
+                        <InputText @bind-Value="Performance.Length"
+                                   class="form-control"
+                                   style="width: 85px" />
+                        <label>
+                            <small>Length</small>
+                        </label>
+                    </div>
+
+                    <div class="form-group flex-grow-1">
+                        <InputText @bind-Value="Performance.Title"
+                                   class="form-control" />
+                        <label>
+                            <small>Method / Class / Stage</small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-10 col-lg-7">
+                    <div class="form-group">
+                        <label>
+                            Composer
+                        </label>
+                        <InputText @bind-Value="Performance.Composer"
+                                   class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
                 <div class="col">
                     <div class="form-group">
                         <label>
-                            CompLib composition id
-                        </label>
-                        <div class="form-inline">
-                            <InputText @bind-Value="Performance.CompLibId"
-                                       class="form-control"
-                                       style="width: 120px" />
-                            <button class="btn btn-primary ml-2"
-                                    @onclick="CompImport">
-                                Import
+                            Performance Detail
+                            <button @onclick="@(e => ActivatePopUp(PopUp.Detail))"
+                                    class="infobutton">
+                                <b>&#9432;</b>
                             </button>
-
-                            @if (CompImporting == true)
-                            {
-                                <div class="spinner" style="margin-left: 12px;
-                                        --borderwidth: 5px; --width: 24px; --height: 24px">
-                                </div>
-                            }
-                        </div>
+                        </label>
+                        <InputTextArea @bind-Value="Performance.Detail"
+                                       class="form-control" />
                     </div>
                 </div>
             </div>
         }
 
-        <div class="row mt-3">
-            <div class="col-12 col-md-9">
-                Performance Title
-                <button @onclick="@(e => ActivatePopUp(PopUp.Title))"
-                        class="infobutton">
-                    <b>&#9432;</b>
-                </button>
-            </div>
-        </div>
-
-        <div class="row mt-1">
-            <div class="col-12 col-md-10 col-lg-7 d-flex">
-                <div class="form-group" style="margin-right: 6px">
-                    <InputText @bind-Value="Performance.Length"
-                               class="form-control"
-                               style="width: 85px" />
-                    <label>
-                        <small>Length</small>
-                    </label>
-                </div>
-
-                <div class="form-group flex-grow-1">
-                    <InputText @bind-Value="Performance.Title"
-                               class="form-control" />
-                    <label>
-                        <small>Method / Class / Stage</small>
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12 col-md-10 col-lg-7">
-                <div class="form-group">
-                    <label>
-                        Composer
-                    </label>
-                    <InputText @bind-Value="Performance.Composer"
-                               class="form-control" />
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-2">
-            <div class="col">
-                <div class="form-group">
-                    <label>
-                        Performance Detail
-                        <button @onclick="@(e => ActivatePopUp(PopUp.Detail))"
-                                class="infobutton">
-                            <b>&#9432;</b>
-                        </button>
-                    </label>
-                    <InputTextArea @bind-Value="Performance.Detail"
-                                   class="form-control" />
-                </div>
-            </div>
-        </div>
-
-        <div class="shadowline shadow mt-2" />
-
-        <div class="row mt-4">
-            <div class="col-12 col-md-5 col-lg-4 col-xl-3">
-                <div class="form-group">
-                    <label>
-                        Number of ringers
-                        <button @onclick="@(e => ActivatePopUp(PopUp.NumRingers))"
-                                class="infobutton">
-                            <b>&#9432;</b>
-                        </button>
-                    </label>
-                    <CustomInputSelect Value="@Performance.NumRingers"
-                                       ValueChanged="@( (int value) => NumRingersChanged(value) )"
-                                       ValueExpression="@( () => Performance.NumRingers )"
-                                       class="form-control">
-                        <option value="0">Please select...</option>
-                        @for (int i = 1; i <= 24; i++)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </CustomInputSelect>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-5 col-lg-4 col-xl-3">
-                <div class="form-group">
-                    <label>
-                        Bells per ringer
-                        <button @onclick="@(e => ActivatePopUp(PopUp.BellsPerRinger))"
-                                class="infobutton">
-                            <b>&#9432;</b>
-                        </button>
-                    </label>
-                    <CustomInputSelect Value="@Performance.BellsPerRinger"
-                                       ValueChanged="@( (int value) => BellsPerRingerChanged(value) )"
-                                       ValueExpression="@( () => Performance.BellsPerRinger )"
-                                       class="form-control">
-                        @for (int i = 1; i <= 3; i++)
-                        {
-                            <option value="@i">@ControlData.BellsPerRinger(i)</option>
-                        }
-                    </CustomInputSelect>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-2">
-            <div class="col">
-                <div class="form-check">
-                    <InputCheckbox id="additionalRingerInfoCheck"
-                                   Value="@Performance.AdditionalRingerInfo"
-                                   ValueChanged="@( (bool value) => AdditionalRingerInfoChanged(value) )"
-                                   ValueExpression="@( () => Performance.AdditionalRingerInfo )"
-                                   class="form-check-input" />
-                    <label class="form-check-label" for="additionalRingerInfoCheck">
-                        Enter additional ringer info?
-                    </label>
-                    <button @onclick="@(e => ActivatePopUp(PopUp.AdditionalRingerInfo))"
-                            class="infobutton">
-                        <b>&#9432;</b>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col-12 col-md-8 col-lg-6 d-flex">
-                @if (Performance.BellsPerRinger == 1)
-                {
-                    <div style="width: 50px">
-                        <b>Bell</b>
-                    </div>
-                }
-                else if (Performance.BellsPerRinger == 2)
-                {
-                    <div style="width: 80px">
-                        <b>Bells</b>
-                    </div>
-                }
-                else
-                {
-                    <div style="width: 100px; margin-right: 8px">
-                        <b>Bell(s)</b>
-                    </div>
-                }
-
-                <div class="flex-grow-1">
-                    <b>Ringer</b>
-                </div>
-
-                <div style="width: 50px; padding-left: 13px">
-                    <b>(C)</b>
-                </div>
-            </div>
-        </div>
-
-        @if (Performance.NumRingers > 0)
+        @if (FormPage == 0)
         {
-            @if (Performance.AdditionalRingerInfo == true || Performance.Distributed == true || Performance.Style == 5)
-            {
-                <hr />
-            }
+            <div class="shadowline shadow mt-2" />
+        }
 
-            @foreach (RingerData ringer in Performance.Ringers)
-            {
-                <div class="row mt-2">
-                    <div class="col-12 col-md-8 col-lg-6 d-flex">
-                        @if (Performance.BellsPerRinger == 1)
-                        {
-                            <div style="width: 50px; padding-top: 8px">
-                                @ringer.Bell
-                            </div>
-                        }
-                        else if (Performance.BellsPerRinger == 2)
-                        {
-                            <div style="width: 80px; padding-top: 8px">
-                                @ringer.Bell
-                            </div>
-                        }
-                        else
-                        {
-                            <div style="width: 100px; margin-right: 8px">
-                                <InputText id="@ringer.Id"
-                                           @bind-Value="ringer.Bell"
-                                           class="form-control" />
-                            </div>
-                        }
+        @if (FormPage == 2)
+        {
+            <div class="row mt-2">
+                <div class="col">
+                    <button class="btn btn-primary mr-2"
+                            @onclick="Back">
+                        Back
+                    </button>
 
-                        <div class="flex-grow-1">
-                            <InputText id="@ringer.Id"
-                                       @bind-Value="ringer.Ringer"
-                                       class="form-control" />
+                    <button class="btn btn-primary"
+                            @onclick="Next">
+                        Next
+                    </button>
+
+                    @if (Saving == true)
+                    {
+                        <div class="spinner" style="display: inline-block; vertical-align: top; margin-left: 12px;
+                                margin-top: 7px; --borderwidth: 5px; --width: 24px; --height: 24px">
                         </div>
+                    }
+                </div>
+            </div>
+        }
 
-                        <div style="width: 50px; padding-top: 8px">
-                            <InputCheckbox id="@ringer.Id"
-                                           @bind-Value="ringer.Conductor"
-                                           class="form-check-input"
-                                           style="margin-left: 18px" />
-                        </div>
+        @if (FormPage == 0 || FormPage == 3)
+        {
+            <div class="row mt-4">
+                <div class="col-12 col-md-5 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                        <label>
+                            Number of ringers
+                            <button @onclick="@(e => ActivatePopUp(PopUp.NumRingers))"
+                                    class="infobutton">
+                                <b>&#9432;</b>
+                            </button>
+                        </label>
+                        <CustomInputSelect Value="@Performance.NumRingers"
+                                           ValueChanged="@( (int value) => NumRingersChanged(value) )"
+                                           ValueExpression="@( () => Performance.NumRingers )"
+                                           class="form-control">
+                            <option value="0">Please select...</option>
+                            @for (int i = 1; i <= 24; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </CustomInputSelect>
                     </div>
                 </div>
 
-                @if (Performance.AdditionalRingerInfo == true)
+                <div class="col-12 col-md-5 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                        <label>
+                            Bells per ringer
+                            <button @onclick="@(e => ActivatePopUp(PopUp.BellsPerRinger))"
+                                    class="infobutton">
+                                <b>&#9432;</b>
+                            </button>
+                        </label>
+                        <CustomInputSelect Value="@Performance.BellsPerRinger"
+                                           ValueChanged="@( (int value) => BellsPerRingerChanged(value) )"
+                                           ValueExpression="@( () => Performance.BellsPerRinger )"
+                                           class="form-control">
+                            @for (int i = 1; i <= 3; i++)
+                            {
+                                <option value="@i">@ControlData.BellsPerRinger(i)</option>
+                            }
+                        </CustomInputSelect>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col">
+                    <div class="form-check">
+                        <InputCheckbox id="additionalRingerInfoCheck"
+                                       Value="@Performance.AdditionalRingerInfo"
+                                       ValueChanged="@( (bool value) => AdditionalRingerInfoChanged(value) )"
+                                       ValueExpression="@( () => Performance.AdditionalRingerInfo )"
+                                       class="form-check-input" />
+                        <label class="form-check-label" for="additionalRingerInfoCheck">
+                            Enter additional ringer info?
+                        </label>
+                        <button @onclick="@(e => ActivatePopUp(PopUp.AdditionalRingerInfo))"
+                                class="infobutton">
+                            <b>&#9432;</b>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-12 col-md-8 col-lg-6 d-flex">
+                    @if (Performance.BellsPerRinger == 1)
+                    {
+                        <div style="width: 50px">
+                            <b>Bell</b>
+                        </div>
+                    }
+                    else if (Performance.BellsPerRinger == 2)
+                    {
+                        <div style="width: 80px">
+                            <b>Bells</b>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="width: 100px; margin-right: 8px">
+                            <b>Bell(s)</b>
+                        </div>
+                    }
+
+                    <div class="flex-grow-1">
+                        <b>Ringer</b>
+                    </div>
+
+                    <div style="width: 50px; padding-left: 13px">
+                        <b>(C)</b>
+                    </div>
+                </div>
+            </div>
+
+            @if (Performance.NumRingers > 0)
+            {
+                @if (Performance.AdditionalRingerInfo == true || Performance.Distributed == true ||
+                    Performance.Style == 5)
+                {
+                    <hr />
+                }
+
+                @foreach (RingerData ringer in Performance.Ringers)
                 {
                     <div class="row mt-2">
-                        <div class="col-12 col-md-9 col-lg-7 d-flex">
-                            <div class="flex-shrink-0"
-                                    style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
-                                Additional info:
-                            </div>
+                        <div class="col-12 col-md-8 col-lg-6 d-flex">
+                            @if (Performance.BellsPerRinger == 1)
+                            {
+                                <div style="width: 50px; padding-top: 8px">
+                                    @ringer.Bell
+                                </div>
+                            }
+                            else if (Performance.BellsPerRinger == 2)
+                            {
+                                <div style="width: 80px; padding-top: 8px">
+                                    @ringer.Bell
+                                </div>
+                            }
+                            else
+                            {
+                                <div style="width: 100px; margin-right: 8px">
+                                    <InputText id="@ringer.Id"
+                                               @bind-Value="ringer.Bell"
+                                               class="form-control" />
+                                </div>
+                            }
 
                             <div class="flex-grow-1">
                                 <InputText id="@ringer.Id"
-                                           @bind-Value="ringer.RingerInfo"
+                                           @bind-Value="ringer.Ringer"
                                            class="form-control" />
+                            </div>
+
+                            <div style="width: 50px; padding-top: 8px">
+                                <InputCheckbox id="@ringer.Id"
+                                               @bind-Value="ringer.Conductor"
+                                               class="form-check-input"
+                                               style="margin-left: 18px" />
                             </div>
                         </div>
                     </div>
-                }
 
-                @if (Performance.Distributed == true)
+                    @if (Performance.AdditionalRingerInfo == true)
+                    {
+                        <div class="row mt-2">
+                            <div class="col-12 col-md-9 col-lg-7 d-flex">
+                                <div class="flex-shrink-0"
+                                     style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
+                                    Additional info:
+                                </div>
+
+                                <div class="flex-grow-1">
+                                    <InputText id="@ringer.Id"
+                                               @bind-Value="ringer.RingerInfo"
+                                               class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (Performance.Distributed == true)
+                    {
+                        <div class="row mt-2">
+                            <div class="col-12 col-md-9 col-lg-7 d-flex">
+                                <div class="flex-shrink-0"
+                                     style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
+                                    Approx location:
+                                    <button @onclick="@(e => ActivatePopUp(PopUp.ApproxLocation))"
+                                            class="infobutton">
+                                        <b>&#9432;</b>
+                                    </button>
+                                </div>
+
+                                <div class="flex-grow-1">
+                                    <InputText id="@ringer.Id"
+                                               @bind-Value="ringer.RingerLocation"
+                                               class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (Performance.Style == 5)
+                    {
+                        <div class="row mt-2">
+                            <div class="col-12 col-md-9 col-lg-7 d-flex">
+                                <div class="flex-shrink-0"
+                                     style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
+                                    Style:
+                                    <button @onclick="@(e => ActivatePopUp(PopUp.RingerStyle))"
+                                            class="infobutton">
+                                        <b>&#9432;</b>
+                                    </button>
+                                </div>
+
+                                <div class="flex-grow-1">
+                                    <CustomInputSelect id="@ringer.Id"
+                                                       @bind-Value="ringer.RingerStyle"
+                                                       class="form-control">
+                                        @for (int i = 1; i <= 4; i++)
+                                                        {
+                                            <option value="@i">@ControlData.Style(i)</option>
+                                                        }
+                                    </CustomInputSelect>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (ringer.RingerStyle == 4)
+                        {
+                            <div class="row mt-2">
+                                <div class="col-12 col-md-9 col-lg-7 d-flex">
+                                    <div class="flex-shrink-0"
+                                         style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
+                                        Other Style:
+                                    </div>
+
+                                    <div class="flex-grow-1">
+                                        <InputText id="@ringer.Id"
+                                                   @bind-Value="ringer.RingerStyleOther"
+                                                   class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    @if (Performance.AdditionalRingerInfo == true || Performance.Distributed == true ||
+                        Performance.Style == 5)
+                    {
+                        if (ringer != Performance.Ringers.Last())
+                        {
+                            <hr />
+                        }
+                    }
+                }
+            }
+        }
+
+        @if (FormPage == 0)
+        {
+            <div class="shadowline shadow mt-4" />
+        }
+
+        @if (FormPage == 3)
+        {
+            <div class="row mt-4">
+                <div class="col">
+                    <button class="btn btn-primary mr-2"
+                            @onclick="Back">
+                        Back
+                    </button>
+
+                    <button class="btn btn-primary"
+                            @onclick="Next">
+                        Next
+                    </button>
+
+                    @if (Saving == true)
+                    {
+                        <div class="spinner" style="display: inline-block; vertical-align: top; margin-left: 12px;
+                                margin-top: 7px; --borderwidth: 5px; --width: 24px; --height: 24px">
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+        @if (FormPage == 0 || FormPage == 4)
+        {
+            <div class="row mt-4 mb-3">
+                <div class="col">
+                    <div class="form-check">
+                        <InputCheckbox id="newMethodsCheck"
+                                       @bind-Value="@Performance.NewMethodsNamed"
+                                       class="form-check-input" />
+                        <label class="form-check-label" for="newMethodsCheck">
+                            New methods named?
+                        </label>
+                        <button @onclick="@(e => ActivatePopUp(PopUp.NewMethods))"
+                                class="infobutton">
+                            <b>&#9432;</b>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            @if (Performance.NewMethodsNamed == true)
+            {
+                foreach (NewMethodData newMethod in Performance.NewMethods)
                 {
                     <div class="row mt-2">
-                        <div class="col-12 col-md-9 col-lg-7 d-flex">
-                            <div class="flex-shrink-0"
-                                    style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
-                                Approx location:
-                                <button @onclick="@(e => ActivatePopUp(PopUp.ApproxLocation))"
-                                        class="infobutton">
-                                    <b>&#9432;</b>
-                                </button>
-                            </div>
-
-                            <div class="flex-grow-1">
-                                <InputText id="@ringer.Id"
-                                           @bind-Value="ringer.RingerLocation"
+                        <div class="col-12 col-md-6 col-lg-5">
+                            <div class="form-group">
+                                <label>
+                                    Name
+                                </label>
+                                <InputText id="@newMethod.Id" @bind-Value="newMethod.Name"
                                            class="form-control" />
                             </div>
                         </div>
-                    </div>
-                }
 
-                @if (Performance.Style == 5)
-                {
-                    <div class="row mt-2">
-                        <div class="col-12 col-md-9 col-lg-7 d-flex">
-                            <div class="flex-shrink-0"
-                                    style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
-                                Style:
-                                <button @onclick="@(e => ActivatePopUp(PopUp.RingerStyle))"
-                                        class="infobutton">
-                                    <b>&#9432;</b>
-                                </button>
-                            </div>
-
-                            <div class="flex-grow-1">
-                                <CustomInputSelect id="@ringer.Id"
-                                                   @bind-Value="ringer.RingerStyle"
+                        <div class="col-12 col-md-6 col-lg-5">
+                            <div class="form-group">
+                                <label>
+                                    Stage
+                                </label>
+                                <CustomInputSelect id="@newMethod.Id"
+                                                   @bind-Value="newMethod.Stage"
                                                    class="form-control">
-                                    @for (int i = 1; i <= 4; i++)
+                                    <option value="0">Please select...</option>
+                                    @for (int i = 2; i <= 24; i++)
                                                 {
-                                        <option value="@i">@ControlData.Style(i)</option>
+                                        <option value="@i">@ControlData.Stage(i)</option>
                                                 }
                                 </CustomInputSelect>
                             </div>
                         </div>
                     </div>
 
-                    @if (ringer.RingerStyle == 4)
-                    {
-                        <div class="row mt-2">
-                            <div class="col-12 col-md-9 col-lg-7 d-flex">
-                                <div class="flex-shrink-0"
-                                        style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
-                                    Other Style:
-                                </div>
-
-                                <div class="flex-grow-1">
-                                    <InputText id="@ringer.Id"
-                                               @bind-Value="ringer.RingerStyleOther"
-                                               class="form-control" />
-                                </div>
+                    <div class="row mt-2">
+                        <div class="col-12 col-md-9 col-lg-7 pr-md-1">
+                            <div class="form-group">
+                                <label>
+                                    Place notation
+                                </label>
+                                <InputText id="@newMethod.Id"
+                                           @bind-Value="newMethod.PlaceNotation"
+                                           class="form-control" />
                             </div>
                         </div>
-                    }
-                }
 
-                @if (Performance.AdditionalRingerInfo == true || Performance.Distributed == true || Performance.Style == 5)
-                {
-                    if (ringer != Performance.Ringers.Last())
+                        <div class="col-12 col-md-3 col-lg-2 mt-md-4 mb-2 mb-md-0 pl-md-1">
+                            <button class="btn btn-primary"
+                                    @onclick="@(e => ValidateMethod(newMethod.Id))"
+                                    style="vertical-align: top; margin-top: 8px">
+                                Validate
+                            </button>
+
+                            @if (newMethod.Validating == true)
+                            {
+                                <div style="display: inline-block; vertical-align: top; margin-top: 15px; margin-left: 8px">
+                                    <div class="spinner"
+                                         style="--borderwidth: 5px; --width: 24px; --height: 24px">
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-12 col-md-6 col-lg-5">
+                            <div class="form-group">
+                                <label>
+                                    Status
+                                </label>
+                                <InputText id="@newMethod.Id"
+                                           @bind-Value="newMethod.Status"
+                                           class="form-control"
+                                           disabled="true" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-5">
+                            <div class="form-group">
+                                <label>
+                                    Title
+                                </label>
+                                <InputText id="@newMethod.Id"
+                                           @bind-Value="newMethod.Title"
+                                           class="form-control"
+                                           disabled="true" />
+                            </div>
+                        </div>
+                    </div>
+
+                    if (newMethod != Performance.NewMethods.Last())
                     {
                         <hr />
                     }
                 }
+
+                <div class="row mt-2">
+                    <div class="col">
+                        <button class="btn btn-primary"
+                                @onclick="Performance.AddNewMethod">
+                            Enter another new method
+                        </button>
+                    </div>
+                </div>
             }
         }
 
-        <div class="shadowline shadow mt-4" />
+        @if (FormPage == 0)
+        {
+            <div class="shadowline shadow mt-4" />
+        }
 
-        <div class="row mt-4 mb-3">
-            <div class="col">
-                <div class="form-check">
-                    <InputCheckbox id="newMethodsCheck"
-                                   @bind-Value="@Performance.NewMethodsNamed"
-                                   class="form-check-input" />
-                    <label class="form-check-label" for="newMethodsCheck">
-                        New methods named?
-                    </label>
-                    <button @onclick="@(e => ActivatePopUp(PopUp.NewMethods))"
-                            class="infobutton">
-                        <b>&#9432;</b>
+        @if (FormPage == 4)
+        {
+            <div class="row mt-4">
+                <div class="col">
+                    <button class="btn btn-primary mr-2"
+                            @onclick="Back">
+                        Back
                     </button>
+
+                    <button class="btn btn-primary"
+                            @onclick="Next">
+                        Next
+                    </button>
+
+                    @if (Saving == true)
+                    {
+                        <div class="spinner" style="display: inline-block; vertical-align: top; margin-left: 12px;
+                                margin-top: 7px; --borderwidth: 5px; --width: 24px; --height: 24px">
+                        </div>
+                    }
                 </div>
             </div>
-        </div>
+        }
 
-        @if (Performance.NewMethodsNamed == true)
+        @if (FormPage == 0 || FormPage == 5)
         {
-            foreach (NewMethodData newMethod in Performance.NewMethods)
-            {
-                <div class="row mt-2">
-                    <div class="col-12 col-md-6 col-lg-5">
-                        <div class="form-group">
-                            <label>
-                                Name
-                            </label>
-                            <InputText id="@newMethod.Id" @bind-Value="newMethod.Name"
+            <div class="row mt-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label>
+                            Footnotes
+                        </label>
+                        <InputTextArea @bind-Value="Performance.Footnotes"
                                        class="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-5">
-                        <div class="form-group">
-                            <label>
-                                Stage
-                            </label>
-                            <CustomInputSelect id="@newMethod.Id"
-                                               @bind-Value="newMethod.Stage"
-                                               class="form-control">
-                                <option value="0">Please select...</option>
-                                @for (int i = 2; i <= 24; i++)
-                                        {
-                                    <option value="@i">@ControlData.Stage(i)</option>
-                                        }
-                            </CustomInputSelect>
-                        </div>
                     </div>
                 </div>
-
-                <div class="row mt-2">
-                    <div class="col-12 col-md-9 col-lg-7 pr-md-1">
-                        <div class="form-group">
-                            <label>
-                                Place notation
-                            </label>
-                            <InputText id="@newMethod.Id"
-                                       @bind-Value="newMethod.PlaceNotation"
-                                       class="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-3 col-lg-2 mt-md-4 mb-2 mb-md-0 pl-md-1">
-                        <button class="btn btn-primary"
-                                @onclick="@(e => ValidateMethod(newMethod.Id))"
-                                style="vertical-align: top; margin-top: 8px">
-                            Validate
-                        </button>
-
-                        @if (newMethod.Validating == true)
-                        {
-                            <div style="display: inline-block; vertical-align: top; margin-top: 15px; margin-left: 8px">
-                                <div class="spinner"
-                                     style="--borderwidth: 5px; --width: 24px; --height: 24px">
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-
-                <div class="row mt-2">
-                    <div class="col-12 col-md-6 col-lg-5">
-                        <div class="form-group">
-                            <label>
-                                Status
-                            </label>
-                            <InputText id="@newMethod.Id"
-                                       @bind-Value="newMethod.Status"
-                                       class="form-control"
-                                       disabled="true" />
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-5">
-                        <div class="form-group">
-                            <label>
-                                Title
-                            </label>
-                            <InputText id="@newMethod.Id"
-                                       @bind-Value="newMethod.Title"
-                                       class="form-control"
-                                       disabled="true" />
-                        </div>
-                    </div>
-                </div>
-
-                if (newMethod != Performance.NewMethods.Last())
-                {
-                    <hr />
-                }
-            }
+            </div>
 
             <div class="row mt-2">
                 <div class="col">
-                    <button class="btn btn-primary"
-                            @onclick="Performance.AddNewMethod">
-                        Enter another new method
+                    <div class="form-group">
+                        <label>
+                            Departures from Norms
+                            <button @onclick="@(e => ActivatePopUp(PopUp.Norms))"
+                                    class="infobutton">
+                                <b>&#9432;</b>
+                            </button>
+                        </label>
+                        <InputTextArea @bind-Value="Performance.NormDepartures"
+                                       class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="shadowline shadow mt-2" />
+
+            <div class="row mt-4">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="form-group">
+                        <label>
+                            Optional: description to refer to this draft performance
+                            <button @onclick="@(e => ActivatePopUp(PopUp.Nickname))"
+                                    class="infobutton">
+                                <b>&#9432;</b>
+                            </button>
+                        </label>
+                        <InputText @bind-Value="Performance.Nickname"
+                                   class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col">
+                    <button class="btn btn-primary mr-2"
+                            @onclick="Back">
+                        Back
                     </button>
+
+                    <button class="btn btn-primary"
+                            @onclick="Next">
+                        Preview
+                    </button>
+
+                    @if (Saving == true)
+                    {
+                        <div class="spinner" style="display: inline-block; vertical-align: top; margin-left: 12px;
+                                margin-top: 7px; --borderwidth: 5px; --width: 24px; --height: 24px">
+                        </div>
+                    }
                 </div>
             </div>
         }
-
-        <div class="shadowline shadow mt-4" />
-
-        <div class="row mt-4">
-            <div class="col">
-                <div class="form-group">
-                    <label>
-                        Footnotes
-                    </label>
-                    <InputTextArea @bind-Value="Performance.Footnotes"
-                                   class="form-control" />
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-2">
-            <div class="col">
-                <div class="form-group">
-                    <label>
-                        Departures from Norms
-                        <button @onclick="@(e => ActivatePopUp(PopUp.Norms))"
-                                class="infobutton">
-                            <b>&#9432;</b>
-                        </button>
-                    </label>
-                    <InputTextArea @bind-Value="Performance.NormDepartures"
-                                   class="form-control" />
-                </div>
-            </div>
-        </div>
-
-        <div class="shadowline shadow mt-2" />
-
-        <div class="row mt-4">
-            <div class="col">
-                Optional: enter a description to refer to this draft performance
-                <button @onclick="@(e => ActivatePopUp(PopUp.Nickname))"
-                        class="infobutton">
-                    <b>&#9432;</b>
-                </button>
-            </div>
-        </div>
-
-        <div class="row mt-2">
-            <div class="col-12 col-md-8 col-lg-6 d-flex">
-                <InputText @bind-Value="Performance.Nickname"
-                            class="form-control"
-                            style="flex-grow: 1" />
-                <button class="btn btn-primary ml-2"
-                        @onclick="SaveDraft"
-                        style="flex-shrink: 0">
-                    Save draft
-                </button>
-
-                @if (Saving == true)
-                {
-                    <div class="spinner" style="margin-left: 12px; margin-top: 7px; flex-shrink: 0;
-                        --borderwidth: 5px; --width: 24px; --height: 24px">
-                    </div>
-                }
-
-                @if (Saved == true)
-                {
-                    <div style="display: inline-block; color: #a00000; margin-left: 12px; margin-top: 7px">
-                        Saved
-                    </div>
-                }
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="col">
-                <button class="btn btn-primary"
-                        @onclick="@(e => NavManager.NavigateTo("/preview"))">
-                    Preview submission
-                </button>
-            </div>
-        </div>
     </EditForm>
 
     <br />

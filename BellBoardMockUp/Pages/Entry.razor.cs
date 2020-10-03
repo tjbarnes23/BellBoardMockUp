@@ -34,6 +34,8 @@ namespace BellBoardMockUp.Pages
 
         private Modal Modal { get; set; }
 
+        private int FormPage { get; set; } = 1;
+
         public bool CompImporting { get; set; }
 
         public bool Saving { get; set; }
@@ -228,10 +230,10 @@ namespace BellBoardMockUp.Pages
             }
         }
 
-        protected async void SaveDraft()
+        protected async Task SaveDraft()
         {
             // Push the performance content to the API in JSON format
-            Saving = true;
+            
 
             DateTime currTimeStart = DateTime.Now;
 
@@ -300,14 +302,35 @@ namespace BellBoardMockUp.Pages
                 double delay = currTimeStart.AddSeconds(1).Subtract(currTimeEnd).TotalMilliseconds;
                 await Task.Delay(Convert.ToInt32(delay));
             }
+        }
+
+        protected async Task Back()
+        {
+            Saving = true;
+            await SaveDraft();
+            
+            FormPage--;
 
             Saving = false;
-            Saved = true;
             StateHasChanged();
+        }
 
-            await Task.Delay(1500);
-            Saved = false;
+        protected async Task Next()
+        {
+            Saving = true;
+            await SaveDraft();
 
+            if (FormPage == 0 || FormPage == 5)
+            {
+                // Must be at the end of the form, so navigate to Preview page
+                NavManager.NavigateTo("/preview");
+            }
+            else
+            {
+                FormPage++;
+            }
+
+            Saving = false;
             StateHasChanged();
         }
 

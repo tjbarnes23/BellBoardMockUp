@@ -94,35 +94,39 @@
     {
         <div class="row">
             <div class="d-none d-md-block">
-                <div class="col">
-                    <div style="display: inline-block; width: 40px">
+                <div class="col d-flex">
+                    <div class="flex-shrink-0"
+                         style="width: 40px">
                         @ringerData.Bell
                     </div>
 
-                    <div style="display: inline-block">
-                        @ConsolidatedRinger(ringerData) @ConsolidatedRingerInfo(ringerData)
+                    <div class="flex-grow-1">
+                        @ConsolidatedRinger(ringerData) 
+                        <span style="font-size: 14px">@ConsolidatedRingerInfo(ringerData)</span>
                     </div>
                 </div>
             </div>
 
             <div class="d-md-none">
-                <div class="col-12">
-                    <div style="display: inline-block; width: 40px">
+                <div class="col-12 d-flex">
+                    <div class="flex-shrink-0"
+                         style="width: 40px">
                         @ringerData.Bell
                     </div>
 
-                    <div style="display: inline-block">
+                    <div class="flex-grow-1">
                         @ConsolidatedRinger(ringerData)
                     </div>
                 </div>
 
                 @if (!string.IsNullOrEmpty(ConsolidatedRingerInfo(ringerData)))
                 {
-                    <div class="col-12">
-                        <div style="display: inline-block; width: 55px">
+                    <div class="col-12 d-flex">
+                        <div class="flex-shrink-0"
+                                style="width: 55px">
                         </div>
 
-                        <div style="display: inline-block">
+                        <div class="flex-grow-1" style="font-size: 14px">
                             @ConsolidatedRingerInfo(ringerData)
                         </div>
                     </div>
@@ -156,7 +160,7 @@
         </div>
     }
 
-    <hr />
+    <br />
 
     <div>
         <button class="btn btn-primary" @onclick="@(e => NavManager.NavigateTo("/entry"))">
