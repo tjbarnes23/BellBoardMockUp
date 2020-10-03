@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="flex-grow-1">
-                        @ConsolidatedRinger(ringerData) 
+                        @ConsolidatedRinger(ringerData)
                         <span style="font-size: 14px">@ConsolidatedRingerInfo(ringerData)</span>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                 {
                     <div class="col-12 d-flex">
                         <div class="flex-shrink-0"
-                                style="width: 55px">
+                             style="width: 55px">
                         </div>
 
                         <div class="flex-grow-1" style="font-size: 14px">
@@ -146,9 +146,10 @@
     {
         @if (!string.IsNullOrEmpty(@newMethodData.Title) || !string.IsNullOrEmpty(@newMethodData.PlaceNotation))
         {
-            <div>
-
-                @newMethodData.Title: @newMethodData.PlaceNotation
+            <div class="row">
+                <div class="col">
+                    @newMethodData.Title: @newMethodData.PlaceNotation
+                </div>
             </div>
         }
     }
@@ -161,8 +162,8 @@
     }
 
     <br />
-
-    <div>
+    
+    <div class="mb-4">
         <button class="btn btn-primary" @onclick="@(e => NavManager.NavigateTo("/entry"))">
             Edit Performance
         </button>

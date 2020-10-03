@@ -60,7 +60,7 @@ namespace BellBoardMockUp.Shared
                     sb.Append("Full circle is the usual style for tower bells (including dummy tower bells). " +
                         "The bells are rung using a rope, wheel and pulley.");
                     sb.Append("\n\n");
-                    sb.Append("Up / down strokes is the usual style for handbells (including dummy handbells). " +
+                    sb.Append("Up/down strokes is the usual style for handbells (including dummy handbells). " +
                         "The bells are retained in hand and rung with alternating upstrokes and downstrokes.");
                     sb.Append("\n\n");
                     sb.Append("Key presses usually refers to online performances 'rung' using a computer keyboard, " +
@@ -82,8 +82,9 @@ namespace BellBoardMockUp.Shared
                     Title = "Distributed";
                     sb.Append("A distributed performance is one where the ringers are located in different places.");
                     sb.Append("\n\n");
-                    sb.Append("Instead of entering a place for the performance, the approximate location is entered " +
-                        "for each ringer.");
+                    sb.Append("Click this checkbox if the performance was distributed, and instead of entering a " +
+                        "place for the performance, enter an approximate location for each ringer in the boxes " +
+                        "that will appear later in the form.");
                     Content = sb.ToString();
                     Image = string.Empty;
                     Link = string.Empty;
@@ -196,8 +197,8 @@ namespace BellBoardMockUp.Shared
                 
                 case PopUp.AdditionalRingerInfo:
                     Title = "Additional ringer info";
-                    sb.Append("Check this box to display an additional field per ringer, which can be used to enter " +
-                        "information such as college, role, lodge, etc.");
+                    sb.Append("Click this checkbox to display an additional field per ringer, which can be used to " +
+                        "enter information such as college, role, lodge, etc.");
                     Content = sb.ToString();
                     Image = string.Empty;
                     Link = string.Empty;
@@ -226,8 +227,9 @@ namespace BellBoardMockUp.Shared
                 
                 case PopUp.NewMethods:
                     Title = "New methods named";
-                    sb.Append("Please enter the method name (excluding any class descriptors such as Bob or " +
-                        "Surprise), place notation and stage for any new method(s) named in this performance.");
+                    sb.Append("If the performance named new method(s), click this checkbox and enter the method name " +
+                        "(excluding any class descriptors such as Bob or Surprise), " +
+                        "stage and place notation for all new method(s) named in this performance.");
                     sb.Append("\n\n");
                     sb.Append("The requirements for naming a new method are in Section 5 " +
                         "of the Framework for Method Ringing.");
@@ -277,6 +279,8 @@ namespace BellBoardMockUp.Shared
                     {
                         foreach (var msg in NewMethod.Messages)
                         {
+                            sb.Append("Messages");
+                            sb.Append("\n\n");
                             sb.Append($"{msg.Type}: {msg.message}");
                             sb.Append("\n");
                         }
@@ -298,7 +302,7 @@ namespace BellBoardMockUp.Shared
                         "saved draft performances on the home page.");
                     sb.Append("\n\n");
                     sb.Append("A default description is automatically generated, but this may be changed " +
-                        "by editing the description box and clicking Save draft.");
+                        "by editing the description box.");
                     Content = sb.ToString();
                     Image = string.Empty;
                     Link = string.Empty;
