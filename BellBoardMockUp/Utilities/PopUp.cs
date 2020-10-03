@@ -18,9 +18,11 @@ namespace BellBoardMockUp.Utilities
         NumRingers,
         BellsPerRinger,
         AdditionalRingerInfo,
+        ApproxLocation,
         RingerStyle,
         NewMethods,
         NewMethodResult,
-        Norms
+        Norms,
+        Nickname
     }
 }

@@ -183,7 +183,7 @@ namespace BellBoardMockUp.Shared
                         "select 'Other Configuration'. You will then be able to enter the bell(s) that each ringer " +
                         "rang.");
                     sb.Append("\n\n");
-                    sb.Append("E.g. enter 1 4 if a ringer rang bells 1 and 4, " +
+                    sb.Append("E.g. enter 1, 4 if a ringer rang bells 1 and 4, " +
                         "or enter 3-6 if a ringer rang bells 3, 4, 5 and 6.");
                     sb.Append("\n\n");
                     sb.Append("If two people rang one bell (e.g. a tenor rung with a strapper), " +
@@ -202,7 +202,17 @@ namespace BellBoardMockUp.Shared
                     Image = string.Empty;
                     Link = string.Empty;
                     break;
-                
+
+                case PopUp.ApproxLocation:
+                    Title = "Approx location";
+                    sb.Append("Usually entered as City/Town/Village and County/State/Country, as applicable.");
+                    sb.Append("\n\n");
+                    sb.Append("E.g. Andover, Hampshire or Boston, Massachusetts.");
+                    Content = sb.ToString();
+                    Image = string.Empty;
+                    Link = string.Empty;
+                    break;
+
                 case PopUp.RingerStyle:
                     Title = "Ringer style";
                     sb.Append("This box is for entering the style of an individual ringer when not all ringers " +
@@ -277,6 +287,17 @@ namespace BellBoardMockUp.Shared
                         sb.Append("\n");
                     }
 
+                    Content = sb.ToString();
+                    Image = string.Empty;
+                    Link = string.Empty;
+                    break;
+
+                case PopUp.Nickname:
+                    Title = "Draft performance description";
+                    sb.Append("This description will be used to identify the performance in the list of " +
+                        "saved draft performances on the home page.");
+                    sb.Append("\n\n");
+                    sb.Append("If no description is entered, one will be automatically generated.");
                     Content = sb.ToString();
                     Image = string.Empty;
                     Link = string.Empty;

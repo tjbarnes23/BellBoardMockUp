@@ -12,7 +12,7 @@
                     <label>
                         Style
                         <button @onclick="@(e => ActivatePopUp(PopUp.Style))"
-                                style="background-color: white; border: none">
+                                class="infobutton">
                             <b>&#9432;</b>
                         </button>
                     </label>
@@ -97,8 +97,8 @@
                     <label class="form-check-label" for="distributedCheck">
                         Distributed performance?
                     </label>
-                    <button @onclick="@(e => ActivatePopUp(PopUp.Distributed))" style="background-color: white;
-                            border: none">
+                    <button @onclick="@(e => ActivatePopUp(PopUp.Distributed))"
+                            class="infobutton">
                         <b>&#9432;</b>
                     </button>
                 </div>
@@ -111,7 +111,7 @@
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="form-group">
                         <label>
-                            Place
+                            Place (City / Town / Village)
                         </label>
                         <InputText @bind-Value="Performance.Location"
                                    class="form-control" />
@@ -145,8 +145,8 @@
                 <div class="form-group">
                     <label>
                         Tenor info (if applicable)
-                        <button @onclick="@(e => ActivatePopUp(PopUp.Tenor))" style="background-color: white;
-                                border: none">
+                        <button @onclick="@(e => ActivatePopUp(PopUp.Tenor))"
+                                class="infobutton">
                             <b>&#9432;</b>
                         </button>
                     </label>
@@ -159,8 +159,8 @@
                 <div class="form-group">
                     <label>
                         Platform (if applicable)
-                        <button @onclick="@(e => ActivatePopUp(PopUp.Platform))" style="background-color: white;
-                                border: none">
+                        <button @onclick="@(e => ActivatePopUp(PopUp.Platform))"
+                                class="infobutton">
                             <b>&#9432;</b>
                         </button>
                     </label>
@@ -173,8 +173,8 @@
                 <div class="form-group">
                     <label>
                         Time taken
-                        <button @onclick="@(e => ActivatePopUp(PopUp.Time))" style="background-color: white;
-                                border: none">
+                        <button @onclick="@(e => ActivatePopUp(PopUp.Time))"
+                                class="infobutton">
                             <b>&#9432;</b>
                         </button>
                     </label>
@@ -193,10 +193,10 @@
                                    @bind-Value="@Performance.ImportFromCompLib"
                                    class="form-check-input" />
                     <label class="form-check-label" for="complibImportCheck">
-                        Enter composition details by importing from CompLib?
+                        Import composition details from CompLib?
                     </label>
-                    <button @onclick="@(e => ActivatePopUp(PopUp.Import))" style="background-color: white;
-                            border: none">
+                    <button @onclick="@(e => ActivatePopUp(PopUp.Import))"
+                            class="infobutton">
                         <b>&#9432;</b>
                     </button>
                 </div>
@@ -235,7 +235,8 @@
         <div class="row mt-3">
             <div class="col-12 col-md-9">
                 Performance Title
-                <button @onclick="@(e => ActivatePopUp(PopUp.Title))" style="background-color: white; border: none">
+                <button @onclick="@(e => ActivatePopUp(PopUp.Title))"
+                        class="infobutton">
                     <b>&#9432;</b>
                 </button>
             </div>
@@ -279,8 +280,8 @@
                 <div class="form-group">
                     <label>
                         Performance Detail
-                        <button @onclick="@(e => ActivatePopUp(PopUp.Detail))" style="background-color: white;
-                                border: none">
+                        <button @onclick="@(e => ActivatePopUp(PopUp.Detail))"
+                                class="infobutton">
                             <b>&#9432;</b>
                         </button>
                     </label>
@@ -297,8 +298,8 @@
                 <div class="form-group">
                     <label>
                         Number of ringers
-                        <button @onclick="@(e => ActivatePopUp(PopUp.NumRingers))" style="background-color: white;
-                                border: none">
+                        <button @onclick="@(e => ActivatePopUp(PopUp.NumRingers))"
+                                class="infobutton">
                             <b>&#9432;</b>
                         </button>
                     </label>
@@ -319,8 +320,8 @@
                 <div class="form-group">
                     <label>
                         Bells per ringer
-                        <button @onclick="@(e => ActivatePopUp(PopUp.BellsPerRinger))" style="background-color: white;
-                                border: none">
+                        <button @onclick="@(e => ActivatePopUp(PopUp.BellsPerRinger))"
+                                class="infobutton">
                             <b>&#9432;</b>
                         </button>
                     </label>
@@ -348,8 +349,8 @@
                     <label class="form-check-label" for="additionalRingerInfoCheck">
                         Enter additional ringer info?
                     </label>
-                    <button @onclick="@(e => ActivatePopUp(PopUp.AdditionalRingerInfo))" style="background-color: white;
-                            border: none">
+                    <button @onclick="@(e => ActivatePopUp(PopUp.AdditionalRingerInfo))"
+                            class="infobutton">
                         <b>&#9432;</b>
                     </button>
                 </div>
@@ -438,7 +439,8 @@
                 {
                     <div class="row mt-2">
                         <div class="col-12 col-md-9 col-lg-7 d-flex">
-                            <div style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
+                            <div class="flex-shrink-0"
+                                    style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
                                 Additional info:
                             </div>
 
@@ -455,8 +457,13 @@
                 {
                     <div class="row mt-2">
                         <div class="col-12 col-md-9 col-lg-7 d-flex">
-                            <div style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
+                            <div class="flex-shrink-0"
+                                    style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
                                 Approx location:
+                                <button @onclick="@(e => ActivatePopUp(PopUp.ApproxLocation))"
+                                        class="infobutton">
+                                    <b>&#9432;</b>
+                                </button>
                             </div>
 
                             <div class="flex-grow-1">
@@ -472,10 +479,11 @@
                 {
                     <div class="row mt-2">
                         <div class="col-12 col-md-9 col-lg-7 d-flex">
-                            <div style="width: 200px; min-width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
+                            <div class="flex-shrink-0"
+                                    style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
                                 Style:
                                 <button @onclick="@(e => ActivatePopUp(PopUp.RingerStyle))"
-                                        style="background-color: white; border: none">
+                                        class="infobutton">
                                     <b>&#9432;</b>
                                 </button>
                             </div>
@@ -497,7 +505,8 @@
                     {
                         <div class="row mt-2">
                             <div class="col-12 col-md-9 col-lg-7 d-flex">
-                                <div style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
+                                <div class="flex-shrink-0"
+                                        style="width: 200px; margin-right: 8px; padding-top: 8px; text-align: right">
                                     Other Style:
                                 </div>
 
@@ -532,8 +541,8 @@
                     <label class="form-check-label" for="newMethodsCheck">
                         New methods named?
                     </label>
-                    <button @onclick="@(e => ActivatePopUp(PopUp.NewMethods))" style="background-color: white;
-                            border: none">
+                    <button @onclick="@(e => ActivatePopUp(PopUp.NewMethods))"
+                            class="infobutton">
                         <b>&#9432;</b>
                     </button>
                 </div>
@@ -664,8 +673,8 @@
                 <div class="form-group">
                     <label>
                         Departures from Norms
-                        <button @onclick="@(e => ActivatePopUp(PopUp.Norms))" style="background-color: white;
-                                border: none">
+                        <button @onclick="@(e => ActivatePopUp(PopUp.Norms))"
+                                class="infobutton">
                             <b>&#9432;</b>
                         </button>
                     </label>
@@ -679,15 +688,19 @@
 
         <div class="row mt-4">
             <div class="col">
-                Optional: enter a name to refer to this draft performance
+                Optional: enter a description to refer to this draft performance
+                <button @onclick="@(e => ActivatePopUp(PopUp.Nickname))"
+                        class="infobutton">
+                    <b>&#9432;</b>
+                </button>
             </div>
         </div>
 
         <div class="row mt-2">
             <div class="col-12 col-md-8 col-lg-6 d-flex">
                 <InputText @bind-Value="Performance.Nickname"
-                           class="form-control"
-                           style="flex-grow: 1" />
+                            class="form-control"
+                            style="flex-grow: 1" />
                 <button class="btn btn-primary ml-2"
                         @onclick="SaveDraft"
                         style="flex-shrink: 0">
@@ -697,7 +710,7 @@
                 @if (Saving == true)
                 {
                     <div class="spinner" style="margin-left: 12px; margin-top: 7px; flex-shrink: 0;
-                            --borderwidth: 5px; --width: 24px; --height: 24px">
+                        --borderwidth: 5px; --width: 24px; --height: 24px">
                     </div>
                 }
 

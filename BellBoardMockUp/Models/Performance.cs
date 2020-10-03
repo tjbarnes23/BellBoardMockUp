@@ -18,8 +18,8 @@ namespace BellBoardMockUp.Models
             BellsPerRinger = 1;
             AdditionalRingerInfo = false;
             Ringers = new List<RingerData>();
+            NewMethodsNamed = false;
             NewMethods = new List<NewMethodData>();
-
             AddNewMethod();
         }
 

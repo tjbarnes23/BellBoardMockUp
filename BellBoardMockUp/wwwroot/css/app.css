@@ -133,6 +133,11 @@ h6 {
     font-size: 15px;
 }
 
+.infobutton {
+    background-color: transparent;
+    border: none;
+}
+
 .shadowline {
     width: auto;
     height: 3px;

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using BellBoardMockUp.Models;
@@ -234,10 +235,35 @@ namespace BellBoardMockUp.Pages
 
             DateTime currTimeStart = DateTime.Now;
 
-            // Add nickname if none
+            // Generate nickname if none
             if (string.IsNullOrEmpty(Performance.Nickname))
             {
-                Performance.Nickname = "NoName";
+                StringBuilder sb = new StringBuilder();
+                int items = 0;
+
+                if (!string.IsNullOrEmpty(Performance.Location))
+                {
+                    sb.Append(Performance.Location);
+                    items++;
+                }
+
+                if (items == 0)
+                {
+                    if (!string.IsNullOrEmpty(Performance.Platform))
+                    {
+                        sb.Append(Performance.Platform);
+                        items++;
+                    }
+                }
+
+                if (items > 0)
+                {
+                    sb.Append(" ");
+                }
+
+                sb.Append(Performance.Date.ToString("yyyy-MM-dd"));
+
+                Performance.Nickname = sb.ToString();
             }
 
             PerformanceJson performanceJson = new PerformanceJson();

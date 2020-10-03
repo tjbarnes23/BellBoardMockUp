@@ -93,7 +93,7 @@ namespace BellBoardMockUp.Pages
             Performance.StyleOther = string.Empty;
             Performance.AssociationDropDown = 0;
             Performance.AssociationFreeForm = string.Empty;
-            // Performance.Date = ???
+            Performance.Date = DateTime.Today;
             Performance.Distributed = false;
             Performance.Location = string.Empty;
             Performance.County = string.Empty;
@@ -107,18 +107,19 @@ namespace BellBoardMockUp.Pages
             Performance.Title = string.Empty;
             Performance.Composer = string.Empty;
             Performance.Detail = string.Empty;
-            Performance.NumRingers = 8;
+
+            Performance.NumRingers = 0;
             Performance.BellsPerRinger = 1;
             Performance.AdditionalRingerInfo = false;
-            Performance.Footnotes = string.Empty;
-            Performance.NormDepartures = string.Empty;
-
             Performance.Ringers.Clear();
-            Performance.PopulateRingers();
 
+            Performance.NewMethodsNamed = false;
             Performance.NewMethods.Clear();
             Performance.AddNewMethod();
 
+            Performance.Footnotes = string.Empty;
+            Performance.NormDepartures = string.Empty;
+            
             NavManager.NavigateTo("/entry");
         }
     }
