@@ -14,13 +14,12 @@ namespace BellBoardMockUp.Models
             Date = DateTime.Today;
             Distributed = false;
             ImportFromCompLib = false;
-            NumRingers = 8;
+            NumRingers = 0;
             BellsPerRinger = 1;
             AdditionalRingerInfo = false;
             Ringers = new List<RingerData>();
             NewMethods = new List<NewMethodData>();
 
-            PopulateRingers();
             AddNewMethod();
         }
 
@@ -72,48 +71,53 @@ namespace BellBoardMockUp.Models
 
         public List<RingerData> Ringers { get; set; }
 
-        public string Footnotes { get; set; }
+        public bool NewMethodsNamed { get; set; }
 
         public List<NewMethodData> NewMethods { get; set; }
+
+        public string Footnotes { get; set; }
 
         public string NormDepartures { get; set; }
 
         public void PopulateRingers()
         {
-            // See how many items are currently in Ringers list, and adjust to match the value of NumRingers
-
-            int j = NumRingers - Ringers.Count;
-
-            if (j > 0)
+            // Don't make any changes to Ringers list if NumRingers = 0 (the Please select... option)
+            if (NumRingers > 0)
             {
-                for (int i = 1; i <= j; i++)
+                // See how many items are currently in Ringers list, and adjust to match the value of NumRingers
+                int j = NumRingers - Ringers.Count;
+
+                if (j > 0)
                 {
-                    RingerData ringerData = new RingerData();
-                    ringerData.Id = Ringers.Count;
-                    ringerData.Bell = string.Empty;
-                    ringerData.Ringer = string.Empty;
-                    ringerData.Conductor = false;
-                    ringerData.RingerInfo = string.Empty;
-                    ringerData.RingerLocation = string.Empty;
-                    ringerData.RingerStyle = 1;
-                    ringerData.RingerStyleOther = string.Empty;
+                    for (int i = 1; i <= j; i++)
+                    {
+                        RingerData ringerData = new RingerData();
+                        ringerData.Id = Ringers.Count;
+                        ringerData.Bell = string.Empty;
+                        ringerData.Ringer = string.Empty;
+                        ringerData.Conductor = false;
+                        ringerData.RingerInfo = string.Empty;
+                        ringerData.RingerLocation = string.Empty;
+                        ringerData.RingerStyle = 1;
+                        ringerData.RingerStyleOther = string.Empty;
 
-                    Ringers.Add(ringerData);
+                        Ringers.Add(ringerData);
+                    }
                 }
-            }
-            else if (j < 0)
-            {
-                int k = -j;
-                
-                for (int i = 1; i <= k; i++)
+                else if (j < 0)
                 {
-                    Ringers.RemoveAt(Ringers.Count - 1);
-                }
-            }
+                    int k = -j;
 
-            if (j != 0)
-            {
-                PopulateRingersBells();
+                    for (int i = 1; i <= k; i++)
+                    {
+                        Ringers.RemoveAt(Ringers.Count - 1);
+                    }
+                }
+
+                if (j != 0)
+                {
+                    PopulateRingersBells();
+                }
             }
         }
 
