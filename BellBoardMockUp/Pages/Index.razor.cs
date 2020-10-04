@@ -62,25 +62,29 @@ namespace BellBoardMockUp.Pages
             Performance.Title = performance.Title;
             Performance.Composer = performance.Composer;
             Performance.Detail = performance.Detail;
+
             Performance.NumRingers = performance.NumRingers;
             Performance.BellsPerRinger = performance.BellsPerRinger;
             Performance.AdditionalRingerInfo = performance.AdditionalRingerInfo;
-            Performance.Footnotes = performance.Footnotes;
-            Performance.NormDepartures = performance.NormDepartures;
 
             Performance.Ringers.Clear();
-            
+
             foreach (RingerData ringerData in performance.Ringers)
             {
                 Performance.Ringers.Add(ringerData);
             }
 
+            Performance.NewMethodsNamed = performance.NewMethodsNamed;
+            
             Performance.NewMethods.Clear();
 
             foreach (NewMethodData newMethodData in performance.NewMethods)
             {
                 Performance.NewMethods.Add(newMethodData);
             }
+
+            Performance.Footnotes = performance.Footnotes;
+            Performance.NormDepartures = performance.NormDepartures;
 
             NavManager.NavigateTo("/preview");
         }

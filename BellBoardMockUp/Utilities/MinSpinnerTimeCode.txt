@@ -1,0 +1,17 @@
+﻿// This needs to be an async Task method
+
+// Record start time
+DateTime currTimeStart = DateTime.Now;
+
+// Do tasks here
+
+// Record end time
+DateTime currTimeEnd = DateTime.Now;
+
+// Add a delay that is the difference between end time and (start time + 1 second), if end time
+// is before (start time + 1 second)
+if (currTimeEnd < currTimeStart.AddSeconds(1))
+{
+    double delay = currTimeStart.AddSeconds(1).Subtract(currTimeEnd).TotalMilliseconds;
+    await Task.Delay(Convert.ToInt32(delay));
+}

@@ -104,8 +104,6 @@ namespace BellBoardMockUp.Pages
             // Start spinner
             CompImporting = true;
 
-            DateTime currTimeStart = DateTime.Now;
-
             // Clear any existing composition info
             Performance.Length = string.Empty;
             Performance.Title = string.Empty;
@@ -149,14 +147,6 @@ namespace BellBoardMockUp.Pages
                 Performance.Title = "*** Composition not found ***";
             }
 
-            DateTime currTimeEnd = DateTime.Now;
-
-            if (currTimeEnd < currTimeStart.AddSeconds(1))
-            {
-                double delay = currTimeStart.AddSeconds(1).Subtract(currTimeEnd).TotalMilliseconds;
-                await Task.Delay(Convert.ToInt32(delay));
-            }
-
             CompImporting = false;
         }
 
@@ -164,8 +154,6 @@ namespace BellBoardMockUp.Pages
         {
             // Start spinner
             Performance.NewMethods[newMethodId].Validating = true;
-
-            DateTime currTimeStart = DateTime.Now;
 
             // Clear any existing new method results
             Performance.NewMethods[newMethodId].Status = string.Empty;
@@ -214,14 +202,6 @@ namespace BellBoardMockUp.Pages
                 }
             }
 
-            DateTime currTimeEnd = DateTime.Now;
-
-            if (currTimeEnd < currTimeStart.AddSeconds(1))
-            {
-                double delay = currTimeStart.AddSeconds(1).Subtract(currTimeEnd).TotalMilliseconds;
-                await Task.Delay(Convert.ToInt32(delay));
-            }
-
             Performance.NewMethods[newMethodId].Validating = false;
 
             if (!string.IsNullOrEmpty(Performance.NewMethods[newMethodId].Title))
@@ -233,9 +213,6 @@ namespace BellBoardMockUp.Pages
         protected async Task SaveDraft()
         {
             // Push the performance content to the API in JSON format
-            
-
-            DateTime currTimeStart = DateTime.Now;
 
             // Generate nickname if none
             if (string.IsNullOrEmpty(Performance.Nickname))
@@ -294,14 +271,6 @@ namespace BellBoardMockUp.Pages
 
             await TJBarnesService.GetHttpClient()
                     .PutAsJsonAsync($"api/performances/{Performance.Id}", performanceJson);
-
-            DateTime currTimeEnd = DateTime.Now;
-
-            if (currTimeEnd < currTimeStart.AddSeconds(1))
-            {
-                double delay = currTimeStart.AddSeconds(1).Subtract(currTimeEnd).TotalMilliseconds;
-                await Task.Delay(Convert.ToInt32(delay));
-            }
         }
 
         protected async Task Back()

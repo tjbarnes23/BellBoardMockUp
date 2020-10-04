@@ -93,44 +93,16 @@
     @foreach (RingerData ringerData in Performance.Ringers)
     {
         <div class="row">
-            <div class="d-none d-md-block">
-                <div class="col d-flex">
-                    <div class="flex-shrink-0"
-                         style="width: 40px">
-                        @ringerData.Bell
-                    </div>
-
-                    <div class="flex-grow-1">
-                        @ConsolidatedRinger(ringerData)
-                        <span style="font-size: 14px">@ConsolidatedRingerInfo(ringerData)</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="d-md-none">
-                <div class="col-12 d-flex">
-                    <div class="flex-shrink-0"
-                         style="width: 40px">
-                        @ringerData.Bell
-                    </div>
-
-                    <div class="flex-grow-1">
-                        @ConsolidatedRinger(ringerData)
-                    </div>
+            <div class="col d-flex">
+                <div class="flex-shrink-0"
+                        style="width: 40px">
+                    @ringerData.Bell
                 </div>
 
-                @if (!string.IsNullOrEmpty(ConsolidatedRingerInfo(ringerData)))
-                {
-                    <div class="col-12 d-flex">
-                        <div class="flex-shrink-0"
-                             style="width: 55px">
-                        </div>
-
-                        <div class="flex-grow-1" style="font-size: 14px">
-                            @ConsolidatedRingerInfo(ringerData)
-                        </div>
-                    </div>
-                }
+                <div class="flex-grow-1" style="margin-left: 20px; text-indent: -20px">
+                    @ConsolidatedRinger(ringerData)
+                    <span style="font-size: 14px">@ConsolidatedRingerInfo(ringerData)</span>
+                </div>
             </div>
         </div>
     }
