@@ -29,9 +29,6 @@ namespace BellBoardMockUp.Pages
         [Inject]
         public NavigationManager NavManager { get; set; }
 
-        [Inject]
-        public Viewport Viewport { get; set; }
-
         private Modal Modal { get; set; }
 
         private int FormPage { get; set; } = 1;
@@ -303,11 +300,6 @@ namespace BellBoardMockUp.Pages
             StateHasChanged();
         }
 
-        protected async Task<int> GetWidth()
-        {
-            BrowserDimensions browserDimensions = await Viewport.GetDimensions();
-            StateHasChanged();
-            return browserDimensions.Width;
-        }
+        
     }
 }

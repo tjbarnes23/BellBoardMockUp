@@ -94,10 +94,27 @@
     {
         <div class="row">
             <div class="col d-flex">
-                <div class="flex-shrink-0"
-                        style="width: 40px">
-                    @ringerData.Bell
-                </div>
+                @if (Performance.BellsPerRinger == 1)
+                {
+                    <div class="flex-shrink-0"
+                         style="width: 30px">
+                        @ringerData.Bell
+                    </div>
+                }
+                else if (Performance.BellsPerRinger == 2)
+                {
+                    <div class="flex-shrink-0"
+                         style="width: 55px">
+                        @ringerData.Bell
+                    </div>
+                }
+                else
+                {
+                    <div class="flex-shrink-0"
+                         style="width: 65px">
+                        @ringerData.Bell
+                    </div>
+                }
 
                 <div class="flex-grow-1" style="margin-left: 20px; text-indent: -20px">
                     @ConsolidatedRinger(ringerData)

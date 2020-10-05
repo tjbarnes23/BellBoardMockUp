@@ -169,6 +169,7 @@ h6 {
 }
 
 .spinner {
+    box-sizing: border-box;
     border-width: var(--borderwidth);
     border-style: solid;
     border-color: silver;

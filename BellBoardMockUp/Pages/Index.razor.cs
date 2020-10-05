@@ -23,12 +23,29 @@ namespace BellBoardMockUp.Pages
         [Inject]
         public NavigationManager NavManager { get; set; }
 
+        [Inject]
+        public Viewport Viewport { get; set; }
+
         public IEnumerable<PerformanceJson> Performances { get; set; }
 
         public bool Loading { get; set; }
 
+        public int Width { get; set; }
+
+        public string LeftPosStr { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
+            await GetWidth();
+
+            // 40 is half the width of the spinner
+            int leftPos = (Width / 2) - 40;
+            leftPos = Math.Min(leftPos, 215);
+
+            LeftPosStr = leftPos.ToString() + "px";
+
+            StateHasChanged();
+
             Performances = (await TJBarnesService.GetHttpClient()
                     .GetFromJsonAsync<PerformanceJson[]>("api/performances")).ToList();
         }
@@ -125,6 +142,12 @@ namespace BellBoardMockUp.Pages
             Performance.NormDepartures = string.Empty;
             
             NavManager.NavigateTo("/entry");
+        }
+
+        protected async Task GetWidth()
+        {
+            BrowserDimensions browserDimensions = await Viewport.GetDimensions();
+            Width = browserDimensions.Width;
         }
     }
 }

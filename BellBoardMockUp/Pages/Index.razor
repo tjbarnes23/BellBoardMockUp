@@ -12,12 +12,15 @@
 
     <br />
     <br />
-
+  
     @if (Performances == null)
     {
-        <div class="spinner" style="position: absolute; left: 215px; top: 250px;
-                --borderwidth: 16px; --width: 80px; --height: 80px">
-        </div>
+        if (LeftPosStr != null)
+        {
+            <div class="spinner" style="position: absolute; left: @LeftPosStr; top: 250px;
+                    --borderwidth: 16px; --width: 80px; --height: 80px">
+            </div>
+        }
     }
     else
     {
