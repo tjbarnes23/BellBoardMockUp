@@ -89,40 +89,22 @@
             Composed by @Performance.Composer
         </div>
     }
+    
+    <div style="display: table">
+        @foreach (RingerData ringerData in Performance.Ringers)
+        {
+            <div style="display: table-row">
+                <div class="pr-3" style="display: table-cell; white-space: nowrap">
+                    @ringerData.Bell
+                </div>
 
-    @foreach (RingerData ringerData in Performance.Ringers)
-    {
-        <div class="row">
-            <div class="col d-flex">
-                @if (Performance.BellsPerRinger == 1)
-                {
-                    <div class="flex-shrink-0"
-                         style="width: 30px">
-                        @ringerData.Bell
-                    </div>
-                }
-                else if (Performance.BellsPerRinger == 2)
-                {
-                    <div class="flex-shrink-0"
-                         style="width: 55px">
-                        @ringerData.Bell
-                    </div>
-                }
-                else
-                {
-                    <div class="flex-shrink-0"
-                         style="width: 65px">
-                        @ringerData.Bell
-                    </div>
-                }
-
-                <div class="flex-grow-1" style="margin-left: 20px; text-indent: -20px">
-                    @ConsolidatedRinger(ringerData)
-                    <span style="font-size: 14px">@ConsolidatedRingerInfo(ringerData)</span>
+                <div style="display: table-cell; padding-left: 20px; text-indent: -20px">
+                    <span style="vertical-align: middle">@ConsolidatedRinger(ringerData)</span>
+                    <span style="font-size: 14px; vertical-align: middle">@ConsolidatedRingerInfo(ringerData)</span>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 
     @if (!string.IsNullOrEmpty(Performance.Footnotes))
     {
@@ -151,7 +133,7 @@
     }
 
     <br />
-    
+
     <div class="mb-4">
         <button class="btn btn-primary" @onclick="@(e => NavManager.NavigateTo("/entry"))">
             Edit Performance
