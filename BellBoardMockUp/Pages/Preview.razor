@@ -135,8 +135,14 @@
     <br />
 
     <div class="mb-4">
-        <button class="btn btn-primary" @onclick="@(e => NavManager.NavigateTo("/entry"))">
+        <button class="btn btn-primary mr-2"
+                @onclick="@(e => NavManager.NavigateTo("/entry"))">
             Edit Performance
+        </button>
+
+        <button class="btn btn-primary"
+                @onclick="@(e => NavManager.NavigateTo("/"))">
+            Home
         </button>
     </div>
 </div>
