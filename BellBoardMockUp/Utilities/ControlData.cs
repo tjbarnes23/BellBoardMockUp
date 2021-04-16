@@ -13,11 +13,11 @@ namespace BellBoardMockUp.Utilities
         {
             return style switch
             {
-                1 => "Full circle (Tower bells)",
-                2 => "Up/down strokes (Handbells)",
-                3 => "Key presses (e.g. Ringing Room)",
-                4 => "Other style",
-                5 => "Mixed style",
+                1 => "Towerbell (Full-circle with rope & wheel)",
+                2 => "Handbell (Alternating up/down strokes",
+                3 => "Keyboard (Key presses on computer or carillon)",
+                4 => "Other (E.g. ringing on frame or tapping bells)",
+                5 => "Mixed (A mixture of the above)",
                 _ => style.ToString()
             };
         }
@@ -31,6 +31,7 @@ namespace BellBoardMockUp.Utilities
                 3 => "North American Guild",
                 4 => "Cambridge University Guild",
                 5 => "Guild of St Cuileáin",
+                6 => "The Middleshire Diocesan Guild",
                 _ => association.ToString()
             };
         }
